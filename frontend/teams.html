@@ -49,6 +49,12 @@
   .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
   body { font-family: 'Lexend', sans-serif; background-color: #0e0e0e; color: #ffffff; }
   .kinetic-gradient { background: linear-gradient(45deg, #ff8f6f, #ff7851); }
+  .expand-panel { transition: max-height 0.3s ease, opacity 0.2s ease; }
+  .season-table th, .season-table td { border-bottom: 1px solid rgba(72,72,71,0.2); }
+  .sticky-name { position: sticky; left: 0; background: #0d0d0d; z-index: 5; }
+  .sticky-total { position: sticky; left: 0; background: #0d0d0d; z-index: 5; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .spin { animation: spin 1s linear infinite; }
 </style>
 </head>
 <body class="bg-background text-on-surface overflow-x-hidden">
@@ -100,25 +106,26 @@
 
 <!-- Main Content -->
 <main class="lg:ml-72 pt-28 px-6 pb-20 max-w-[1400px] mx-auto">
+
   <!-- Hero Header -->
-  <section class="mb-12 relative">
+  <section class="mb-10 relative">
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 relative z-10">
       <div>
         <h1 class="text-6xl md:text-8xl font-black font-['Space_Grotesk'] tracking-tighter uppercase leading-[0.85] italic mb-4">
           Team <span class="text-primary block md:inline">Arena</span>
         </h1>
         <p class="text-on-surface-variant max-w-lg leading-relaxed">
-          Real-time synchronization of the world's most elite competitive units. Performance metrics updated live for the 2026 season.
+          Click any team to reveal member scores, tier badges, and full season breakdowns.
         </p>
       </div>
-      <div class="flex gap-4">
+      <div class="flex gap-4 shrink-0">
         <div class="bg-surface-container-low p-6 rounded-xl border-l-4 border-tertiary">
           <div class="text-on-surface-variant text-[10px] font-bold tracking-widest uppercase mb-1">Global Avg</div>
-          <div class="text-tertiary text-4xl font-black font-['Space_Grotesk'] italic">2,845</div>
+          <div class="text-tertiary text-4xl font-black font-['Space_Grotesk'] italic" id="stat-avg">—</div>
         </div>
         <div class="bg-surface-container-low p-6 rounded-xl border-l-4 border-primary">
           <div class="text-on-surface-variant text-[10px] font-bold tracking-widest uppercase mb-1">Total Teams</div>
-          <div class="text-primary text-4xl font-black font-['Space_Grotesk'] italic">128</div>
+          <div class="text-primary text-4xl font-black font-['Space_Grotesk'] italic" id="stat-teams">—</div>
         </div>
       </div>
     </div>
@@ -126,187 +133,140 @@
   </section>
 
   <div class="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
+
     <!-- Leaderboard Column -->
-    <div class="xl:col-span-8 space-y-4">
-      <div class="flex items-center justify-between px-6 py-4 bg-surface-container-low rounded-t-xl">
-        <span class="text-on-surface-variant text-[10px] font-bold tracking-widest uppercase">Team Rankings — Week 24</span>
-        <div class="flex items-center gap-4 text-xs font-bold font-['Space_Grotesk']">
-          <button class="text-primary border-b-2 border-primary">WEEKLY</button>
-          <button class="text-on-surface-variant hover:text-on-surface">MONTHLY</button>
-          <button class="text-on-surface-variant hover:text-on-surface">SEASON</button>
+    <div class="xl:col-span-8 space-y-3">
+
+      <!-- Controls Bar -->
+      <div class="flex items-center justify-between px-5 py-4 bg-surface-container-low rounded-xl">
+        <!-- Week Navigator (hidden in SEASON mode) -->
+        <div id="week-nav" class="flex items-center gap-2 transition-opacity duration-200">
+          <button id="prev-week" onclick="navigateWeek(-1)"
+            class="w-8 h-8 flex items-center justify-center rounded-lg bg-surface-container-highest hover:bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors">
+            <span class="material-symbols-outlined" style="font-size:18px;">chevron_left</span>
+          </button>
+          <span id="week-label" class="text-[11px] font-black font-['Space_Grotesk'] tracking-widest uppercase text-on-surface whitespace-nowrap px-1">
+            Loading…
+          </span>
+          <button id="next-week" onclick="navigateWeek(1)"
+            class="w-8 h-8 flex items-center justify-center rounded-lg bg-surface-container-highest text-on-surface-variant transition-colors opacity-30 cursor-not-allowed"
+            disabled>
+            <span class="material-symbols-outlined" style="font-size:18px;">chevron_right</span>
+          </button>
+        </div>
+        <!-- Mode Tabs -->
+        <div class="flex items-center gap-1 bg-surface-container-highest rounded-lg p-1">
+          <button id="tab-weekly" onclick="setMode('weekly')"
+            class="px-4 py-1.5 text-[11px] font-black font-['Space_Grotesk'] tracking-widest uppercase rounded-md bg-surface-container text-primary transition-all">
+            WEEKLY
+          </button>
+          <button id="tab-season" onclick="setMode('season')"
+            class="px-4 py-1.5 text-[11px] font-black font-['Space_Grotesk'] tracking-widest uppercase rounded-md text-on-surface-variant hover:text-on-surface transition-all">
+            SEASON
+          </button>
         </div>
       </div>
-      <!-- Rank 1 -->
-      <div class="bg-surface-container-high rounded-xl p-1 overflow-hidden transition-transform duration-300 hover:scale-[1.01] shadow-2xl">
-        <div class="flex items-center p-5 gap-6">
-          <div class="flex flex-col items-center justify-center w-12">
-            <span class="text-primary text-2xl font-black font-['Space_Grotesk'] italic">01</span>
-            <span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings:'FILL' 1;">change_history</span>
-          </div>
-          <div class="w-16 h-16 rounded-lg bg-secondary-container flex items-center justify-center relative">
-            <img alt="Vortex Velocity badge" class="w-12 h-12" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrIrgAFkwbYeHmzF9QGCNO4Tk4u3NtQrIFTUVk7s6e4-QYokasCnGNI6NcucicSb2zn9nak6jj0sXKwdr1IdyCzb1iK1qsjlLpI1KkpJtqUbk2r_HYxoU_XGHlww8nPj10dTEE6uFHMKXip1lPdqhypkluoyxN2z7IxhAwhji6_dFlK-uK2qSJOA97AjlQBOhi57m-GaNmNef-oVZTUmqlsUUNJZw0HoHGlfclbkzRIuldS1wdhLCuqMQXa8BhK3RBAUWmG25Y1_o"/>
-            <div class="absolute -top-2 -right-2 bg-tertiary text-on-tertiary px-1.5 py-0.5 rounded text-[8px] font-black italic">PRO</div>
-          </div>
-          <div class="flex-1">
-            <h3 class="text-xl font-black font-['Space_Grotesk'] uppercase tracking-tight">Vortex Velocity</h3>
-            <div class="flex gap-4 mt-1">
-              <span class="text-[10px] text-on-surface-variant font-bold uppercase flex items-center gap-1">
-                <span class="material-symbols-outlined text-xs">group</span> 12 Members
-              </span>
-              <span class="text-[10px] text-on-surface-variant font-bold uppercase flex items-center gap-1">
-                <span class="material-symbols-outlined text-xs">calendar_month</span> 14,200 Monthly
-              </span>
-            </div>
-          </div>
-          <div class="text-right">
-            <div class="text-[10px] text-on-surface-variant font-bold uppercase mb-1">Avg Score</div>
-            <div class="text-3xl font-black font-['Space_Grotesk'] text-primary italic tracking-tighter">3,892</div>
-          </div>
+
+      <!-- Sub-label -->
+      <div class="px-1">
+        <span id="sub-label" class="text-[10px] text-on-surface-variant font-bold tracking-widest uppercase"></span>
+      </div>
+
+      <!-- Teams List -->
+      <div id="teams-list" class="space-y-3">
+        <div class="bg-surface-container-low rounded-xl p-10 text-center">
+          <span class="material-symbols-outlined text-on-surface-variant spin" style="font-size:32px;">refresh</span>
+          <p class="text-on-surface-variant text-sm mt-3">Loading teams…</p>
         </div>
       </div>
-      <!-- Rank 2 -->
-      <div class="bg-surface-container-low rounded-xl p-1 overflow-hidden transition-transform duration-300 hover:scale-[1.01]">
-        <div class="flex items-center p-5 gap-6">
-          <div class="flex flex-col items-center justify-center w-12">
-            <span class="text-on-surface-variant text-2xl font-black font-['Space_Grotesk'] italic">02</span>
-            <span class="material-symbols-outlined text-gray-600 text-sm">remove</span>
-          </div>
-          <div class="w-16 h-16 rounded-lg bg-surface-container-highest flex items-center justify-center">
-            <img alt="Titan Pulse badge" class="w-12 h-12" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtHgbhFJ4Kubjq3mJdDqgRjZoZrtGajxppBuSX-ZHn2ILt7PJX1btmucfX2OXl3ZJvBIIKGBOllzaNsNd4i6X9bBLfoU4fm-tv89fPLYTpo5hOr117jqhV1RZPGb8UnYGxp2opKuXF2nGY2hXJ1g3atKb-pQ35-0CYPME5zBz8j9Ca_pn_JdHWUSgwitrVTAs6s-dQ0ELK0_eg3PtWvSejU2JnDbGOgryZho4X2OvO29eXbEQ6_4UTBWuZ4atnjoytKdTYGUCfxco"/>
-          </div>
-          <div class="flex-1">
-            <h3 class="text-xl font-black font-['Space_Grotesk'] uppercase tracking-tight">Titan Pulse</h3>
-            <div class="flex gap-4 mt-1">
-              <span class="text-[10px] text-on-surface-variant font-bold uppercase flex items-center gap-1"><span class="material-symbols-outlined text-xs">group</span> 15 Members</span>
-              <span class="text-[10px] text-on-surface-variant font-bold uppercase flex items-center gap-1"><span class="material-symbols-outlined text-xs">calendar_month</span> 12,850 Monthly</span>
-            </div>
-          </div>
-          <div class="text-right">
-            <div class="text-[10px] text-on-surface-variant font-bold uppercase mb-1">Avg Score</div>
-            <div class="text-3xl font-black font-['Space_Grotesk'] text-on-surface italic tracking-tighter">3,450</div>
-          </div>
-        </div>
-      </div>
-      <!-- Rank 3 -->
-      <div class="bg-surface-container-low rounded-xl p-1 overflow-hidden transition-transform duration-300 hover:scale-[1.01]">
-        <div class="flex items-center p-5 gap-6">
-          <div class="flex flex-col items-center justify-center w-12">
-            <span class="text-on-surface-variant text-2xl font-black font-['Space_Grotesk'] italic">03</span>
-            <span class="material-symbols-outlined text-error text-sm" style="font-variation-settings:'FILL' 1;">change_history</span>
-          </div>
-          <div class="w-16 h-16 rounded-lg bg-surface-container-highest flex items-center justify-center">
-            <img alt="Neon Shadows badge" class="w-12 h-12" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUtaV5GuZfmjqJC9QpfHvQbWr7NtJgpM68kzsAudIu49F9LYI64wY4XB5uA7faFO7misNSO5U6Unw80IIXK25Asjx3C5o-IXJ8LrOvim9-30yI4sNiEsMhP7PuwOH0RW7MULXFPIBGnmkkPwtfNHvVbpiSoaKFXtE466Y8EidbPHTfxSCeS5vuPCVRm4y186_cxFQMCbVLlSNRgxo_iz6jVCogPSM7vi5yp42Ke6gWw0PkhWgrUsSAVhxPtTUsZo5pYZcLJS0M4C0"/>
-          </div>
-          <div class="flex-1">
-            <h3 class="text-xl font-black font-['Space_Grotesk'] uppercase tracking-tight">Neon Shadows</h3>
-            <div class="flex gap-4 mt-1">
-              <span class="text-[10px] text-on-surface-variant font-bold uppercase flex items-center gap-1"><span class="material-symbols-outlined text-xs">group</span> 10 Members</span>
-              <span class="text-[10px] text-on-surface-variant font-bold uppercase flex items-center gap-1"><span class="material-symbols-outlined text-xs">calendar_month</span> 11,900 Monthly</span>
-            </div>
-          </div>
-          <div class="text-right">
-            <div class="text-[10px] text-on-surface-variant font-bold uppercase mb-1">Avg Score</div>
-            <div class="text-3xl font-black font-['Space_Grotesk'] text-on-surface italic tracking-tighter">3,122</div>
-          </div>
-        </div>
-      </div>
-      <!-- Rank 4 -->
-      <div class="bg-surface-container-low rounded-xl p-1 overflow-hidden transition-transform duration-300 hover:scale-[1.01]">
-        <div class="flex items-center p-5 gap-6">
-          <div class="flex flex-col items-center justify-center w-12">
-            <span class="text-on-surface-variant text-2xl font-black font-['Space_Grotesk'] italic">04</span>
-            <span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings:'FILL' 1;">change_history</span>
-          </div>
-          <div class="w-16 h-16 rounded-lg bg-surface-container-highest flex items-center justify-center">
-            <img alt="Summit Strikers badge" class="w-12 h-12" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaxzEB0KScD4QK1oAdXOQvp0KY2nRGeJo689KQkiMKw-xYKDBPd42F_E4_TuDmGxxLcnEI0nO0E2tYaBVcD9c82IKzVuTP-d20Xcc7weG_zb0ycUij5scTCH4V06ng0M2BCWFmk7TTn19SAGzgNVG-tq7De29qia-gCt_8BODxf2G02IfaLx8AuPLIVNF0Y2PtJbpPABS2c5FSpeRPYMkIAdCXDqAoIipbmvLr9kwu2JVwBVbaIa_ptB7cBt5ImqY7DCYVSPQOiWo"/>
-          </div>
-          <div class="flex-1">
-            <h3 class="text-xl font-black font-['Space_Grotesk'] uppercase tracking-tight">Summit Strikers</h3>
-            <div class="flex gap-4 mt-1">
-              <span class="text-[10px] text-on-surface-variant font-bold uppercase flex items-center gap-1"><span class="material-symbols-outlined text-xs">group</span> 18 Members</span>
-              <span class="text-[10px] text-on-surface-variant font-bold uppercase flex items-center gap-1"><span class="material-symbols-outlined text-xs">calendar_month</span> 10,200 Monthly</span>
-            </div>
-          </div>
-          <div class="text-right">
-            <div class="text-[10px] text-on-surface-variant font-bold uppercase mb-1">Avg Score</div>
-            <div class="text-3xl font-black font-['Space_Grotesk'] text-on-surface italic tracking-tighter">2,905</div>
-          </div>
-        </div>
-      </div>
-    </div>
+
+    </div><!-- /leaderboard col -->
 
     <!-- Side Bento Column -->
     <div class="xl:col-span-4 space-y-8">
-      <!-- Special Cards -->
-      <div class="bg-surface-container-low p-8 rounded-2xl relative overflow-hidden group">
+
+      <!-- Tier Reference -->
+      <div class="bg-surface-container-low p-7 rounded-2xl relative overflow-hidden">
         <div class="relative z-10">
-          <div class="flex items-center justify-between mb-8">
-            <h2 class="text-2xl font-black font-['Space_Grotesk'] uppercase tracking-tight">Special <span class="text-primary">Cards</span></h2>
-            <span class="material-symbols-outlined text-primary">auto_awesome</span>
+          <div class="flex items-center gap-2 mb-6">
+            <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">military_tech</span>
+            <h2 class="text-lg font-black font-['Space_Grotesk'] uppercase tracking-tight">Tier <span class="text-primary">Reference</span></h2>
           </div>
-          <div class="space-y-4">
-            <div class="bg-surface-container-highest p-4 rounded-xl border-l-2 border-primary-container flex gap-4 items-center transition-all group-hover:-translate-y-1">
-              <div class="w-12 h-16 bg-gradient-to-br from-primary to-primary-fixed-dim rounded flex items-center justify-center shadow-lg shadow-primary/20">
-                <span class="material-symbols-outlined text-on-primary">local_fire_department</span>
-              </div>
-              <div>
-                <h4 class="text-sm font-black font-['Space_Grotesk'] uppercase">Hyper-Streak</h4>
-                <p class="text-[10px] text-on-surface-variant">Earned by Vortex Velocity</p>
-                <div class="mt-2 text-[10px] font-bold text-tertiary">+25% XP Multiplier</div>
-              </div>
+          <div class="space-y-2 text-xs">
+            <div class="flex items-center justify-between bg-surface-container-highest/50 px-3 py-2 rounded-lg">
+              <span class="font-black font-['Space_Grotesk'] text-[#ff8f6f]">ELITE</span>
+              <span class="text-on-surface-variant">≥ 25 km</span>
+              <span class="text-tertiary font-bold">+25 pts</span>
             </div>
-            <div class="bg-surface-container-highest p-4 rounded-xl border-l-2 border-secondary flex gap-4 items-center transition-all group-hover:-translate-y-1 delay-75">
-              <div class="w-12 h-16 bg-gradient-to-br from-secondary to-secondary-container rounded flex items-center justify-center shadow-lg shadow-secondary/20">
-                <span class="material-symbols-outlined text-on-secondary">shield</span>
-              </div>
-              <div>
-                <h4 class="text-sm font-black font-['Space_Grotesk'] uppercase">Iron Wall</h4>
-                <p class="text-[10px] text-on-surface-variant">Earned by Titan Pulse</p>
-                <div class="mt-2 text-[10px] font-bold text-tertiary">Penalty Immunity</div>
-              </div>
+            <div class="flex items-center justify-between bg-surface-container-highest/50 px-3 py-2 rounded-lg">
+              <span class="font-black font-['Space_Grotesk'] text-[#00e3fd]">PACER</span>
+              <span class="text-on-surface-variant">≥ 20 km</span>
+              <span class="text-tertiary font-bold">+20 pts</span>
             </div>
-            <div class="bg-surface-container-highest p-4 rounded-xl border-l-2 border-tertiary flex gap-4 items-center transition-all group-hover:-translate-y-1 delay-150">
-              <div class="w-12 h-16 bg-gradient-to-br from-tertiary-dim to-tertiary-container rounded flex items-center justify-center shadow-lg shadow-tertiary/20">
-                <span class="material-symbols-outlined text-on-tertiary">rocket_launch</span>
-              </div>
-              <div>
-                <h4 class="text-sm font-black font-['Space_Grotesk'] uppercase">Velocity Boost</h4>
-                <p class="text-[10px] text-on-surface-variant">Earned by Neon Shadows</p>
-                <div class="mt-2 text-[10px] font-bold text-tertiary">+500 Weekly Points</div>
-              </div>
+            <div class="flex items-center justify-between bg-surface-container-highest/50 px-3 py-2 rounded-lg">
+              <span class="font-black font-['Space_Grotesk'] text-[#929bfa]">STRIDER</span>
+              <span class="text-on-surface-variant">≥ 15 km</span>
+              <span class="text-tertiary font-bold">+15 pts</span>
+            </div>
+            <div class="flex items-center justify-between bg-surface-container-highest/50 px-3 py-2 rounded-lg">
+              <span class="font-black font-['Space_Grotesk'] text-[#4ade80]">RUNNER</span>
+              <span class="text-on-surface-variant">≥ 10 km</span>
+              <span class="text-tertiary font-bold">+10 pts</span>
+            </div>
+            <div class="flex items-center justify-between bg-surface-container-highest/50 px-3 py-2 rounded-lg">
+              <span class="font-black font-['Space_Grotesk'] text-[#fbbf24]">MOVER</span>
+              <span class="text-on-surface-variant">≥ 5 km</span>
+              <span class="text-tertiary font-bold">+5 pts</span>
+            </div>
+            <div class="flex items-center justify-between bg-surface-container-highest/50 px-3 py-2 rounded-lg">
+              <span class="font-black font-['Space_Grotesk'] text-[#94a3b8]">STARTER</span>
+              <span class="text-on-surface-variant">≥ 1 km</span>
+              <span class="text-tertiary font-bold">+0 pts</span>
+            </div>
+            <div class="flex items-center justify-between bg-surface-container-highest/30 px-3 py-2 rounded-lg opacity-50">
+              <span class="font-black font-['Space_Grotesk'] text-[#4b5563]">INACTIVE</span>
+              <span class="text-on-surface-variant">0 km</span>
+              <span class="text-on-surface-variant font-bold">0 pts</span>
             </div>
           </div>
-          <button class="w-full mt-8 py-3 text-[10px] font-black font-['Space_Grotesk'] tracking-widest uppercase border border-outline-variant/30 rounded-full hover:bg-surface-container-highest transition-colors">VIEW COLLECTION (14)</button>
+          <p class="text-[10px] text-on-surface-variant mt-4 leading-relaxed">
+            Base points = distance in km. Bonus added on top per tier.
+            <strong class="text-on-surface">Total = km + bonus.</strong>
+          </p>
         </div>
-        <div class="absolute -bottom-20 -right-20 w-64 h-64 bg-primary/10 rounded-full blur-[80px] pointer-events-none"></div>
+        <div class="absolute -bottom-16 -right-16 w-48 h-48 bg-primary/8 rounded-full blur-[60px] pointer-events-none"></div>
       </div>
 
-      <!-- Active Challenges -->
-      <div class="bg-gradient-to-br from-[#131313] to-[#0a0a0a] p-8 rounded-2xl border border-outline-variant/10">
-        <h3 class="text-xs font-black font-['Space_Grotesk'] tracking-widest uppercase text-on-surface-variant mb-6 flex items-center gap-2">
-          <span class="w-2 h-2 rounded-full bg-error inline-block"></span> Live Challenges
+      <!-- Live Week Stats -->
+      <div class="bg-gradient-to-br from-[#131313] to-[#0a0a0a] p-7 rounded-2xl border border-outline-variant/10">
+        <h3 class="text-xs font-black font-['Space_Grotesk'] tracking-widest uppercase text-on-surface-variant mb-5 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-tertiary inline-block"></span> This Week
         </h3>
-        <div class="space-y-6">
+        <div class="space-y-4">
           <div>
             <div class="flex justify-between items-end mb-2">
-              <span class="text-sm font-bold">Member Engagement</span>
-              <span class="text-xs font-black font-['Space_Grotesk'] italic text-primary">82%</span>
+              <span class="text-sm font-bold">Participation Rate</span>
+              <span class="text-xs font-black font-['Space_Grotesk'] italic text-primary" id="side-pct">—</span>
             </div>
             <div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
-              <div class="h-full bg-primary rounded-full" style="width: 82%"></div>
+              <div class="h-full bg-primary rounded-full transition-all duration-700" id="side-bar" style="width:0%"></div>
             </div>
+            <div class="text-[10px] text-on-surface-variant mt-1" id="side-member-count"></div>
           </div>
           <div class="flex items-center gap-4 bg-surface-container-highest/30 p-4 rounded-xl">
-            <span class="material-symbols-outlined text-tertiary">timer</span>
+            <span class="material-symbols-outlined text-tertiary">leaderboard</span>
             <div>
-              <div class="text-[10px] font-bold uppercase text-on-surface-variant">Next Payout</div>
-              <div class="text-lg font-black font-['Space_Grotesk'] italic">14h : 22m : 05s</div>
+              <div class="text-[10px] font-bold uppercase text-on-surface-variant">Top Team Avg</div>
+              <div class="text-xl font-black font-['Space_Grotesk'] italic" id="side-top-avg">—</div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
+
+    </div><!-- /side col -->
+
+  </div><!-- /grid -->
+
 </main>
 
 <!-- Bottom Nav (Mobile) -->
@@ -328,5 +288,574 @@
     <span class="text-[10px] font-bold uppercase">Rules</span>
   </a>
 </nav>
+
+<script>
+// ============================================================
+// CONSTANTS
+// ============================================================
+const GAME = 'walk_run_2026';
+
+const TIER_BONUS = {
+  ELITE: 25, PACER: 20, STRIDER: 15, RUNNER: 10, MOVER: 5, STARTER: 0, INACTIVE: 0
+};
+
+const TIER_STYLE = {
+  ELITE:    { text: '#ff8f6f', bg: 'rgba(255,143,111,0.12)', border: 'rgba(255,143,111,0.3)' },
+  PACER:    { text: '#00e3fd', bg: 'rgba(0,227,253,0.10)',   border: 'rgba(0,227,253,0.3)' },
+  STRIDER:  { text: '#929bfa', bg: 'rgba(146,155,250,0.10)', border: 'rgba(146,155,250,0.3)' },
+  RUNNER:   { text: '#4ade80', bg: 'rgba(74,222,128,0.10)',  border: 'rgba(74,222,128,0.3)' },
+  MOVER:    { text: '#fbbf24', bg: 'rgba(251,191,36,0.10)',  border: 'rgba(251,191,36,0.3)' },
+  STARTER:  { text: '#94a3b8', bg: 'rgba(148,163,184,0.10)', border: 'rgba(148,163,184,0.3)' },
+  INACTIVE: { text: '#4b5563', bg: 'rgba(75,85,99,0.08)',    border: 'rgba(75,85,99,0.25)' },
+};
+
+// ============================================================
+// WEEK HELPER (Bangkok UTC+7, ISO week)
+// ============================================================
+function bangkokIsoWeek(weekOffset) {
+  if (weekOffset === undefined) weekOffset = 0;
+  var bkk = new Date(Date.now() + 7 * 3600 * 1000);
+  var shifted = new Date(Date.UTC(
+    bkk.getUTCFullYear(), bkk.getUTCMonth(), bkk.getUTCDate() - weekOffset * 7
+  ));
+  var day = shifted.getUTCDay() || 7;
+  shifted.setUTCDate(shifted.getUTCDate() + 4 - day);
+  var jan1 = new Date(Date.UTC(shifted.getUTCFullYear(), 0, 1));
+  var week = Math.ceil((((shifted - jan1) / 86400000) + 1) / 7);
+  return { year: shifted.getUTCFullYear(), week: week };
+}
+
+// ============================================================
+// STATE
+// ============================================================
+var mode = 'weekly';
+var weekOffset = 0;
+var expandedTeamId = null;
+var teamsCache = {};
+var indivCache = {};
+
+// ============================================================
+// API HELPERS (with caching)
+// ============================================================
+function fetchTeams(year, week) {
+  var key = year + '_' + week;
+  if (!teamsCache[key]) {
+    teamsCache[key] = fetch('/api/scoreboard/teams?game=' + GAME + '&year=' + year + '&week=' + week)
+      .then(function(r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      });
+  }
+  return teamsCache[key];
+}
+
+function fetchIndivs(year, week) {
+  var key = year + '_' + week;
+  if (!indivCache[key]) {
+    indivCache[key] = fetch('/api/scoreboard/individuals?game=' + GAME + '&year=' + year + '&week=' + week + '&per_page=100')
+      .then(function(r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      });
+  }
+  return indivCache[key];
+}
+
+// ============================================================
+// RENDER HELPERS
+// ============================================================
+function esc(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function fmtPts(n) { return (+n).toFixed(1); }
+function fmtKm(n)  { return (+n).toFixed(2) + ' km'; }
+
+function tierBadge(tier) {
+  var t = tier || 'INACTIVE';
+  var s = TIER_STYLE[t] || TIER_STYLE.INACTIVE;
+  return '<span style="color:' + s.text + ';background:' + s.bg + ';border:1px solid ' + s.border + ';display:inline-block;padding:2px 8px;border-radius:4px;font-size:9px;font-family:\'Space Grotesk\',sans-serif;font-weight:900;letter-spacing:0.1em;text-transform:uppercase;">' + esc(t) + '</span>';
+}
+
+// ============================================================
+// WEEKLY MEMBER TABLE
+// ============================================================
+function buildWeeklyTable(members, inactiveCount, weekNum) {
+  if (members.length === 0 && inactiveCount <= 0) {
+    return '<p style="text-align:center;color:#adaaaa;padding:20px 0;font-size:13px;">No activity data for this week yet.</p>';
+  }
+
+  // Sort by total_points desc
+  var sorted = members.slice().sort(function(a, b) { return b.total_points - a.total_points; });
+
+  var rows = sorted.map(function(m, i) {
+    var tier = m.tier_name || 'STARTER';
+    var bonus = TIER_BONUS[tier] !== undefined ? TIER_BONUS[tier] : 0;
+    var base = m.raw_value;
+    var s = TIER_STYLE[tier] || TIER_STYLE.INACTIVE;
+    var rowBg = i % 2 === 0 ? 'rgba(26,26,26,0.4)' : 'transparent';
+    return '<tr style="background:' + rowBg + ';border-bottom:1px solid rgba(72,72,71,0.15);">' +
+      '<td style="padding:10px 8px 10px 16px;font-size:13px;font-weight:700;white-space:nowrap;">' + esc(m.user_name) + '</td>' +
+      '<td style="padding:10px 8px;">' + tierBadge(tier) + '</td>' +
+      '<td style="padding:10px 8px;color:#adaaaa;font-size:12px;font-family:monospace;white-space:nowrap;">' + fmtKm(m.raw_value) + '</td>' +
+      '<td style="padding:10px 8px;font-size:12px;font-family:monospace;font-weight:700;color:#ffffff;">' + fmtPts(base) + '</td>' +
+      '<td style="padding:10px 8px;font-size:12px;font-family:monospace;font-weight:700;color:#81ecff;">+' + bonus + '</td>' +
+      '<td style="padding:10px 16px 10px 8px;font-size:13px;font-family:monospace;font-weight:900;color:' + s.text + ';">' + fmtPts(m.total_points) + '</td>' +
+    '</tr>';
+  }).join('');
+
+  var inactiveRow = '';
+  if (inactiveCount > 0) {
+    inactiveRow = '<tr><td colspan="6" style="padding:10px 16px;font-size:11px;color:#4b5563;font-style:italic;border-top:1px dashed rgba(72,72,71,0.3);">' +
+      '+ ' + inactiveCount + ' inactive member' + (inactiveCount !== 1 ? 's' : '') + ' this week &nbsp;(0 pts)' +
+    '</td></tr>';
+  }
+
+  return '<div style="overflow-x:auto;">' +
+    '<table style="width:100%;border-collapse:collapse;min-width:480px;" class="season-table">' +
+      '<thead>' +
+        '<tr style="border-bottom:1px solid rgba(72,72,71,0.3);">' +
+          '<th style="text-align:left;padding:0 8px 10px 16px;font-size:10px;font-family:\'Space Grotesk\',sans-serif;font-weight:900;letter-spacing:0.12em;text-transform:uppercase;color:#adaaaa;white-space:nowrap;">Member</th>' +
+          '<th style="text-align:left;padding:0 8px 10px;font-size:10px;font-family:\'Space Grotesk\',sans-serif;font-weight:900;letter-spacing:0.12em;text-transform:uppercase;color:#adaaaa;">Tier</th>' +
+          '<th style="text-align:left;padding:0 8px 10px;font-size:10px;font-family:\'Space Grotesk\',sans-serif;font-weight:900;letter-spacing:0.12em;text-transform:uppercase;color:#adaaaa;white-space:nowrap;">Distance</th>' +
+          '<th style="text-align:left;padding:0 8px 10px;font-size:10px;font-family:\'Space Grotesk\',sans-serif;font-weight:900;letter-spacing:0.12em;text-transform:uppercase;color:#adaaaa;white-space:nowrap;">Base Pts</th>' +
+          '<th style="text-align:left;padding:0 8px 10px;font-size:10px;font-family:\'Space Grotesk\',sans-serif;font-weight:900;letter-spacing:0.12em;text-transform:uppercase;color:#adaaaa;white-space:nowrap;">Bonus</th>' +
+          '<th style="text-align:left;padding:0 16px 10px 8px;font-size:10px;font-family:\'Space Grotesk\',sans-serif;font-weight:900;letter-spacing:0.12em;text-transform:uppercase;color:#adaaaa;white-space:nowrap;">Total</th>' +
+        '</tr>' +
+      '</thead>' +
+      '<tbody>' + rows + inactiveRow + '</tbody>' +
+    '</table>' +
+  '</div>';
+}
+
+// ============================================================
+// SEASON TABLE
+// ============================================================
+function buildSeasonTable(weekList, memberMap, inactiveInSeason) {
+  if (memberMap.size === 0) {
+    return '<p style="text-align:center;color:#adaaaa;padding:20px 0;font-size:13px;">No season data available yet.</p>';
+  }
+
+  // Sort members by season total desc
+  var sorted = [];
+  memberMap.forEach(function(data, name) {
+    sorted.push({ name: name, data: data });
+  });
+  sorted.sort(function(a, b) { return b.data.seasonTotal - a.data.seasonTotal; });
+
+  var weekHeaders = weekList.map(function(w) {
+    return '<th style="text-align:center;padding:0 4px 10px;font-size:10px;font-family:\'Space Grotesk\',sans-serif;font-weight:900;letter-spacing:0.08em;text-transform:uppercase;color:#adaaaa;white-space:nowrap;min-width:68px;">W' + w.week + '</th>';
+  }).join('');
+
+  var rows = sorted.map(function(item, ri) {
+    var rowBg = ri % 2 === 0 ? 'rgba(26,26,26,0.4)' : 'transparent';
+    var weekCells = item.data.entries.map(function(e) {
+      if (!e) {
+        return '<td style="text-align:center;padding:8px 4px;"><span style="color:#4b5563;font-size:11px;">—</span></td>';
+      }
+      var tier = e.tier_name || 'STARTER';
+      var s = TIER_STYLE[tier] || TIER_STYLE.INACTIVE;
+      return '<td style="text-align:center;padding:8px 4px;">' +
+        '<div style="font-size:11px;font-family:monospace;font-weight:900;color:' + s.text + ';">' + fmtPts(e.total_points) + '</div>' +
+        '<div style="font-size:8px;font-family:\'Space Grotesk\',sans-serif;font-weight:900;color:' + s.text + ';opacity:0.7;text-transform:uppercase;letter-spacing:0.05em;margin-top:1px;">' + esc(tier) + '</div>' +
+      '</td>';
+    }).join('');
+
+    return '<tr style="background:' + rowBg + ';border-bottom:1px solid rgba(72,72,71,0.15);">' +
+      '<td style="padding:10px 12px 10px 16px;font-size:13px;font-weight:700;white-space:nowrap;position:sticky;left:0;background:' + (rowBg === 'transparent' ? '#0e0e0e' : '#111111') + ';z-index:5;">' + esc(item.name) + '</td>' +
+      '<td style="padding:10px 12px;font-size:13px;font-family:monospace;font-weight:900;color:#ff8f6f;white-space:nowrap;text-align:right;position:sticky;left:0;z-index:4;">' + fmtPts(item.data.seasonTotal) + '</td>' +
+      weekCells +
+    '</tr>';
+  }).join('');
+
+  var inactiveRow = '';
+  if (inactiveInSeason > 0) {
+    inactiveRow = '<tr><td colspan="' + (2 + weekList.length) + '" style="padding:10px 16px;font-size:11px;color:#4b5563;font-style:italic;border-top:1px dashed rgba(72,72,71,0.3);">' +
+      '+ ' + inactiveInSeason + ' member' + (inactiveInSeason !== 1 ? 's' : '') + ' with no season activity' +
+    '</td></tr>';
+  }
+
+  var tableWidth = Math.max(500, 180 + 120 + weekList.length * 72);
+
+  return '<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">' +
+    '<table style="width:100%;border-collapse:collapse;min-width:' + tableWidth + 'px;" class="season-table">' +
+      '<thead>' +
+        '<tr style="border-bottom:1px solid rgba(72,72,71,0.3);">' +
+          '<th style="text-align:left;padding:0 12px 10px 16px;font-size:10px;font-family:\'Space Grotesk\',sans-serif;font-weight:900;letter-spacing:0.12em;text-transform:uppercase;color:#adaaaa;white-space:nowrap;position:sticky;left:0;background:#0e0e0e;z-index:6;min-width:140px;">Member</th>' +
+          '<th style="text-align:right;padding:0 12px 10px;font-size:10px;font-family:\'Space Grotesk\',sans-serif;font-weight:900;letter-spacing:0.12em;text-transform:uppercase;color:#adaaaa;white-space:nowrap;position:sticky;left:0;z-index:5;min-width:90px;">Season Total</th>' +
+          weekHeaders +
+        '</tr>' +
+      '</thead>' +
+      '<tbody>' + rows + inactiveRow + '</tbody>' +
+    '</table>' +
+  '</div>';
+}
+
+// ============================================================
+// TEAM CARD HTML
+// ============================================================
+function teamCardHTML(team, members, isExpanded, inactiveCount, weekNum) {
+  var rankStr = String(team.rank).padStart(2, '0');
+  var rankColor = team.rank === 1 ? '#ff8f6f' : '#adaaaa';
+  var avgColor  = team.rank === 1 ? '#ff8f6f' : '#ffffff';
+  var chevronRot = isExpanded ? 'rotate(180deg)' : '';
+
+  var expandContent = '';
+  if (isExpanded) {
+    if (mode === 'season') {
+      expandContent = '<div style="text-align:center;color:#adaaaa;padding:24px 0;font-size:13px;display:flex;align-items:center;justify-content:center;gap:8px;">' +
+        '<span class="material-symbols-outlined spin" style="font-size:16px;">refresh</span> Loading season data…' +
+      '</div>';
+    } else {
+      expandContent = buildWeeklyTable(members, inactiveCount, weekNum);
+    }
+  }
+
+  var expandTitleText = mode === 'season' ? 'Season Breakdown — All Weeks' : ('Team Members — Week ' + weekNum);
+
+  return '<div class="bg-surface-container-low rounded-xl overflow-hidden shadow-lg" id="card-' + team.team_id + '" ' +
+      'data-team-name="' + esc(team.team_name) + '" ' +
+      'data-total-members="' + team.total_member_count + '" ' +
+      'data-active-members="' + team.active_member_count + '">' +
+
+    // Header row (clickable)
+    '<div style="cursor:pointer;display:flex;align-items:center;padding:18px 20px;gap:16px;transition:background 0.15s;" ' +
+      'class="hover:bg-surface-container transition-colors select-none" ' +
+      'onclick="toggleTeam(' + team.team_id + ')">' +
+
+      // Rank
+      '<div style="width:40px;text-align:center;flex-shrink:0;">' +
+        '<span style="font-size:22px;font-weight:900;font-family:\'Space Grotesk\',sans-serif;font-style:italic;color:' + rankColor + ';">' + rankStr + '</span>' +
+      '</div>' +
+
+      // Icon
+      '<div style="width:52px;height:52px;background:#262626;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">' +
+        '<span class="material-symbols-outlined" style="color:#ff8f6f;font-size:26px;font-variation-settings:\'FILL\' 1;">groups</span>' +
+      '</div>' +
+
+      // Name + member count
+      '<div style="flex:1;min-width:0;">' +
+        '<h3 style="font-size:16px;font-weight:900;font-family:\'Space Grotesk\',sans-serif;text-transform:uppercase;letter-spacing:-0.02em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + esc(team.team_name) + '</h3>' +
+        '<div style="margin-top:4px;display:flex;gap:16px;">' +
+          '<span style="font-size:10px;color:#adaaaa;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;display:flex;align-items:center;gap:4px;">' +
+            '<span class="material-symbols-outlined" style="font-size:12px;">group</span>' +
+            team.active_member_count + '/' + team.total_member_count + ' active' +
+          '</span>' +
+        '</div>' +
+      '</div>' +
+
+      // Avg score
+      '<div style="text-align:right;flex-shrink:0;">' +
+        '<div style="font-size:10px;color:#adaaaa;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:2px;">Avg Score</div>' +
+        '<div style="font-size:28px;font-weight:900;font-family:\'Space Grotesk\',sans-serif;font-style:italic;letter-spacing:-0.03em;color:' + avgColor + ';">' + fmtPts(team.avg_score) + '</div>' +
+      '</div>' +
+
+      // Chevron
+      '<div style="flex-shrink:0;margin-left:4px;">' +
+        '<span class="material-symbols-outlined" id="chevron-' + team.team_id + '" style="color:#adaaaa;font-size:22px;transition:transform 0.25s ease;transform:' + chevronRot + ';">expand_more</span>' +
+      '</div>' +
+
+    '</div>' + // end clickable header
+
+    // Expand panel
+    '<div id="expand-' + team.team_id + '" ' + (isExpanded ? '' : 'style="display:none;"') + '>' +
+      '<div style="border-top:1px solid rgba(72,72,71,0.2);padding:20px;">' +
+        '<div style="font-size:10px;font-family:\'Space Grotesk\',sans-serif;font-weight:900;letter-spacing:0.12em;text-transform:uppercase;color:#adaaaa;margin-bottom:14px;display:flex;align-items:center;gap:6px;">' +
+          '<span class="material-symbols-outlined" style="font-size:14px;">person</span>' +
+          '<span id="expand-title-' + team.team_id + '">' + expandTitleText + '</span>' +
+        '</div>' +
+        '<div id="expand-content-' + team.team_id + '">' + expandContent + '</div>' +
+      '</div>' +
+    '</div>' +
+
+  '</div>'; // end card
+}
+
+// ============================================================
+// MAIN RENDER
+// ============================================================
+function renderPage() {
+  var cur = bangkokIsoWeek(weekOffset);
+  var year = cur.year;
+  var week = cur.week;
+
+  // Update week label
+  document.getElementById('week-label').textContent = 'Week ' + week + ', ' + year;
+
+  // Toggle next-week button
+  var nextBtn = document.getElementById('next-week');
+  if (weekOffset >= 0) {
+    nextBtn.disabled = true;
+    nextBtn.style.opacity = '0.3';
+    nextBtn.style.cursor = 'not-allowed';
+  } else {
+    nextBtn.disabled = false;
+    nextBtn.style.opacity = '1';
+    nextBtn.style.cursor = 'pointer';
+  }
+
+  // Sub-label
+  var subLabel = document.getElementById('sub-label');
+  if (mode === 'season') {
+    subLabel.textContent = 'Season overview — click a team to expand all-week member scores';
+  } else {
+    subLabel.textContent = 'Team rankings — week ' + week + ', ' + year;
+  }
+
+  // Update tab styles
+  updateTabStyles();
+
+  var listEl = document.getElementById('teams-list');
+  listEl.innerHTML = '<div style="background:#131313;border-radius:12px;padding:40px;text-align:center;">' +
+    '<span class="material-symbols-outlined spin" style="font-size:28px;color:#adaaaa;">refresh</span>' +
+    '<p style="color:#adaaaa;font-size:13px;margin-top:12px;">Loading teams…</p>' +
+  '</div>';
+
+  Promise.all([fetchTeams(year, week), fetchIndivs(year, week)])
+    .then(function(results) {
+      var teamsResp  = results[0];
+      var indivsResp = results[1];
+      var teams  = teamsResp.entries  || [];
+      var indivs = indivsResp.entries || [];
+
+      // Hero stats
+      var totalTeams = teams.length;
+      var globalAvg = totalTeams > 0
+        ? teams.reduce(function(s, t) { return s + t.avg_score; }, 0) / totalTeams
+        : 0;
+      document.getElementById('stat-avg').textContent   = fmtPts(globalAvg);
+      document.getElementById('stat-teams').textContent = String(totalTeams);
+
+      // Sidebar stats
+      var totalMembers  = teams.reduce(function(s, t) { return s + t.total_member_count; }, 0);
+      var activeMembers = teams.reduce(function(s, t) { return s + t.active_member_count; }, 0);
+      var pct = totalMembers > 0 ? Math.round(activeMembers / totalMembers * 100) : 0;
+      document.getElementById('side-pct').textContent         = pct + '%';
+      document.getElementById('side-bar').style.width         = pct + '%';
+      document.getElementById('side-member-count').textContent = activeMembers + ' of ' + totalMembers + ' members active';
+      document.getElementById('side-top-avg').textContent     = teams.length > 0 ? fmtPts(teams[0].avg_score) : '—';
+
+      if (teams.length === 0) {
+        listEl.innerHTML = '<div style="background:#131313;border-radius:12px;padding:40px;text-align:center;color:#adaaaa;">No team data for this week yet.</div>';
+        return;
+      }
+
+      var html = teams.map(function(team) {
+        var members     = indivs.filter(function(e) { return e.team_name === team.team_name; });
+        var inactiveCnt = team.total_member_count - team.active_member_count;
+        var isExpanded  = expandedTeamId === team.team_id;
+        return teamCardHTML(team, members, isExpanded, inactiveCnt, week);
+      }).join('');
+
+      listEl.innerHTML = html;
+
+      // If a team is expanded in season mode, trigger season load
+      if (mode === 'season' && expandedTeamId !== null) {
+        var expandedTeam = teams.filter(function(t) { return t.team_id === expandedTeamId; })[0];
+        if (expandedTeam) {
+          loadSeasonData(expandedTeamId);
+        }
+      }
+    })
+    .catch(function(err) {
+      listEl.innerHTML = '<div style="background:#131313;border-radius:12px;padding:40px;text-align:center;color:#ff716c;">Failed to load teams: ' + esc(err.message) + '</div>';
+    });
+}
+
+// ============================================================
+// TOGGLE TEAM EXPANSION
+// ============================================================
+function toggleTeam(teamId) {
+  // Collapse if already open
+  if (expandedTeamId === teamId) {
+    var panel = document.getElementById('expand-' + teamId);
+    var chev  = document.getElementById('chevron-' + teamId);
+    if (panel) panel.style.display = 'none';
+    if (chev)  chev.style.transform = '';
+    expandedTeamId = null;
+    return;
+  }
+
+  // Collapse the previously expanded one
+  if (expandedTeamId !== null) {
+    var oldPanel = document.getElementById('expand-' + expandedTeamId);
+    var oldChev  = document.getElementById('chevron-' + expandedTeamId);
+    if (oldPanel) oldPanel.style.display = 'none';
+    if (oldChev)  oldChev.style.transform = '';
+  }
+
+  expandedTeamId = teamId;
+  var panel = document.getElementById('expand-' + teamId);
+  var chev  = document.getElementById('chevron-' + teamId);
+  if (!panel) return;
+
+  panel.style.display = 'block';
+  if (chev) chev.style.transform = 'rotate(180deg)';
+
+  var card = document.getElementById('card-' + teamId);
+  if (!card) return;
+
+  if (mode === 'season') {
+    // Populate title + loading state
+    var titleEl   = document.getElementById('expand-title-' + teamId);
+    var contentEl = document.getElementById('expand-content-' + teamId);
+    if (titleEl)   titleEl.textContent = 'Season Breakdown — All Weeks';
+    if (contentEl) contentEl.innerHTML =
+      '<div style="text-align:center;color:#adaaaa;padding:24px 0;font-size:13px;display:flex;align-items:center;justify-content:center;gap:8px;">' +
+      '<span class="material-symbols-outlined spin" style="font-size:16px;">refresh</span> Loading season data…</div>';
+    loadSeasonData(teamId);
+  } else {
+    // Weekly content was already built into the HTML; just reveal title
+    var titleEl = document.getElementById('expand-title-' + teamId);
+    if (titleEl) {
+      var cur  = bangkokIsoWeek(weekOffset);
+      titleEl.textContent = 'Team Members — Week ' + cur.week;
+    }
+  }
+}
+
+// ============================================================
+// SEASON DATA LOADER
+// ============================================================
+function loadSeasonData(teamId) {
+  var card = document.getElementById('card-' + teamId);
+  if (!card) return;
+  var teamName     = card.dataset.teamName;
+  var totalMembers = parseInt(card.dataset.totalMembers, 10) || 0;
+  var contentEl    = document.getElementById('expand-content-' + teamId);
+  if (!contentEl) return;
+
+  var cur = bangkokIsoWeek(0);
+  var weekList = [];
+  for (var w = 1; w <= cur.week; w++) {
+    weekList.push({ year: cur.year, week: w });
+  }
+
+  var promises = weekList.map(function(yw) {
+    return fetchIndivs(yw.year, yw.week).catch(function() { return { entries: [] }; });
+  });
+
+  Promise.all(promises).then(function(results) {
+    // Build memberMap: name -> { entries: (entry|null)[], seasonTotal }
+    var memberMap = new Map();
+
+    results.forEach(function(resp, i) {
+      var entries = (resp.entries || []).filter(function(e) { return e.team_name === teamName; });
+      entries.forEach(function(e) {
+        if (!memberMap.has(e.user_name)) {
+          memberMap.set(e.user_name, { entries: new Array(weekList.length).fill(null), seasonTotal: 0 });
+        }
+        var rec = memberMap.get(e.user_name);
+        rec.entries[i] = e;
+        rec.seasonTotal += e.total_points;
+      });
+    });
+
+    var inactiveInSeason = Math.max(0, totalMembers - memberMap.size);
+    var html = buildSeasonTable(weekList, memberMap, inactiveInSeason);
+    if (contentEl) contentEl.innerHTML = html;
+  }).catch(function(err) {
+    if (contentEl) contentEl.innerHTML = '<p style="color:#ff716c;font-size:13px;padding:16px 0;">Failed to load season data: ' + esc(err.message) + '</p>';
+  });
+}
+
+// ============================================================
+// WEEK NAVIGATION
+// ============================================================
+function navigateWeek(delta) {
+  var newOffset = weekOffset + delta;
+  if (newOffset > 0) return;
+  weekOffset = newOffset;
+  expandedTeamId = null;
+  renderPage();
+}
+
+// ============================================================
+// MODE SWITCH
+// ============================================================
+function setMode(newMode) {
+  if (mode === newMode) return;
+  mode = newMode;
+
+  // If a team is expanded, update its expansion content
+  if (expandedTeamId !== null) {
+    var titleEl   = document.getElementById('expand-title-' + expandedTeamId);
+    var contentEl = document.getElementById('expand-content-' + expandedTeamId);
+    var cur = bangkokIsoWeek(weekOffset);
+
+    if (mode === 'season') {
+      if (titleEl) titleEl.textContent = 'Season Breakdown — All Weeks';
+      if (contentEl) contentEl.innerHTML =
+        '<div style="text-align:center;color:#adaaaa;padding:24px 0;font-size:13px;display:flex;align-items:center;justify-content:center;gap:8px;">' +
+        '<span class="material-symbols-outlined spin" style="font-size:16px;">refresh</span> Loading season data…</div>';
+      loadSeasonData(expandedTeamId);
+    } else {
+      // Rebuild weekly table from cache
+      if (titleEl) titleEl.textContent = 'Team Members — Week ' + cur.week;
+      if (contentEl) {
+        var card = document.getElementById('card-' + expandedTeamId);
+        if (card) {
+          var teamName     = card.dataset.teamName;
+          var totalMembers = parseInt(card.dataset.totalMembers, 10) || 0;
+          var activeMembers = parseInt(card.dataset.activeMembers, 10) || 0;
+          fetchIndivs(cur.year, cur.week).then(function(resp) {
+            var indivs   = resp.entries || [];
+            var members  = indivs.filter(function(e) { return e.team_name === teamName; });
+            var inactive = totalMembers - activeMembers;
+            if (contentEl) contentEl.innerHTML = buildWeeklyTable(members, inactive, cur.week);
+          });
+        }
+      }
+    }
+  }
+
+  updateTabStyles();
+
+  // Show/hide week nav
+  var weekNav = document.getElementById('week-nav');
+  if (mode === 'season') {
+    weekNav.style.visibility = 'hidden';
+    weekNav.style.opacity = '0';
+  } else {
+    weekNav.style.visibility = 'visible';
+    weekNav.style.opacity = '1';
+  }
+
+  // Update sub-label
+  var subLabel = document.getElementById('sub-label');
+  var cur = bangkokIsoWeek(weekOffset);
+  if (mode === 'season') {
+    subLabel.textContent = 'Season overview — click a team to expand all-week member scores';
+  } else {
+    subLabel.textContent = 'Team rankings — week ' + cur.week + ', ' + cur.year;
+  }
+}
+
+function updateTabStyles() {
+  var tabW = document.getElementById('tab-weekly');
+  var tabS = document.getElementById('tab-season');
+  if (!tabW || !tabS) return;
+  if (mode === 'weekly') {
+    tabW.style.background = '#1a1a1a';
+    tabW.style.color = '#ff8f6f';
+    tabS.style.background = 'transparent';
+    tabS.style.color = '#adaaaa';
+  } else {
+    tabS.style.background = '#1a1a1a';
+    tabS.style.color = '#ff8f6f';
+    tabW.style.background = 'transparent';
+    tabW.style.color = '#adaaaa';
+  }
+}
+
+// ============================================================
+// INIT
+// ============================================================
+document.addEventListener('DOMContentLoaded', renderPage);
+</script>
 </body>
 </html>
