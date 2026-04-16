@@ -78,17 +78,6 @@
       <span class="material-symbols-outlined">info</span><span>Rules</span>
     </a>
   </nav>
-  <div class="px-6 mt-auto">
-    <button class="w-full kinetic-gradient py-4 rounded-full text-on-primary font-headline font-black text-xs tracking-widest uppercase mb-8 hover:brightness-110 transition-all">START TRACKING</button>
-    <div class="space-y-2 border-t border-surface-variant pt-6">
-      <a class="flex items-center gap-4 py-2 px-4 text-gray-500 hover:text-[#929bfa] transition-all font-['Space_Grotesk'] text-xs font-bold uppercase tracking-widest" href="#">
-        <span class="material-symbols-outlined text-lg">settings</span><span>Settings</span>
-      </a>
-      <a class="flex items-center gap-4 py-2 px-4 text-gray-500 hover:text-error transition-all font-['Space_Grotesk'] text-xs font-bold uppercase tracking-widest" href="#">
-        <span class="material-symbols-outlined text-lg">logout</span><span>Logout</span>
-      </a>
-    </div>
-  </div>
 </aside>
 
 <!-- Main Canvas -->
@@ -98,30 +87,25 @@
     <div class="flex items-center gap-4">
       <span class="text-2xl font-black italic tracking-tighter text-[#ff8f6f] font-['Space_Grotesk'] uppercase">Cube Games 2026</span>
     </div>
-    <div class="flex items-center gap-6">
-      <button class="w-10 h-10 rounded-full flex items-center justify-center text-[#929bfa] hover:bg-[#262626] transition-colors duration-300">
-        <span class="material-symbols-outlined">notifications</span>
-      </button>
-      <div class="h-10 w-10 rounded-full overflow-hidden border-2 border-surface-container-highest">
-        <img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNJ96MB02wY0uwqzokl8qHjrJGL1aXPz7I4bZgWvbNiecyeYw6PkSf4_k4SWz6Bf-1_tpNS1MCKKy58KHj7rEfI2x7AsK6yKzVFLdcSJ5zy2GRpK3nhpDY6CbIl7LWA4ZXVUf4wz8K4KJHl92vsZFQzrkiM_KtdAYJbztHAbu939aePrnFMopsHBOt-1IuSG-WGRWJro1tmotjM39ZSNlG-9KsOAfEqUizvXruYE1uS6cknWgrrvwgltN0jhHqBfaQAa5COnsh63s"/>
-      </div>
+    <div class="flex items-center gap-3">
+      <span class="text-on-surface-variant font-headline text-xs font-bold tracking-[0.2em] uppercase">Public Dashboard</span>
     </div>
   </header>
 
   <div class="p-8 max-w-7xl mx-auto space-y-8">
-    <!-- Welcome Header -->
+    <!-- Page Header -->
     <section class="relative">
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
-          <h2 class="text-on-surface-variant font-headline text-sm font-bold tracking-[0.3em] uppercase mb-2">Athlete Overview</h2>
+          <h2 class="text-on-surface-variant font-headline text-sm font-bold tracking-[0.3em] uppercase mb-2">Company Overview</h2>
           <h1 class="font-headline text-5xl md:text-6xl font-black tracking-tighter leading-none italic">
-            WELCOME BACK, <span class="text-primary">ALEX</span>
+            SEASON <span class="text-primary">SCOREBOARD</span>
           </h1>
         </div>
         <div class="flex gap-4">
           <div class="bg-surface-container-low px-6 py-3 rounded-xl border-l-4 border-tertiary">
-            <p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest">Global Status</p>
-            <p class="font-headline text-lg font-black text-tertiary tracking-tight uppercase">In Motion</p>
+            <p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest">Season Status</p>
+            <p class="font-headline text-lg font-black text-tertiary tracking-tight uppercase">Week In Progress</p>
           </div>
         </div>
       </div>
@@ -129,168 +113,131 @@
 
     <!-- Stats Grid -->
     <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <!-- Weekly Distance -->
+      <!-- Company KM This Week -->
       <div class="bg-surface-container-low p-8 rounded-xl relative overflow-hidden group">
         <div class="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
           <span class="material-symbols-outlined text-[120px]" style="font-variation-settings:'wght' 700;">route</span>
         </div>
         <div class="relative z-10">
           <div class="flex items-center gap-2 mb-6">
-            <span class="material-symbols-outlined text-primary">speed</span>
-            <span class="text-on-surface-variant text-xs font-bold uppercase tracking-widest">Weekly Distance</span>
+            <span class="material-symbols-outlined text-primary">directions_run</span>
+            <span class="text-on-surface-variant text-xs font-bold uppercase tracking-widest">Company KM This Week</span>
           </div>
           <div class="flex items-baseline gap-2">
-            <span class="font-headline text-6xl font-black tracking-tighter text-on-surface" id="weekly-distance">15.5</span>
+            <span class="font-headline text-6xl font-black tracking-tighter text-on-surface" id="company-km">—</span>
             <span class="font-headline text-xl font-bold text-primary italic">KM</span>
           </div>
-          <div class="mt-6 h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
-            <div class="h-full kinetic-gradient w-[62%]"></div>
-          </div>
-          <p class="mt-3 text-[10px] text-on-surface-variant font-medium">62% OF WEEKLY TARGET (25KM)</p>
+          <p class="mt-6 text-[10px] text-on-surface-variant font-medium uppercase tracking-widest">COMBINED ACROSS ALL PARTICIPANTS</p>
         </div>
       </div>
-      <!-- Total Points -->
+      <!-- Active Participants -->
       <div class="bg-surface-container-low p-8 rounded-xl relative overflow-hidden group">
         <div class="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
-          <span class="material-symbols-outlined text-[120px]" style="font-variation-settings:'wght' 700;">military_tech</span>
+          <span class="material-symbols-outlined text-[120px]" style="font-variation-settings:'wght' 700;">groups</span>
         </div>
         <div class="relative z-10">
           <div class="flex items-center gap-2 mb-6">
-            <span class="material-symbols-outlined text-secondary">star</span>
-            <span class="text-on-surface-variant text-xs font-bold uppercase tracking-widest">Total Points</span>
+            <span class="material-symbols-outlined text-secondary">person</span>
+            <span class="text-on-surface-variant text-xs font-bold uppercase tracking-widest">Active Participants</span>
           </div>
           <div class="flex items-baseline gap-2">
-            <span class="font-headline text-6xl font-black tracking-tighter text-on-surface" id="total-points">4,820</span>
+            <span class="font-headline text-6xl font-black tracking-tighter text-on-surface" id="active-count">—</span>
           </div>
-          <div class="mt-6 flex gap-2">
-            <span class="px-2 py-1 bg-secondary-container text-on-secondary-container text-[10px] font-bold rounded">ELITE RANK</span>
-            <span class="px-2 py-1 bg-surface-container-highest text-on-surface-variant text-[10px] font-bold rounded">+420 THIS WEEK</span>
-          </div>
+          <p class="mt-6 text-[10px] text-on-surface-variant font-medium uppercase tracking-widest">ATHLETES MOVING THIS WEEK</p>
         </div>
       </div>
-      <!-- Team Rank -->
+      <!-- Top Team -->
       <div class="bg-secondary-container p-8 rounded-xl relative overflow-hidden">
         <div class="absolute top-0 right-0 p-4">
-          <span class="material-symbols-outlined text-secondary opacity-30 text-4xl" style="font-variation-settings:'FILL' 1;">shield</span>
+          <span class="material-symbols-outlined text-secondary opacity-30 text-4xl" style="font-variation-settings:'FILL' 1;">emoji_events</span>
         </div>
         <div class="relative z-10">
           <div class="flex items-center gap-2 mb-6 text-on-secondary-container">
-            <span class="material-symbols-outlined text-secondary">groups</span>
-            <span class="text-xs font-bold uppercase tracking-widest">Team Rank</span>
+            <span class="material-symbols-outlined text-secondary">military_tech</span>
+            <span class="text-xs font-bold uppercase tracking-widest">Leading Team</span>
           </div>
           <div class="flex items-baseline gap-2">
-            <span class="font-headline text-6xl font-black tracking-tighter text-on-secondary-container">#04</span>
-            <span class="font-headline text-xl font-bold text-tertiary italic">TOP 5%</span>
+            <span class="font-headline text-6xl font-black tracking-tighter text-on-secondary-container" id="top-team-score">—</span>
+            <span class="font-headline text-base font-bold text-tertiary italic">AVG PTS</span>
           </div>
-          <p class="mt-6 text-sm text-secondary-fixed-dim font-medium leading-tight">TEAM: TITAN VELOCITY<br/>CLIMBED 2 POSITIONS SINCE YESTERDAY</p>
+          <p class="mt-6 text-sm text-secondary-fixed-dim font-medium leading-tight uppercase tracking-tight" id="top-team-name">Loading...</p>
         </div>
       </div>
     </section>
 
-    <!-- Monthly Challenge + Activity Feed -->
+    <!-- Team Rankings + Recent Activity -->
     <section class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-      <!-- Monthly Challenge Spotlight -->
+      <!-- Leading Teams -->
       <div class="lg:col-span-8">
-        <div class="bg-surface-container-low rounded-xl overflow-hidden relative group">
-          <div class="grid md:grid-cols-2">
-            <div class="p-8 md:p-12 relative z-10 flex flex-col justify-center">
-              <span class="px-3 py-1 bg-primary text-on-primary text-[10px] font-black tracking-[0.2em] uppercase rounded-full w-fit mb-6">Spotlight Challenge</span>
-              <h3 class="font-headline text-4xl font-black tracking-tight mb-4 uppercase">MIDNIGHT SPRINT SERIES</h3>
-              <p class="text-on-surface-variant text-sm mb-8 leading-relaxed max-w-sm">Complete 5 runs after 10:00 PM this month to unlock the exclusive 'Neon Pulse' performance modifier card.</p>
-              <div class="flex items-center gap-6">
-                <button class="kinetic-gradient text-on-primary font-headline font-black text-xs px-8 py-4 rounded-full tracking-widest uppercase hover:scale-105 transition-transform">ACCEPT CHALLENGE</button>
-                <div class="flex flex-col">
-                  <span class="text-[10px] text-on-surface-variant uppercase font-bold">Time Remaining</span>
-                  <span class="text-primary font-headline font-bold">12D : 04H : 22M</span>
-                </div>
-              </div>
+        <div class="bg-surface-container-low rounded-xl overflow-hidden">
+          <!-- Panel header -->
+          <div class="flex items-center justify-between px-8 py-5 border-b border-surface-container-highest">
+            <div>
+              <h3 class="font-headline font-black text-xl tracking-tight uppercase">Team Rankings</h3>
+              <p class="text-on-surface-variant text-[10px] font-bold uppercase tracking-widest mt-0.5" id="week-label">This Week</p>
             </div>
-            <div class="relative min-h-[300px] h-full overflow-hidden">
-              <img alt="Night runner" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAw7uE4f3AK0-Z-F-_0DILZfsSBePZhaG3RYOLJ121xQrtGh8CY9jwHO4SoUu-38Sia60Xa37DrEMXn51YP2aZvBIN0zXepGlFmbatOGyADgH7x4rn0L7FdTSY62WinxlRe2p4Qe-PExG8MHLhJshsN8nhHWtcAf0xyYqHHchdebGeJzq3VYxSjA4nYQBeSs016Onns1TsOvNx43PGu_mqebM8jBpak2TmKCi8Mlv5zgWTxb0rk6QealSRvQ5p3rZ6ZPviHwb4Gdyk"/>
-              <div class="absolute inset-0 bg-gradient-to-r from-surface-container-low via-surface-container-low/80 to-transparent"></div>
-              <!-- Special Card -->
-              <div class="absolute right-8 top-1/2 -translate-y-1/2 rotate-12 group-hover:rotate-6 transition-transform duration-500">
-                <div class="w-48 h-64 bg-surface-container-highest rounded-xl border border-primary/20 shadow-2xl flex flex-col p-4 glass-panel">
-                  <div class="w-full h-32 bg-primary/10 rounded-lg mb-4 flex items-center justify-center border border-primary/10">
-                    <span class="material-symbols-outlined text-primary text-5xl" style="font-variation-settings:'FILL' 1;">bolt</span>
-                  </div>
-                  <div class="text-center">
-                    <p class="text-[10px] text-primary font-black uppercase tracking-tighter">Special Reward</p>
-                    <h4 class="font-headline text-lg font-black text-on-surface leading-tight">NEON PULSE</h4>
-                    <p class="text-[8px] text-on-surface-variant mt-2">SPEED MULTIPLIER +15%<br/>NIGHT SESSIONS ONLY</p>
-                  </div>
-                </div>
-              </div>
+            <a href="teams.html" class="text-secondary text-xs font-black uppercase tracking-widest hover:text-on-surface transition-colors flex items-center gap-1">
+              View All <span class="material-symbols-outlined text-sm">chevron_right</span>
+            </a>
+          </div>
+          <!-- Team rows — populated by JS -->
+          <div id="team-rows" class="divide-y divide-surface-container-highest">
+            <!-- loading state -->
+            <div class="flex items-center justify-center py-16 text-on-surface-variant text-xs font-bold uppercase tracking-widest" id="teams-loading">
+              <span class="material-symbols-outlined animate-spin mr-2">progress_activity</span> Loading...
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Recent Activity Feed -->
+      <!-- Recent Company Activity -->
       <div class="lg:col-span-4">
         <div class="bg-surface-container-low p-6 rounded-xl h-full flex flex-col">
           <div class="flex items-center justify-between mb-8">
             <h3 class="font-headline font-black text-xl tracking-tight uppercase">Recent Activity</h3>
-            <button class="text-on-surface-variant hover:text-primary transition-colors">
-              <span class="material-symbols-outlined">more_horiz</span>
-            </button>
           </div>
-          <div class="space-y-6 flex-1 overflow-y-auto pr-2">
+          <div class="space-y-6 flex-1 overflow-y-auto pr-2" id="activity-feed">
             <!-- Activity 1 -->
             <div class="flex gap-4 group">
-              <div class="w-10 h-10 rounded-full border-2 border-secondary overflow-hidden shrink-0">
-                <img alt="Marcus Chen" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQHFDyXYUk73gLMIsZGYtSJ86Q0J6Z-rf0XNP3nttoHLoMHjx99RqVeMkojTEEosdu6mlF-NgFWHeoHCLHQ_2qHkMx7-IjBRtSsv2iF3RZ-g8F0mfqNQJs81woeZkW0pGm287tEYYX7SbSynZYEXiUuJSRtGLFCaHFG-hKtM7hVCL3tjSRw9-6iwi6s4FnJN1wuIQm9015VsIe_1W9cGCWM3-9ORPBj_G4twbzPn6VOgaVxYzuYkQ8x8vHsQQqhEYA7k6WxMxtNb8"/>
+              <div class="w-10 h-10 rounded-full border-2 border-secondary bg-surface-container-highest shrink-0 flex items-center justify-center">
+                <span class="material-symbols-outlined text-secondary text-sm">person</span>
               </div>
               <div class="flex-1 border-b border-surface-container-highest pb-4">
                 <div class="flex justify-between items-start mb-1">
                   <p class="text-sm font-bold text-on-surface group-hover:text-secondary transition-colors">Marcus Chen</p>
                   <span class="text-[10px] text-on-surface-variant">2M AGO</span>
                 </div>
-                <p class="text-xs text-on-surface-variant leading-snug">Smashed a personal best! Logged <span class="text-tertiary">12.4km</span> in the Central Park Loop.</p>
-                <div class="flex items-center gap-3 mt-3">
-                  <button class="text-[10px] font-bold text-primary flex items-center gap-1">
-                    <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1;">favorite</span> CHEER
-                  </button>
-                  <button class="text-[10px] font-bold text-on-surface-variant flex items-center gap-1">
-                    <span class="material-symbols-outlined text-sm">chat_bubble</span> COMMENT
-                  </button>
-                </div>
+                <p class="text-xs text-on-surface-variant leading-snug">Logged <span class="text-tertiary">12.4km</span> · Titan Pulse</p>
               </div>
             </div>
             <!-- Activity 2 -->
             <div class="flex gap-4 group">
-              <div class="w-10 h-10 rounded-full border-2 border-primary overflow-hidden shrink-0">
-                <img alt="Sarah Jenkins" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYJvuWqph9XDTJ74IKbnzA_Ld1hOSk3_8INm5OHlqplbIqCmhGR7lIWuDRumevucSStXrg6jIoAOV1mvbVx3q1rtL2_n395GLNgqmsIZfkY7ZQoxdfZTyHWQqhZi6Ur2ZbuID0KD9cG5sHFa0qQN4OSFTkpGivYB99LhjXb3nenAaXfUnE83a1WaZ2XnH-XvsW6ajhOrD51YW_fzkTj4nPUEJ2qcFMW9ELXuvmYUN4RIbM0CnrBWKgdvtaaFGO2B0o4BTRa-TRSPg"/>
+              <div class="w-10 h-10 rounded-full border-2 border-primary bg-surface-container-highest shrink-0 flex items-center justify-center">
+                <span class="material-symbols-outlined text-primary text-sm">person</span>
               </div>
               <div class="flex-1 border-b border-surface-container-highest pb-4">
                 <div class="flex justify-between items-start mb-1">
                   <p class="text-sm font-bold text-on-surface group-hover:text-primary transition-colors">Sarah Jenkins</p>
                   <span class="text-[10px] text-on-surface-variant">45M AGO</span>
                 </div>
-                <p class="text-xs text-on-surface-variant leading-snug">Earned the <span class="text-primary font-bold">EARLY BIRD</span> badge for 5 consecutive 6AM sessions.</p>
-                <div class="mt-3 flex items-center gap-2">
-                  <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                    <span class="material-symbols-outlined text-primary text-[14px]" style="font-variation-settings:'FILL' 1;">verified</span>
-                  </div>
-                  <span class="text-[10px] font-bold text-on-surface">TITAN VELOCITY LEADERSHIP +50 PTS</span>
-                </div>
+                <p class="text-xs text-on-surface-variant leading-snug">Logged <span class="text-tertiary">8.1km</span> · Vortex Velocity</p>
               </div>
             </div>
             <!-- Activity 3 -->
             <div class="flex gap-4 group">
-              <div class="w-10 h-10 rounded-full border-2 border-tertiary overflow-hidden shrink-0">
-                <img alt="Liam Rodriguez" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBA76BFF6E5bpFJ2_K4bOfcYQtTVUoI60f8ZskUzG0hatOqrYnfxrwLwAdNyrD0UUAReFpAthUC87tzxrhX3FIk4N6uDhwz-vDr0DWwHXVGwhuDeT0vxqiVwUx0BnWnxc-xcIi-DCxdd3tXPBykk7ylNuAlsLDNQgh4SzeeN8FuAPEslkKPQoy3MnA039UP_hz-9yubsjm39h0YTZk26rODXvsI3GGuPjRlqzB_eawMm5owb6wDLyTohlVm0blZKNBf9Ct5uYgowdA"/>
+              <div class="w-10 h-10 rounded-full border-2 border-tertiary bg-surface-container-highest shrink-0 flex items-center justify-center">
+                <span class="material-symbols-outlined text-tertiary text-sm">person</span>
               </div>
               <div class="flex-1 border-b border-surface-container-highest pb-4">
                 <div class="flex justify-between items-start mb-1">
                   <p class="text-sm font-bold text-on-surface group-hover:text-tertiary transition-colors">Liam Rodriguez</p>
                   <span class="text-[10px] text-on-surface-variant">2H AGO</span>
                 </div>
-                <p class="text-xs text-on-surface-variant leading-snug">Just completed the <span class="text-on-surface italic">Uphill Grind</span> circuit. Team average up by 2%.</p>
+                <p class="text-xs text-on-surface-variant leading-snug">Logged <span class="text-tertiary">5.6km</span> · Neon Shadows</p>
               </div>
             </div>
           </div>
-          <button class="mt-6 w-full py-3 bg-surface-container-highest rounded-lg text-[10px] font-black uppercase tracking-widest text-on-surface-variant hover:text-on-surface transition-all">VIEW ALL TEAM ACTIVITY</button>
+          <a href="individuals.html" class="mt-6 block w-full py-3 bg-surface-container-highest rounded-lg text-center text-[10px] font-black uppercase tracking-widest text-on-surface-variant hover:text-on-surface transition-all">VIEW ALL INDIVIDUALS</a>
         </div>
       </div>
     </section>
@@ -316,5 +263,97 @@
     <span class="text-[10px] font-bold font-['Space_Grotesk']">Rules</span>
   </a>
 </nav>
+
+<script>
+(async function () {
+  const RANK_COLORS = ['text-primary', 'text-on-surface', 'text-on-surface', 'text-on-surface-variant', 'text-on-surface-variant'];
+  const RANK_BG    = ['bg-surface-container-high', 'bg-transparent', 'bg-transparent', 'bg-transparent', 'bg-transparent'];
+  const MEDAL      = ['emoji_events', 'military_tech', 'workspace_premium', '', ''];
+
+  function fmtScore(n) {
+    return Number(n).toLocaleString(undefined, { maximumFractionDigits: 1 });
+  }
+
+  function buildRow(team, index) {
+    const rank    = index + 1;
+    const color   = RANK_COLORS[index] ?? 'text-on-surface-variant';
+    const bg      = RANK_BG[index]     ?? 'bg-transparent';
+    const medal   = MEDAL[index];
+    const score   = fmtScore(team.avg_score ?? team.score ?? 0);
+    const members = team.total_member_count ?? team.member_count ?? '—';
+    const maxScore = 50; // visual scale cap (points)
+
+    const barPct  = Math.min(100, ((team.avg_score ?? team.score ?? 0) / maxScore) * 100).toFixed(1);
+    const medalHtml = medal
+      ? `<span class="material-symbols-outlined text-base ${color}" style="font-variation-settings:'FILL' 1;">${medal}</span>`
+      : '';
+
+    return `
+      <div class="flex items-center gap-5 px-8 py-5 ${bg} hover:bg-surface-container-high transition-colors">
+        <!-- Rank -->
+        <div class="w-8 shrink-0 flex flex-col items-center gap-0.5">
+          <span class="font-headline font-black text-lg italic leading-none ${color}">${String(rank).padStart(2,'0')}</span>
+          ${medalHtml}
+        </div>
+        <!-- Team info -->
+        <div class="flex-1 min-w-0">
+          <p class="font-headline font-black text-sm uppercase tracking-tight text-on-surface truncate">${team.team_name}</p>
+          <p class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest mt-0.5">
+            <span class="material-symbols-outlined text-xs align-middle" style="font-size:12px;">group</span>
+            ${members} members
+          </p>
+          <!-- Mini progress bar -->
+          <div class="mt-2 h-1 w-full max-w-[180px] bg-surface-container-highest rounded-full overflow-hidden">
+            <div class="h-full kinetic-gradient rounded-full transition-all duration-700" style="width:${barPct}%"></div>
+          </div>
+        </div>
+        <!-- Score -->
+        <div class="text-right shrink-0">
+          <div class="font-headline font-black text-2xl italic tracking-tighter ${color}">${score}</div>
+          <div class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest">avg pts</div>
+        </div>
+      </div>`;
+  }
+
+  async function loadTeams() {
+    try {
+      const res  = await fetch('/api/scoreboard/teams');
+      if (!res.ok) throw new Error(res.statusText);
+      const data = await res.json();
+
+      // API returns { teams: [...] } or plain array
+      const teams = Array.isArray(data) ? data : (data.teams ?? []);
+      teams.sort((a, b) => (b.avg_score ?? b.score ?? 0) - (a.avg_score ?? a.score ?? 0));
+
+      const container = document.getElementById('team-rows');
+      const loading   = document.getElementById('teams-loading');
+      loading.remove();
+
+      const top5 = teams.slice(0, 5);
+      container.innerHTML = top5.map(buildRow).join('');
+
+      // Populate the stat card at the top
+      if (top5.length > 0) {
+        const leader = top5[0];
+        document.getElementById('top-team-score').textContent = fmtScore(leader.avg_score ?? leader.score ?? 0);
+        document.getElementById('top-team-name').textContent  = leader.team_name;
+      }
+
+      // Update week label if available
+      if (!Array.isArray(data) && data.iso_week) {
+        document.getElementById('week-label').textContent = `Week ${data.iso_week}`;
+      }
+    } catch (err) {
+      const container = document.getElementById('team-rows');
+      container.innerHTML = `<div class="flex items-center justify-center py-16 text-error text-xs font-bold uppercase tracking-widest gap-2">
+        <span class="material-symbols-outlined text-sm">error</span> Failed to load — is the API running?
+      </div>`;
+      console.error('Team scoreboard fetch failed:', err);
+    }
+  }
+
+  loadTeams();
+})();
+</script>
 </body>
 </html>
