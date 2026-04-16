@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rules & Scoring | Cube Games 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "tertiary-fixed": "#00e3fd", "secondary-fixed": "#cbceff",
+          "primary-fixed-dim": "#ff5d2b", "primary-dim": "#ff734a",
+          "primary-container": "#ff7851", "primary": "#ff8f6f",
+          "outline-variant": "#484847", "tertiary-container": "#00e3fd",
+          "on-primary": "#5c1400", "surface-variant": "#262626",
+          "on-primary-container": "#470e00", "on-error-container": "#ffa8a3",
+          "surface-tint": "#ff8f6f", "background": "#0e0e0e", "surface": "#0e0e0e",
+          "secondary-fixed-dim": "#babfff", "primary-fixed": "#ff7851",
+          "on-tertiary-fixed-variant": "#005762", "inverse-on-surface": "#565555",
+          "on-error": "#490006", "tertiary-dim": "#00d4ec",
+          "on-background": "#ffffff", "secondary": "#929bfa", "tertiary": "#81ecff",
+          "surface-container-lowest": "#000000", "on-tertiary-fixed": "#003840",
+          "on-primary-fixed-variant": "#581300", "surface-container-highest": "#262626",
+          "on-secondary-fixed-variant": "#3e47a0", "on-tertiary": "#005762",
+          "on-secondary": "#0b1574", "surface-container": "#1a1a1a",
+          "surface-container-high": "#20201f", "on-tertiary-container": "#004d57",
+          "error-dim": "#d7383b", "tertiary-fixed-dim": "#00d4ec",
+          "secondary-dim": "#8d96f4", "on-surface-variant": "#adaaaa",
+          "on-secondary-container": "#c9cdff", "inverse-primary": "#b12f00",
+          "outline": "#767575", "surface-container-low": "#131313",
+          "inverse-surface": "#fcf9f8", "secondary-container": "#343d96",
+          "error": "#ff716c", "on-primary-fixed": "#000000",
+          "error-container": "#9f0519", "on-surface": "#ffffff",
+          "surface-bright": "#2c2c2c", "surface-dim": "#0e0e0e",
+          "on-secondary-fixed": "#1f2882"
+        },
+        borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+        fontFamily: { headline: ["Space Grotesk"], body: ["Lexend"], label: ["Lexend"] }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .kinetic-gradient { background: linear-gradient(45deg, #ff8f6f, #ff7851); }
+  .glass-card { background: rgba(38,38,38,0.6); backdrop-filter: blur(20px); }
+</style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary selection:text-on-primary">
+
+<!-- Top Navigation -->
+<header class="bg-[#0e0e0e] fixed top-0 w-full z-50 flex justify-between items-center px-6 h-20">
+  <div class="flex items-center gap-4">
+    <span class="text-2xl font-black italic tracking-tighter text-[#ff8f6f] font-headline uppercase">Cube Games 2026</span>
+  </div>
+  <div class="hidden md:flex items-center space-x-8 font-headline font-bold uppercase tracking-tight">
+    <a class="text-[#929bfa] hover:bg-[#262626] transition-colors duration-300 px-3 py-2 rounded-lg" href="index.html">Dashboard</a>
+    <a class="text-[#929bfa] hover:bg-[#262626] transition-colors duration-300 px-3 py-2 rounded-lg" href="individuals.html">Individuals</a>
+    <a class="text-[#929bfa] hover:bg-[#262626] transition-colors duration-300 px-3 py-2 rounded-lg" href="teams.html">Teams</a>
+    <a class="text-[#ff8f6f] font-bold px-3 py-2 rounded-lg" href="rules.html">Rules</a>
+  </div>
+  <div class="flex items-center gap-4">
+    <button class="p-2 rounded-full hover:bg-[#262626] transition-colors text-on-surface-variant">
+      <span class="material-symbols-outlined">notifications</span>
+    </button>
+    <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container">
+      <img alt="User avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3lXBz6-A5XdButHujkqqryCt54HqTRDtchfGN-v1_Yj9YLgHmRk07STEA8tvnhJ3K16OifNQVn2rbU3uNTcA-vKS3NWejJl7OIEG-OiQcMNCbgJJCavvx-4-6lyM4kReY0SlPUq-UUujWAYWOSITLBjPsgUFh9L3Wp3slGW3b81mdkIcZDXKkZqgm4EW4ubtdCwaexsCAgsRNiVfy7ZUMRUvXgAatM-VSRNhgAfFkst7TfDg4RvMvTt8ZXGpzfhBzp50s4b2LKvo"/>
+    </div>
+  </div>
+</header>
+
+<!-- Side Navigation -->
+<aside class="hidden lg:flex fixed left-0 top-0 h-full w-72 bg-[#131313] flex-col py-8 z-40 pt-24 shadow-[32px_0_64px_-20px_rgba(255,143,111,0.08)]">
+  <div class="px-6 mb-10">
+    <div class="flex items-center gap-3 mb-1">
+      <span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings:'FILL' 1;">rocket_launch</span>
+      <div class="leading-none">
+        <p class="text-orange-500 font-black font-headline tracking-tighter">KINETIC VELOCITY</p>
+        <p class="text-on-surface-variant text-[10px] tracking-widest font-bold">2026 SEASON</p>
+      </div>
+    </div>
+  </div>
+  <nav class="flex-1 space-y-1 px-4">
+    <a class="flex items-center gap-3 px-4 py-4 text-gray-500 hover:text-[#929bfa] hover:translate-x-1 transition-all duration-300 font-bold text-sm" href="index.html">
+      <span class="material-symbols-outlined">dashboard</span> Dashboard
+    </a>
+    <a class="flex items-center gap-3 px-4 py-4 text-gray-500 hover:text-[#929bfa] hover:translate-x-1 transition-all duration-300 font-bold text-sm" href="individuals.html">
+      <span class="material-symbols-outlined">leaderboard</span> Individuals
+    </a>
+    <a class="flex items-center gap-3 px-4 py-4 text-gray-500 hover:text-[#929bfa] hover:translate-x-1 transition-all duration-300 font-bold text-sm" href="teams.html">
+      <span class="material-symbols-outlined">group</span> Teams
+    </a>
+    <a class="flex items-center gap-3 px-4 py-4 text-[#ff8f6f] border-l-4 border-[#ff8f6f] bg-gradient-to-r from-[#ff8f6f15] to-transparent font-bold text-sm" href="rules.html">
+      <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">info</span> Rules
+    </a>
+  </nav>
+  <div class="px-6 mt-auto space-y-4">
+    <button class="w-full kinetic-gradient text-on-primary font-black py-4 rounded-full font-headline tracking-tighter hover:scale-95 transition-transform duration-200 uppercase">START TRACKING</button>
+    <div class="flex flex-col gap-2 pt-4 border-t border-outline-variant/20">
+      <a class="flex items-center gap-3 text-gray-500 text-sm py-2 hover:text-on-surface transition-colors" href="#">
+        <span class="material-symbols-outlined">settings</span> Settings
+      </a>
+      <a class="flex items-center gap-3 text-error text-sm py-2 hover:opacity-80 transition-opacity" href="#">
+        <span class="material-symbols-outlined">logout</span> Logout
+      </a>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="lg:ml-72 pt-24 min-h-screen p-6 lg:p-10 bg-background overflow-x-hidden">
+  <!-- Hero -->
+  <div class="relative rounded-xl overflow-hidden mb-12 h-64 flex flex-col justify-center px-8 lg:px-12">
+    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAQfTeA1Yd4LCczbjijsUn4vA7F4i7grbMj65YC8bVQ99-umxqRODyoZhCIrmTnzzGKW-5Zy8StSPDHEuF-icVr6TdiSUqhowR6NnOgsmgmQbdzYLdxSx5FCt5-dybfDsMuXLQlJOFO5SXYPqOR8GFNQ8M5GA-GWWs29YiXm45tjMQkScJ3dfb83APSeeOV6mrh6ij-geOhV3eKO41TA44ZgDFBBB-3fEojfNcOLj0upv6EM6E_eYhZWsYTmzfWgmpUlqlUboMlQT0')"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent"></div>
+    <div class="relative z-10 max-w-2xl">
+      <span class="text-primary font-headline font-black tracking-widest uppercase text-xs mb-2 block">Competitive Manual</span>
+      <h1 class="text-4xl lg:text-6xl font-headline font-black italic tracking-tighter text-on-background mb-4 uppercase">Rules &amp; Scoring</h1>
+      <p class="text-on-surface-variant text-lg max-w-lg leading-relaxed">Master the 3-layer architecture of Cube Games 2026. Every kilometer counts toward individual glory and team dominance.</p>
+    </div>
+  </div>
+
+  <!-- 3-Layer Scoring -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+    <!-- Layer 1 -->
+    <div class="bg-surface-container-low rounded-xl p-8 flex flex-col relative overflow-hidden group">
+      <div class="absolute -right-8 -top-8 w-32 h-32 bg-primary/10 rounded-full blur-3xl transition-all duration-500 group-hover:bg-primary/20"></div>
+      <div class="flex items-center gap-4 mb-8">
+        <div class="w-12 h-12 rounded-lg bg-primary-container/20 flex items-center justify-center text-primary">
+          <span class="material-symbols-outlined text-3xl">person</span>
+        </div>
+        <div>
+          <p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest">Layer 01</p>
+          <h3 class="text-xl font-headline font-black uppercase text-on-surface">Weekly Individual</h3>
+        </div>
+      </div>
+      <div class="space-y-6 flex-1">
+        <div class="flex items-start gap-4">
+          <div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center shrink-0 border border-outline-variant/30 text-primary font-black">1</div>
+          <div>
+            <p class="font-bold text-on-surface mb-1">Base Velocity</p>
+            <p class="text-sm text-on-surface-variant">1km tracked = <span class="text-primary font-bold">1pt</span> earned.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center shrink-0 border border-outline-variant/30 text-primary font-black">2</div>
+          <div>
+            <p class="font-bold text-on-surface mb-1">Milestone Surge</p>
+            <p class="text-sm text-on-surface-variant">Hit 5km, 10km, 15km, 20km, or 25km to unlock progressive tier bonuses.</p>
+          </div>
+        </div>
+      </div>
+      <div class="mt-8 pt-6 border-t border-outline-variant/20">
+        <div class="bg-surface-container-highest rounded-lg p-4">
+          <p class="text-[10px] uppercase font-bold text-tertiary tracking-tighter mb-2">Live Example</p>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-on-surface">12.5km Walk</span>
+            <span class="text-primary font-black font-headline">22.5 PTS</span>
+          </div>
+          <p class="text-[10px] text-on-surface-variant mt-1">12.5 base + 10 Runner bonus</p>
+        </div>
+      </div>
+    </div>
+    <!-- Layer 2 -->
+    <div class="bg-surface-container-low rounded-xl p-8 flex flex-col relative overflow-hidden group">
+      <div class="absolute -right-8 -top-8 w-32 h-32 bg-secondary/10 rounded-full blur-3xl transition-all duration-500 group-hover:bg-secondary/20"></div>
+      <div class="flex items-center gap-4 mb-8">
+        <div class="w-12 h-12 rounded-lg bg-secondary-container/20 flex items-center justify-center text-secondary">
+          <span class="material-symbols-outlined text-3xl">groups</span>
+        </div>
+        <div>
+          <p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest">Layer 02</p>
+          <h3 class="text-xl font-headline font-black uppercase text-on-surface">Weekly Team</h3>
+        </div>
+      </div>
+      <div class="space-y-6 flex-1">
+        <div class="flex items-start gap-4">
+          <div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center shrink-0 border border-outline-variant/30 text-secondary font-black">1</div>
+          <div>
+            <p class="font-bold text-on-surface mb-1">Collective Average</p>
+            <p class="text-sm text-on-surface-variant">Team score = average of all members' individual total points.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center shrink-0 border border-outline-variant/30 text-secondary font-black">2</div>
+          <div>
+            <p class="font-bold text-on-surface mb-1">Full Participation</p>
+            <p class="text-sm text-on-surface-variant">Inactive members count toward the average — keep everyone moving!</p>
+          </div>
+        </div>
+      </div>
+      <div class="mt-8 pt-6 border-t border-outline-variant/20">
+        <div class="bg-surface-container-highest rounded-lg p-4">
+          <div class="flex flex-col gap-1">
+            <div class="flex justify-between items-center text-xs text-on-surface-variant">
+              <span>Team participation</span><span>4 Members</span>
+            </div>
+            <div class="w-full h-1.5 bg-surface-container-low rounded-full mt-1">
+              <div class="h-full kinetic-gradient rounded-full" style="width: 75%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Layer 3 -->
+    <div class="bg-surface-container-low rounded-xl p-8 flex flex-col relative overflow-hidden group">
+      <div class="absolute -right-8 -top-8 w-32 h-32 bg-tertiary/10 rounded-full blur-3xl transition-all duration-500 group-hover:bg-tertiary/20"></div>
+      <div class="flex items-center gap-4 mb-8">
+        <div class="w-12 h-12 rounded-lg bg-tertiary-container/10 flex items-center justify-center text-tertiary">
+          <span class="material-symbols-outlined text-3xl">calendar_month</span>
+        </div>
+        <div>
+          <p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest">Layer 03</p>
+          <h3 class="text-xl font-headline font-black uppercase text-on-surface">Monthly Finale</h3>
+        </div>
+      </div>
+      <div class="space-y-6 flex-1">
+        <div class="flex items-start gap-4">
+          <div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center shrink-0 border border-outline-variant/30 text-tertiary font-black">1</div>
+          <div>
+            <p class="font-bold text-on-surface mb-1">Monthly Challenge</p>
+            <p class="text-sm text-on-surface-variant">Complete the themed monthly challenge to earn activity points and a Special Card.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center shrink-0 border border-outline-variant/30 text-tertiary font-black">2</div>
+          <div>
+            <p class="font-bold text-on-surface mb-1">Special Card Event</p>
+            <p class="text-sm text-on-surface-variant">Unlocked only in the final week of each month. High risk, high reward.</p>
+          </div>
+        </div>
+      </div>
+      <div class="mt-8 pt-6 border-t border-outline-variant/20">
+        <button class="w-full py-3 rounded-lg border border-tertiary/20 text-tertiary text-xs font-bold uppercase tracking-widest hover:bg-tertiary/5 transition-colors">View Season Calendar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tier Table -->
+  <div class="bg-surface-container-low rounded-xl p-8 mb-12">
+    <h2 class="text-2xl font-headline font-black uppercase tracking-tighter mb-6">Distance Tier Bonuses</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-outline-variant/20 text-[10px] font-black uppercase tracking-widest text-on-surface-variant">
+            <th class="text-left pb-4 pr-8">Tier</th>
+            <th class="text-left pb-4 pr-8">Weekly Distance</th>
+            <th class="text-left pb-4 pr-8">Base Points</th>
+            <th class="text-left pb-4">Bonus Points</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-outline-variant/10">
+          <tr class="py-3">
+            <td class="py-4 pr-8"><span class="px-3 py-1 rounded-full text-[10px] font-black bg-[#ffd70015] text-[#ffd700] border border-[#ffd70030]">ELITE</span></td>
+            <td class="py-4 pr-8 font-bold">≥ 25 km</td>
+            <td class="py-4 pr-8 text-on-surface-variant">distance km</td>
+            <td class="py-4 text-tertiary font-black">+25 pts</td>
+          </tr>
+          <tr>
+            <td class="py-4 pr-8"><span class="px-3 py-1 rounded-full text-[10px] font-black bg-[#c0c0c015] text-[#c0c0c0] border border-[#c0c0c030]">PACER</span></td>
+            <td class="py-4 pr-8 font-bold">≥ 20 km</td>
+            <td class="py-4 pr-8 text-on-surface-variant">distance km</td>
+            <td class="py-4 text-tertiary font-black">+20 pts</td>
+          </tr>
+          <tr>
+            <td class="py-4 pr-8"><span class="px-3 py-1 rounded-full text-[10px] font-black bg-[#cd7f3215] text-[#cd7f32] border border-[#cd7f3230]">STRIDER</span></td>
+            <td class="py-4 pr-8 font-bold">≥ 15 km</td>
+            <td class="py-4 pr-8 text-on-surface-variant">distance km</td>
+            <td class="py-4 text-tertiary font-black">+15 pts</td>
+          </tr>
+          <tr>
+            <td class="py-4 pr-8"><span class="px-3 py-1 rounded-full text-[10px] font-black bg-primary/10 text-primary border border-primary/20">RUNNER</span></td>
+            <td class="py-4 pr-8 font-bold">≥ 10 km</td>
+            <td class="py-4 pr-8 text-on-surface-variant">distance km</td>
+            <td class="py-4 text-tertiary font-black">+10 pts</td>
+          </tr>
+          <tr>
+            <td class="py-4 pr-8"><span class="px-3 py-1 rounded-full text-[10px] font-black bg-secondary/10 text-secondary border border-secondary/20">MOVER</span></td>
+            <td class="py-4 pr-8 font-bold">≥ 5 km</td>
+            <td class="py-4 pr-8 text-on-surface-variant">distance km</td>
+            <td class="py-4 text-tertiary font-black">+5 pts</td>
+          </tr>
+          <tr>
+            <td class="py-4 pr-8"><span class="px-3 py-1 rounded-full text-[10px] font-black bg-surface-container-highest text-on-surface-variant border border-outline-variant/20">STARTER</span></td>
+            <td class="py-4 pr-8 font-bold">≥ 1 km</td>
+            <td class="py-4 pr-8 text-on-surface-variant">distance km</td>
+            <td class="py-4 text-on-surface-variant font-black">+0 pts</td>
+          </tr>
+          <tr>
+            <td class="py-4 pr-8"><span class="px-3 py-1 rounded-full text-[10px] font-black bg-surface-container-highest text-on-surface-variant/50 border border-outline-variant/10">INACTIVE</span></td>
+            <td class="py-4 pr-8 font-bold text-on-surface-variant">< 1 km</td>
+            <td class="py-4 pr-8 text-on-surface-variant">0</td>
+            <td class="py-4 text-on-surface-variant font-black">+0 pts</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Special Mechanics -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+    <!-- Special Card -->
+    <div class="glass-card rounded-xl p-8 border border-outline-variant/10 relative overflow-hidden">
+      <div class="relative z-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings:'FILL' 1;">style</span>
+          <h2 class="text-2xl font-headline font-black uppercase italic tracking-tighter">The Special Card</h2>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 items-center">
+          <div>
+            <p class="text-on-surface-variant text-sm leading-relaxed mb-4">
+              Win the monthly challenge and your team earns a <span class="text-on-surface font-bold">Special Card</span>. This powerful tool can boost your score, defend against other teams, or shake up the leaderboard — the choice is yours.
+            </p>
+            <ul class="space-y-2 text-xs font-bold text-on-surface uppercase tracking-tight">
+              <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Score Multiplier</li>
+              <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Shield from Penalties</li>
+              <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Team Velocity Boost</li>
+            </ul>
+          </div>
+          <div class="relative group">
+            <div class="absolute inset-0 kinetic-gradient blur-xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
+            <div class="relative bg-surface-container-highest border border-primary/30 aspect-[2/3] rounded-xl flex flex-col p-6 overflow-hidden">
+              <div class="mb-auto">
+                <span class="text-[10px] text-primary font-black uppercase tracking-[0.2em]">Kinetic Velocity 26</span>
+              </div>
+              <div class="flex flex-col items-center justify-center flex-1">
+                <span class="material-symbols-outlined text-6xl text-primary mb-2" style="font-variation-settings:'FILL' 1;">bolt</span>
+                <p class="text-lg font-headline font-black text-on-surface tracking-tighter">HYPER-DRIVE</p>
+              </div>
+              <div class="mt-auto pt-4 border-t border-primary/20 text-center">
+                <p class="text-[9px] text-on-surface-variant uppercase font-bold">X3 MULTIPLIER ACTIVE</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Surprise Bonuses -->
+    <div class="glass-card rounded-xl p-8 border border-outline-variant/10 relative overflow-hidden">
+      <div class="relative z-10">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="material-symbols-outlined text-tertiary text-4xl" style="font-variation-settings:'FILL' 1;">card_giftcard</span>
+          <h2 class="text-2xl font-headline font-black uppercase italic tracking-tighter">Surprise Bonuses</h2>
+        </div>
+        <p class="text-on-surface-variant text-sm leading-relaxed mb-6">
+          Unexpected bonus point events drop randomly throughout the season. No one knows when they'll happen — just keep moving!
+        </p>
+        <div class="space-y-4">
+          <div class="flex items-center justify-between p-4 bg-surface-container-low rounded-lg border-l-4 border-tertiary/50">
+            <div class="flex items-center gap-4">
+              <span class="material-symbols-outlined text-tertiary">cloud</span>
+              <div>
+                <p class="text-sm font-bold text-on-surface">Rainy Day Warrior</p>
+                <p class="text-xs text-on-surface-variant">Points doubled during active precipitation.</p>
+              </div>
+            </div>
+            <span class="text-tertiary font-black font-headline text-lg">+100%</span>
+          </div>
+          <div class="flex items-center justify-between p-4 bg-surface-container-low rounded-lg border-l-4 border-tertiary/50">
+            <div class="flex items-center gap-4">
+              <span class="material-symbols-outlined text-tertiary">alarm</span>
+              <div>
+                <p class="text-sm font-bold text-on-surface">Early Bird Surge</p>
+                <p class="text-xs text-on-surface-variant">05:00 – 07:00 AM tracked walks.</p>
+              </div>
+            </div>
+            <span class="text-tertiary font-black font-headline text-lg">+50</span>
+          </div>
+          <div class="flex items-center justify-between p-4 bg-surface-container-low rounded-lg border-l-4 border-tertiary/50">
+            <div class="flex items-center gap-4">
+              <span class="material-symbols-outlined text-tertiary">history</span>
+              <div>
+                <p class="text-sm font-bold text-on-surface">Comeback King</p>
+                <p class="text-xs text-on-surface-variant">Return to tracking after 3 days of rest.</p>
+              </div>
+            </div>
+            <span class="text-tertiary font-black font-headline text-lg">JACKPOT</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="bg-surface-container-low rounded-xl p-10">
+    <h2 class="text-2xl font-headline font-black uppercase text-on-surface mb-8 tracking-tighter">Frequently Asked</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+      <div class="group cursor-pointer">
+        <div class="flex justify-between items-center mb-2">
+          <p class="font-bold text-on-surface group-hover:text-primary transition-colors">How do I connect Strava?</p>
+          <span class="material-symbols-outlined text-on-surface-variant">add</span>
+        </div>
+        <p class="text-sm text-on-surface-variant">Click "Start Tracking", sign in with your Strava account, and join the <a href="https://www.strava.com/clubs/cubegames2026" class="text-primary underline">CubeGames 2026 club</a>. Activities sync automatically.</p>
+      </div>
+      <div class="group cursor-pointer">
+        <div class="flex justify-between items-center mb-2">
+          <p class="font-bold text-on-surface group-hover:text-primary transition-colors">What activities count?</p>
+          <span class="material-symbols-outlined text-on-surface-variant">add</span>
+        </div>
+        <p class="text-sm text-on-surface-variant">Only <strong>Run</strong> and <strong>Walk</strong> activity types recorded on Strava count toward your score. Distance is measured in kilometres.</p>
+      </div>
+      <div class="group cursor-pointer">
+        <div class="flex justify-between items-center mb-2">
+          <p class="font-bold text-on-surface group-hover:text-primary transition-colors">When are scores updated?</p>
+          <span class="material-symbols-outlined text-on-surface-variant">add</span>
+        </div>
+        <p class="text-sm text-on-surface-variant">Individual scores update as activities are recorded. Weekly totals are locked every Sunday at 11:59 PM Bangkok time.</p>
+      </div>
+      <div class="group cursor-pointer">
+        <div class="flex justify-between items-center mb-2">
+          <p class="font-bold text-on-surface group-hover:text-primary transition-colors">What happens to inactive members?</p>
+          <span class="material-symbols-outlined text-on-surface-variant">add</span>
+        </div>
+        <p class="text-sm text-on-surface-variant">Team averages include all registered members. Keep your teammates motivated — every inactive member pulls the team average down!</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Bottom Nav (Mobile) -->
+<div class="md:hidden fixed bottom-0 left-0 w-full bg-[#131313] h-16 flex justify-around items-center z-50 border-t border-outline-variant/10">
+  <a class="flex flex-col items-center text-gray-500" href="index.html">
+    <span class="material-symbols-outlined">dashboard</span>
+    <span class="text-[10px] font-bold uppercase tracking-tighter">Home</span>
+  </a>
+  <a class="flex flex-col items-center text-gray-500" href="individuals.html">
+    <span class="material-symbols-outlined">leaderboard</span>
+    <span class="text-[10px] font-bold uppercase tracking-tighter">Stats</span>
+  </a>
+  <a class="flex flex-col items-center text-primary" href="rules.html">
+    <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">info</span>
+    <span class="text-[10px] font-bold uppercase tracking-tighter">Rules</span>
+  </a>
+  <a class="flex flex-col items-center text-gray-500" href="#">
+    <span class="material-symbols-outlined">settings</span>
+    <span class="text-[10px] font-bold uppercase tracking-tighter">Settings</span>
+  </a>
+</div>
+</body>
+</html>

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Team Leaderboard | Cube Games 2026</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "tertiary-fixed": "#00e3fd", "secondary-fixed": "#cbceff",
+          "primary-fixed-dim": "#ff5d2b", "primary-dim": "#ff734a",
+          "primary-container": "#ff7851", "primary": "#ff8f6f",
+          "outline-variant": "#484847", "tertiary-container": "#00e3fd",
+          "on-primary": "#5c1400", "surface-variant": "#262626",
+          "on-primary-container": "#470e00", "on-error-container": "#ffa8a3",
+          "surface-tint": "#ff8f6f", "background": "#0e0e0e", "surface": "#0e0e0e",
+          "secondary-fixed-dim": "#babfff", "primary-fixed": "#ff7851",
+          "on-tertiary-fixed-variant": "#005762", "inverse-on-surface": "#565555",
+          "on-error": "#490006", "tertiary-dim": "#00d4ec",
+          "on-background": "#ffffff", "secondary": "#929bfa", "tertiary": "#81ecff",
+          "surface-container-lowest": "#000000", "on-tertiary-fixed": "#003840",
+          "on-primary-fixed-variant": "#581300", "surface-container-highest": "#262626",
+          "on-secondary-fixed-variant": "#3e47a0", "on-tertiary": "#005762",
+          "on-secondary": "#0b1574", "surface-container": "#1a1a1a",
+          "surface-container-high": "#20201f", "on-tertiary-container": "#004d57",
+          "error-dim": "#d7383b", "tertiary-fixed-dim": "#00d4ec",
+          "secondary-dim": "#8d96f4", "on-surface-variant": "#adaaaa",
+          "on-secondary-container": "#c9cdff", "inverse-primary": "#b12f00",
+          "outline": "#767575", "surface-container-low": "#131313",
+          "inverse-surface": "#fcf9f8", "secondary-container": "#343d96",
+          "error": "#ff716c", "on-primary-fixed": "#000000",
+          "error-container": "#9f0519", "on-surface": "#ffffff",
+          "surface-bright": "#2c2c2c", "surface-dim": "#0e0e0e",
+          "on-secondary-fixed": "#1f2882"
+        },
+        borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+        fontFamily: { headline: ["Space Grotesk"], body: ["Lexend"], label: ["Lexend"] }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  body { font-family: 'Lexend', sans-serif; background-color: #0e0e0e; color: #ffffff; }
+  .kinetic-gradient { background: linear-gradient(45deg, #ff8f6f, #ff7851); }
+</style>
+</head>
+<body class="bg-background text-on-surface overflow-x-hidden">
+
+<!-- Top Navigation -->
+<header class="bg-[#0e0e0e] flex justify-between items-center w-full px-6 h-20 fixed top-0 z-50">
+  <div class="text-2xl font-black italic tracking-tighter text-[#ff8f6f] font-['Space_Grotesk'] uppercase">Cube Games 2026</div>
+  <div class="flex items-center gap-6">
+    <nav class="hidden md:flex gap-8">
+      <a class="text-[#929bfa] hover:bg-[#262626] transition-colors duration-300 px-4 py-2 rounded-lg font-['Space_Grotesk'] tracking-tighter uppercase font-bold" href="index.html">Dashboard</a>
+      <a class="text-[#929bfa] hover:bg-[#262626] transition-colors duration-300 px-4 py-2 rounded-lg font-['Space_Grotesk'] tracking-tighter uppercase font-bold" href="individuals.html">Individuals</a>
+      <a class="text-[#ff8f6f] font-bold hover:bg-[#262626] transition-colors duration-300 px-4 py-2 rounded-lg font-['Space_Grotesk'] tracking-tighter uppercase" href="teams.html">Teams</a>
+      <a class="text-[#929bfa] hover:bg-[#262626] transition-colors duration-300 px-4 py-2 rounded-lg font-['Space_Grotesk'] tracking-tighter uppercase font-bold" href="rules.html">Rules</a>
+    </nav>
+    <div class="flex items-center gap-4">
+      <button class="material-symbols-outlined p-2 rounded-full hover:bg-[#262626] transition-colors text-on-surface">notifications</button>
+      <div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-highest border border-outline-variant/20">
+        <img alt="User avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAQjfSAn33YvGef2KUCmevaKIgar7lonyYvaz2xDOeWdCXBtW0-EbUn2yQNStsxXKfxZJt8pMaFKzyxVieOCRWQY9nSdPLuFkRFOumUPgqeI60uxLOfm98vIXoAYYPKFhldrkTCAHfOof-gd66Ln27CccEU229ElwGGEsiHl4jJ7_kWDsyX7jKjCBi-fMewwc7arCzMuzJfAVFRTIa4sP3DALeBGLoXbaO8MI__P9MdD_3eMTWD0MFaIDXTIGoFnGzf68exM43EZI"/>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Side Navigation -->
+<aside class="fixed left-0 top-0 h-full hidden lg:flex flex-col py-8 bg-[#131313] w-72 z-40 pt-24 shadow-[32px_0_64px_-20px_rgba(255,143,111,0.08)]">
+  <div class="px-6 mb-10">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 bg-primary rounded flex items-center justify-center">
+        <span class="material-symbols-outlined text-on-primary" style="font-variation-settings:'FILL' 1;">bolt</span>
+      </div>
+      <div>
+        <h2 class="text-orange-500 font-black font-['Space_Grotesk'] leading-none">KINETIC VELOCITY</h2>
+        <p class="text-gray-500 text-[10px] font-bold tracking-widest uppercase">2026 SEASON</p>
+      </div>
+    </div>
+  </div>
+  <nav class="flex-1 px-4 space-y-2">
+    <a class="flex items-center gap-4 px-4 py-3 text-gray-500 hover:text-[#929bfa] hover:translate-x-1 transition-all duration-300 font-['Space_Grotesk'] text-sm font-bold tracking-tight" href="index.html">
+      <span class="material-symbols-outlined">dashboard</span> Dashboard
+    </a>
+    <a class="flex items-center gap-4 px-4 py-3 text-gray-500 hover:text-[#929bfa] hover:translate-x-1 transition-all duration-300 font-['Space_Grotesk'] text-sm font-bold tracking-tight" href="individuals.html">
+      <span class="material-symbols-outlined">leaderboard</span> Individuals
+    </a>
+    <a class="flex items-center gap-4 px-4 py-3 text-[#ff8f6f] border-l-4 border-[#ff8f6f] bg-gradient-to-r from-[#ff8f6f15] to-transparent font-['Space_Grotesk'] text-sm font-bold tracking-tight" href="teams.html">
+      <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">group</span> Teams
+    </a>
+    <a class="flex items-center gap-4 px-4 py-3 text-gray-500 hover:text-[#929bfa] hover:translate-x-1 transition-all duration-300 font-['Space_Grotesk'] text-sm font-bold tracking-tight" href="rules.html">
+      <span class="material-symbols-outlined">info</span> Rules
+    </a>
+  </nav>
+  <div class="px-6 mt-auto space-y-6">
+    <button class="w-full py-4 rounded-full kinetic-gradient text-on-primary font-bold text-xs tracking-widest uppercase shadow-lg shadow-primary/20 hover:scale-95 duration-200">START TRACKING</button>
+    <div class="space-y-2 pt-6 border-t border-outline-variant/10">
+      <a class="flex items-center gap-4 px-2 py-2 text-gray-500 hover:text-[#929bfa] transition-colors font-['Space_Grotesk'] text-sm font-bold" href="#">
+        <span class="material-symbols-outlined">settings</span> Settings
+      </a>
+      <a class="flex items-center gap-4 px-2 py-2 text-gray-500 hover:text-[#929bfa] transition-colors font-['Space_Grotesk'] text-sm font-bold" href="#">
+        <span class="material-symbols-outlined">logout</span> Logout
+      </a>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="lg:ml-72 pt-28 px-6 pb-20 max-w-[1400px] mx-auto">
+  <!-- Hero Header -->
+  <section class="mb-12 relative">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 relative z-10">
+      <div>
+        <h1 class="text-6xl md:text-8xl font-black font-['Space_Grotesk'] tracking-tighter uppercase leading-[0.85] italic mb-4">
+          Team <span class="text-primary block md:inline">Arena</span>
+        </h1>
+        <p class="text-on-surface-variant max-w-lg leading-relaxed">
+          Real-time synchronization of the world's most elite competitive units. Performance metrics updated live for the 2026 season.
+        </p>
+      </div>
+      <div class="flex gap-4">
+        <div class="bg-surface-container-low p-6 rounded-xl border-l-4 border-tertiary">
+          <div class="text-on-surface-variant text-[10px] font-bold tracking-widest uppercase mb-1">Global Avg</div>
+          <div class="text-tertiary text-4xl font-black font-['Space_Grotesk'] italic">2,845</div>
+        </div>
+        <div class="bg-surface-container-low p-6 rounded-xl border-l-4 border-primary">
+          <div class="text-on-surface-variant text-[10px] font-bold tracking-widest uppercase mb-1">Total Teams</div>
+          <div class="text-primary text-4xl font-black font-['Space_Grotesk'] italic">128</div>
+        </div>
+      </div>
+    </div>
+    <div class="absolute -top-10 -right-10 w-64 h-64 bg-primary/5 rounded-full blur-[100px] -z-10"></div>
+  </section>
+
+  <div class="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
+    <!-- Leaderboard Column -->
+    <div class="xl:col-span-8 space-y-4">
+      <div class="flex items-center justify-between px-6 py-4 bg-surface-container-low rounded-t-xl">
+        <span class="text-on-surface-variant text-[10px] font-bold tracking-widest uppercase">Team Rankings — Week 24</span>
+        <div class="flex items-center gap-4 text-xs font-bold font-['Space_Grotesk']">
+          <button class="text-primary border-b-2 border-primary">WEEKLY</button>
+          <button class="text-on-surface-variant hover:text-on-surface">MONTHLY</button>
+          <button class="text-on-surface-variant hover:text-on-surface">SEASON</button>
+        </div>
+      </div>
+      <!-- Rank 1 -->
+      <div class="bg-surface-container-high rounded-xl p-1 overflow-hidden transition-transform duration-300 hover:scale-[1.01] shadow-2xl">
+        <div class="flex items-center p-5 gap-6">
+          <div class="flex flex-col items-center justify-center w-12">
+            <span class="text-primary text-2xl font-black font-['Space_Grotesk'] italic">01</span>
+            <span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings:'FILL' 1;">change_history</span>
+          </div>
+          <div class="w-16 h-16 rounded-lg bg-secondary-container flex items-center justify-center relative">
+            <img alt="Vortex Velocity badge" class="w-12 h-12" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrIrgAFkwbYeHmzF9QGCNO4Tk4u3NtQrIFTUVk7s6e4-QYokasCnGNI6NcucicSb2zn9nak6jj0sXKwdr1IdyCzb1iK1qsjlLpI1KkpJtqUbk2r_HYxoU_XGHlww8nPj10dTEE6uFHMKXip1lPdqhypkluoyxN2z7IxhAwhji6_dFlK-uK2qSJOA97AjlQBOhi57m-GaNmNef-oVZTUmqlsUUNJZw0HoHGlfclbkzRIuldS1wdhLCuqMQXa8BhK3RBAUWmG25Y1_o"/>
+            <div class="absolute -top-2 -right-2 bg-tertiary text-on-tertiary px-1.5 py-0.5 rounded text-[8px] font-black italic">PRO</div>
+          </div>
+          <div class="flex-1">
+            <h3 class="text-xl font-black font-['Space_Grotesk'] uppercase tracking-tight">Vortex Velocity</h3>
+            <div class="flex gap-4 mt-1">
+              <span class="text-[10px] text-on-surface-variant font-bold uppercase flex items-center gap-1">
+                <span class="material-symbols-outlined text-xs">group</span> 12 Members
+              </span>
+              <span class="text-[10px] text-on-surface-variant font-bold uppercase flex items-center gap-1">
+                <span class="material-symbols-outlined text-xs">calendar_month</span> 14,200 Monthly
+              </span>
+            </div>
+          </div>
+          <div class="text-right">
+            <div class="text-[10px] text-on-surface-variant font-bold uppercase mb-1">Avg Score</div>
+            <div class="text-3xl font-black font-['Space_Grotesk'] text-primary italic tracking-tighter">3,892</div>
+          </div>
+        </div>
+      </div>
+      <!-- Rank 2 -->
+      <div class="bg-surface-container-low rounded-xl p-1 overflow-hidden transition-transform duration-300 hover:scale-[1.01]">
+        <div class="flex items-center p-5 gap-6">
+          <div class="flex flex-col items-center justify-center w-12">
+            <span class="text-on-surface-variant text-2xl font-black font-['Space_Grotesk'] italic">02</span>
+            <span class="material-symbols-outlined text-gray-600 text-sm">remove</span>
+          </div>
+          <div class="w-16 h-16 rounded-lg bg-surface-container-highest flex items-center justify-center">
+            <img alt="Titan Pulse badge" class="w-12 h-12" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtHgbhFJ4Kubjq3mJdDqgRjZoZrtGajxppBuSX-ZHn2ILt7PJX1btmucfX2OXl3ZJvBIIKGBOllzaNsNd4i6X9bBLfoU4fm-tv89fPLYTpo5hOr117jqhV1RZPGb8UnYGxp2opKuXF2nGY2hXJ1g3atKb-pQ35-0CYPME5zBz8j9Ca_pn_JdHWUSgwitrVTAs6s-dQ0ELK0_eg3PtWvSejU2JnDbGOgryZho4X2OvO29eXbEQ6_4UTBWuZ4atnjoytKdTYGUCfxco"/>
+          </div>
+          <div class="flex-1">
+            <h3 class="text-xl font-black font-['Space_Grotesk'] uppercase tracking-tight">Titan Pulse</h3>
+            <div class="flex gap-4 mt-1">
+              <span class="text-[10px] text-on-surface-variant font-bold uppercase flex items-center gap-1"><span class="material-symbols-outlined text-xs">group</span> 15 Members</span>
+              <span class="text-[10px] text-on-surface-variant font-bold uppercase flex items-center gap-1"><span class="material-symbols-outlined text-xs">calendar_month</span> 12,850 Monthly</span>
+            </div>
+          </div>
+          <div class="text-right">
+            <div class="text-[10px] text-on-surface-variant font-bold uppercase mb-1">Avg Score</div>
+            <div class="text-3xl font-black font-['Space_Grotesk'] text-on-surface italic tracking-tighter">3,450</div>
+          </div>
+        </div>
+      </div>
+      <!-- Rank 3 -->
+      <div class="bg-surface-container-low rounded-xl p-1 overflow-hidden transition-transform duration-300 hover:scale-[1.01]">
+        <div class="flex items-center p-5 gap-6">
+          <div class="flex flex-col items-center justify-center w-12">
+            <span class="text-on-surface-variant text-2xl font-black font-['Space_Grotesk'] italic">03</span>
+            <span class="material-symbols-outlined text-error text-sm" style="font-variation-settings:'FILL' 1;">change_history</span>
+          </div>
+          <div class="w-16 h-16 rounded-lg bg-surface-container-highest flex items-center justify-center">
+            <img alt="Neon Shadows badge" class="w-12 h-12" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUtaV5GuZfmjqJC9QpfHvQbWr7NtJgpM68kzsAudIu49F9LYI64wY4XB5uA7faFO7misNSO5U6Unw80IIXK25Asjx3C5o-IXJ8LrOvim9-30yI4sNiEsMhP7PuwOH0RW7MULXFPIBGnmkkPwtfNHvVbpiSoaKFXtE466Y8EidbPHTfxSCeS5vuPCVRm4y186_cxFQMCbVLlSNRgxo_iz6jVCogPSM7vi5yp42Ke6gWw0PkhWgrUsSAVhxPtTUsZo5pYZcLJS0M4C0"/>
+          </div>
+          <div class="flex-1">
+            <h3 class="text-xl font-black font-['Space_Grotesk'] uppercase tracking-tight">Neon Shadows</h3>
+            <div class="flex gap-4 mt-1">
+              <span class="text-[10px] text-on-surface-variant font-bold uppercase flex items-center gap-1"><span class="material-symbols-outlined text-xs">group</span> 10 Members</span>
+              <span class="text-[10px] text-on-surface-variant font-bold uppercase flex items-center gap-1"><span class="material-symbols-outlined text-xs">calendar_month</span> 11,900 Monthly</span>
+            </div>
+          </div>
+          <div class="text-right">
+            <div class="text-[10px] text-on-surface-variant font-bold uppercase mb-1">Avg Score</div>
+            <div class="text-3xl font-black font-['Space_Grotesk'] text-on-surface italic tracking-tighter">3,122</div>
+          </div>
+        </div>
+      </div>
+      <!-- Rank 4 -->
+      <div class="bg-surface-container-low rounded-xl p-1 overflow-hidden transition-transform duration-300 hover:scale-[1.01]">
+        <div class="flex items-center p-5 gap-6">
+          <div class="flex flex-col items-center justify-center w-12">
+            <span class="text-on-surface-variant text-2xl font-black font-['Space_Grotesk'] italic">04</span>
+            <span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings:'FILL' 1;">change_history</span>
+          </div>
+          <div class="w-16 h-16 rounded-lg bg-surface-container-highest flex items-center justify-center">
+            <img alt="Summit Strikers badge" class="w-12 h-12" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaxzEB0KScD4QK1oAdXOQvp0KY2nRGeJo689KQkiMKw-xYKDBPd42F_E4_TuDmGxxLcnEI0nO0E2tYaBVcD9c82IKzVuTP-d20Xcc7weG_zb0ycUij5scTCH4V06ng0M2BCWFmk7TTn19SAGzgNVG-tq7De29qia-gCt_8BODxf2G02IfaLx8AuPLIVNF0Y2PtJbpPABS2c5FSpeRPYMkIAdCXDqAoIipbmvLr9kwu2JVwBVbaIa_ptB7cBt5ImqY7DCYVSPQOiWo"/>
+          </div>
+          <div class="flex-1">
+            <h3 class="text-xl font-black font-['Space_Grotesk'] uppercase tracking-tight">Summit Strikers</h3>
+            <div class="flex gap-4 mt-1">
+              <span class="text-[10px] text-on-surface-variant font-bold uppercase flex items-center gap-1"><span class="material-symbols-outlined text-xs">group</span> 18 Members</span>
+              <span class="text-[10px] text-on-surface-variant font-bold uppercase flex items-center gap-1"><span class="material-symbols-outlined text-xs">calendar_month</span> 10,200 Monthly</span>
+            </div>
+          </div>
+          <div class="text-right">
+            <div class="text-[10px] text-on-surface-variant font-bold uppercase mb-1">Avg Score</div>
+            <div class="text-3xl font-black font-['Space_Grotesk'] text-on-surface italic tracking-tighter">2,905</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Side Bento Column -->
+    <div class="xl:col-span-4 space-y-8">
+      <!-- Special Cards -->
+      <div class="bg-surface-container-low p-8 rounded-2xl relative overflow-hidden group">
+        <div class="relative z-10">
+          <div class="flex items-center justify-between mb-8">
+            <h2 class="text-2xl font-black font-['Space_Grotesk'] uppercase tracking-tight">Special <span class="text-primary">Cards</span></h2>
+            <span class="material-symbols-outlined text-primary">auto_awesome</span>
+          </div>
+          <div class="space-y-4">
+            <div class="bg-surface-container-highest p-4 rounded-xl border-l-2 border-primary-container flex gap-4 items-center transition-all group-hover:-translate-y-1">
+              <div class="w-12 h-16 bg-gradient-to-br from-primary to-primary-fixed-dim rounded flex items-center justify-center shadow-lg shadow-primary/20">
+                <span class="material-symbols-outlined text-on-primary">local_fire_department</span>
+              </div>
+              <div>
+                <h4 class="text-sm font-black font-['Space_Grotesk'] uppercase">Hyper-Streak</h4>
+                <p class="text-[10px] text-on-surface-variant">Earned by Vortex Velocity</p>
+                <div class="mt-2 text-[10px] font-bold text-tertiary">+25% XP Multiplier</div>
+              </div>
+            </div>
+            <div class="bg-surface-container-highest p-4 rounded-xl border-l-2 border-secondary flex gap-4 items-center transition-all group-hover:-translate-y-1 delay-75">
+              <div class="w-12 h-16 bg-gradient-to-br from-secondary to-secondary-container rounded flex items-center justify-center shadow-lg shadow-secondary/20">
+                <span class="material-symbols-outlined text-on-secondary">shield</span>
+              </div>
+              <div>
+                <h4 class="text-sm font-black font-['Space_Grotesk'] uppercase">Iron Wall</h4>
+                <p class="text-[10px] text-on-surface-variant">Earned by Titan Pulse</p>
+                <div class="mt-2 text-[10px] font-bold text-tertiary">Penalty Immunity</div>
+              </div>
+            </div>
+            <div class="bg-surface-container-highest p-4 rounded-xl border-l-2 border-tertiary flex gap-4 items-center transition-all group-hover:-translate-y-1 delay-150">
+              <div class="w-12 h-16 bg-gradient-to-br from-tertiary-dim to-tertiary-container rounded flex items-center justify-center shadow-lg shadow-tertiary/20">
+                <span class="material-symbols-outlined text-on-tertiary">rocket_launch</span>
+              </div>
+              <div>
+                <h4 class="text-sm font-black font-['Space_Grotesk'] uppercase">Velocity Boost</h4>
+                <p class="text-[10px] text-on-surface-variant">Earned by Neon Shadows</p>
+                <div class="mt-2 text-[10px] font-bold text-tertiary">+500 Weekly Points</div>
+              </div>
+            </div>
+          </div>
+          <button class="w-full mt-8 py-3 text-[10px] font-black font-['Space_Grotesk'] tracking-widest uppercase border border-outline-variant/30 rounded-full hover:bg-surface-container-highest transition-colors">VIEW COLLECTION (14)</button>
+        </div>
+        <div class="absolute -bottom-20 -right-20 w-64 h-64 bg-primary/10 rounded-full blur-[80px] pointer-events-none"></div>
+      </div>
+
+      <!-- Active Challenges -->
+      <div class="bg-gradient-to-br from-[#131313] to-[#0a0a0a] p-8 rounded-2xl border border-outline-variant/10">
+        <h3 class="text-xs font-black font-['Space_Grotesk'] tracking-widest uppercase text-on-surface-variant mb-6 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-error inline-block"></span> Live Challenges
+        </h3>
+        <div class="space-y-6">
+          <div>
+            <div class="flex justify-between items-end mb-2">
+              <span class="text-sm font-bold">Member Engagement</span>
+              <span class="text-xs font-black font-['Space_Grotesk'] italic text-primary">82%</span>
+            </div>
+            <div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+              <div class="h-full bg-primary rounded-full" style="width: 82%"></div>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 bg-surface-container-highest/30 p-4 rounded-xl">
+            <span class="material-symbols-outlined text-tertiary">timer</span>
+            <div>
+              <div class="text-[10px] font-bold uppercase text-on-surface-variant">Next Payout</div>
+              <div class="text-lg font-black font-['Space_Grotesk'] italic">14h : 22m : 05s</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Bottom Nav (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-surface-container-low flex justify-around items-center px-4 z-50 border-t border-outline-variant/10">
+  <a class="flex flex-col items-center gap-1 text-on-surface-variant" href="index.html">
+    <span class="material-symbols-outlined">dashboard</span>
+    <span class="text-[10px] font-bold uppercase">Home</span>
+  </a>
+  <a class="flex flex-col items-center gap-1 text-primary" href="teams.html">
+    <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">group</span>
+    <span class="text-[10px] font-bold uppercase">Teams</span>
+  </a>
+  <a class="flex flex-col items-center gap-1 text-on-surface-variant" href="individuals.html">
+    <span class="material-symbols-outlined">leaderboard</span>
+    <span class="text-[10px] font-bold uppercase">Ranks</span>
+  </a>
+  <a class="flex flex-col items-center gap-1 text-on-surface-variant" href="rules.html">
+    <span class="material-symbols-outlined">info</span>
+    <span class="text-[10px] font-bold uppercase">Rules</span>
+  </a>
+</nav>
+</body>
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kinetic Velocity | Cube Games 2026</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "tertiary-fixed": "#00e3fd", "secondary-fixed": "#cbceff",
+          "primary-fixed-dim": "#ff5d2b", "primary-dim": "#ff734a",
+          "primary-container": "#ff7851", "primary": "#ff8f6f",
+          "outline-variant": "#484847", "tertiary-container": "#00e3fd",
+          "on-primary": "#5c1400", "surface-variant": "#262626",
+          "on-primary-container": "#470e00", "on-error-container": "#ffa8a3",
+          "surface-tint": "#ff8f6f", "background": "#0e0e0e", "surface": "#0e0e0e",
+          "secondary-fixed-dim": "#babfff", "primary-fixed": "#ff7851",
+          "on-tertiary-fixed-variant": "#005762", "inverse-on-surface": "#565555",
+          "on-error": "#490006", "tertiary-dim": "#00d4ec",
+          "on-background": "#ffffff", "secondary": "#929bfa", "tertiary": "#81ecff",
+          "surface-container-lowest": "#000000", "on-tertiary-fixed": "#003840",
+          "on-primary-fixed-variant": "#581300", "surface-container-highest": "#262626",
+          "on-secondary-fixed-variant": "#3e47a0", "on-tertiary": "#005762",
+          "on-secondary": "#0b1574", "surface-container": "#1a1a1a",
+          "surface-container-high": "#20201f", "on-tertiary-container": "#004d57",
+          "error-dim": "#d7383b", "tertiary-fixed-dim": "#00d4ec",
+          "secondary-dim": "#8d96f4", "on-surface-variant": "#adaaaa",
+          "on-secondary-container": "#c9cdff", "inverse-primary": "#b12f00",
+          "outline": "#767575", "surface-container-low": "#131313",
+          "inverse-surface": "#fcf9f8", "secondary-container": "#343d96",
+          "error": "#ff716c", "on-primary-fixed": "#000000",
+          "error-container": "#9f0519", "on-surface": "#ffffff",
+          "surface-bright": "#2c2c2c", "surface-dim": "#0e0e0e",
+          "on-secondary-fixed": "#1f2882"
+        },
+        borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+        fontFamily: { headline: ["Space Grotesk"], body: ["Lexend"], label: ["Lexend"] }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .kinetic-gradient { background: linear-gradient(45deg, #ff8f6f, #ff7851); }
+  .glass-panel { background: rgba(38,38,38,0.6); backdrop-filter: blur(20px); }
+</style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary selection:text-on-primary">
+
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full flex flex-col py-8 bg-[#131313] w-72 z-50 shadow-[32px_0_64px_-20px_rgba(255,143,111,0.08)] hidden md:flex">
+  <div class="px-8 mb-12">
+    <div class="flex items-center gap-3 mb-1">
+      <div class="w-8 h-8 kinetic-gradient rounded-sm flex items-center justify-center">
+        <span class="material-symbols-outlined text-on-primary text-xl" style="font-variation-settings:'FILL' 1;">deployed_code</span>
+      </div>
+      <h1 class="text-orange-500 font-black font-headline tracking-tighter text-xl">KINETIC VELOCITY</h1>
+    </div>
+    <p class="text-on-surface-variant font-headline text-[10px] tracking-[0.2em] uppercase opacity-70">2026 SEASON</p>
+  </div>
+  <nav class="flex-1 space-y-2 px-4">
+    <a class="flex items-center gap-4 py-3 px-4 text-[#ff8f6f] border-l-4 border-[#ff8f6f] bg-gradient-to-r from-[#ff8f6f15] to-transparent font-['Space_Grotesk'] text-sm font-bold tracking-tight" href="index.html">
+      <span class="material-symbols-outlined">dashboard</span><span>Dashboard</span>
+    </a>
+    <a class="flex items-center gap-4 py-3 px-4 text-gray-500 hover:text-[#929bfa] hover:translate-x-1 transition-all duration-300 font-['Space_Grotesk'] text-sm font-bold tracking-tight" href="individuals.html">
+      <span class="material-symbols-outlined">leaderboard</span><span>Individuals</span>
+    </a>
+    <a class="flex items-center gap-4 py-3 px-4 text-gray-500 hover:text-[#929bfa] hover:translate-x-1 transition-all duration-300 font-['Space_Grotesk'] text-sm font-bold tracking-tight" href="teams.html">
+      <span class="material-symbols-outlined">group</span><span>Teams</span>
+    </a>
+    <a class="flex items-center gap-4 py-3 px-4 text-gray-500 hover:text-[#929bfa] hover:translate-x-1 transition-all duration-300 font-['Space_Grotesk'] text-sm font-bold tracking-tight" href="rules.html">
+      <span class="material-symbols-outlined">info</span><span>Rules</span>
+    </a>
+  </nav>
+  <div class="px-6 mt-auto">
+    <button class="w-full kinetic-gradient py-4 rounded-full text-on-primary font-headline font-black text-xs tracking-widest uppercase mb-8 hover:brightness-110 transition-all">START TRACKING</button>
+    <div class="space-y-2 border-t border-surface-variant pt-6">
+      <a class="flex items-center gap-4 py-2 px-4 text-gray-500 hover:text-[#929bfa] transition-all font-['Space_Grotesk'] text-xs font-bold uppercase tracking-widest" href="#">
+        <span class="material-symbols-outlined text-lg">settings</span><span>Settings</span>
+      </a>
+      <a class="flex items-center gap-4 py-2 px-4 text-gray-500 hover:text-error transition-all font-['Space_Grotesk'] text-xs font-bold uppercase tracking-widest" href="#">
+        <span class="material-symbols-outlined text-lg">logout</span><span>Logout</span>
+      </a>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Canvas -->
+<main class="md:ml-72 min-h-screen relative">
+  <!-- TopAppBar -->
+  <header class="flex justify-between items-center w-full px-6 h-20 bg-[#0e0e0e] sticky top-0 z-40">
+    <div class="flex items-center gap-4">
+      <span class="text-2xl font-black italic tracking-tighter text-[#ff8f6f] font-['Space_Grotesk'] uppercase">Cube Games 2026</span>
+    </div>
+    <div class="flex items-center gap-6">
+      <button class="w-10 h-10 rounded-full flex items-center justify-center text-[#929bfa] hover:bg-[#262626] transition-colors duration-300">
+        <span class="material-symbols-outlined">notifications</span>
+      </button>
+      <div class="h-10 w-10 rounded-full overflow-hidden border-2 border-surface-container-highest">
+        <img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNJ96MB02wY0uwqzokl8qHjrJGL1aXPz7I4bZgWvbNiecyeYw6PkSf4_k4SWz6Bf-1_tpNS1MCKKy58KHj7rEfI2x7AsK6yKzVFLdcSJ5zy2GRpK3nhpDY6CbIl7LWA4ZXVUf4wz8K4KJHl92vsZFQzrkiM_KtdAYJbztHAbu939aePrnFMopsHBOt-1IuSG-WGRWJro1tmotjM39ZSNlG-9KsOAfEqUizvXruYE1uS6cknWgrrvwgltN0jhHqBfaQAa5COnsh63s"/>
+      </div>
+    </div>
+  </header>
+
+  <div class="p-8 max-w-7xl mx-auto space-y-8">
+    <!-- Welcome Header -->
+    <section class="relative">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div>
+          <h2 class="text-on-surface-variant font-headline text-sm font-bold tracking-[0.3em] uppercase mb-2">Athlete Overview</h2>
+          <h1 class="font-headline text-5xl md:text-6xl font-black tracking-tighter leading-none italic">
+            WELCOME BACK, <span class="text-primary">ALEX</span>
+          </h1>
+        </div>
+        <div class="flex gap-4">
+          <div class="bg-surface-container-low px-6 py-3 rounded-xl border-l-4 border-tertiary">
+            <p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest">Global Status</p>
+            <p class="font-headline text-lg font-black text-tertiary tracking-tight uppercase">In Motion</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Grid -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Weekly Distance -->
+      <div class="bg-surface-container-low p-8 rounded-xl relative overflow-hidden group">
+        <div class="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
+          <span class="material-symbols-outlined text-[120px]" style="font-variation-settings:'wght' 700;">route</span>
+        </div>
+        <div class="relative z-10">
+          <div class="flex items-center gap-2 mb-6">
+            <span class="material-symbols-outlined text-primary">speed</span>
+            <span class="text-on-surface-variant text-xs font-bold uppercase tracking-widest">Weekly Distance</span>
+          </div>
+          <div class="flex items-baseline gap-2">
+            <span class="font-headline text-6xl font-black tracking-tighter text-on-surface" id="weekly-distance">15.5</span>
+            <span class="font-headline text-xl font-bold text-primary italic">KM</span>
+          </div>
+          <div class="mt-6 h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+            <div class="h-full kinetic-gradient w-[62%]"></div>
+          </div>
+          <p class="mt-3 text-[10px] text-on-surface-variant font-medium">62% OF WEEKLY TARGET (25KM)</p>
+        </div>
+      </div>
+      <!-- Total Points -->
+      <div class="bg-surface-container-low p-8 rounded-xl relative overflow-hidden group">
+        <div class="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
+          <span class="material-symbols-outlined text-[120px]" style="font-variation-settings:'wght' 700;">military_tech</span>
+        </div>
+        <div class="relative z-10">
+          <div class="flex items-center gap-2 mb-6">
+            <span class="material-symbols-outlined text-secondary">star</span>
+            <span class="text-on-surface-variant text-xs font-bold uppercase tracking-widest">Total Points</span>
+          </div>
+          <div class="flex items-baseline gap-2">
+            <span class="font-headline text-6xl font-black tracking-tighter text-on-surface" id="total-points">4,820</span>
+          </div>
+          <div class="mt-6 flex gap-2">
+            <span class="px-2 py-1 bg-secondary-container text-on-secondary-container text-[10px] font-bold rounded">ELITE RANK</span>
+            <span class="px-2 py-1 bg-surface-container-highest text-on-surface-variant text-[10px] font-bold rounded">+420 THIS WEEK</span>
+          </div>
+        </div>
+      </div>
+      <!-- Team Rank -->
+      <div class="bg-secondary-container p-8 rounded-xl relative overflow-hidden">
+        <div class="absolute top-0 right-0 p-4">
+          <span class="material-symbols-outlined text-secondary opacity-30 text-4xl" style="font-variation-settings:'FILL' 1;">shield</span>
+        </div>
+        <div class="relative z-10">
+          <div class="flex items-center gap-2 mb-6 text-on-secondary-container">
+            <span class="material-symbols-outlined text-secondary">groups</span>
+            <span class="text-xs font-bold uppercase tracking-widest">Team Rank</span>
+          </div>
+          <div class="flex items-baseline gap-2">
+            <span class="font-headline text-6xl font-black tracking-tighter text-on-secondary-container">#04</span>
+            <span class="font-headline text-xl font-bold text-tertiary italic">TOP 5%</span>
+          </div>
+          <p class="mt-6 text-sm text-secondary-fixed-dim font-medium leading-tight">TEAM: TITAN VELOCITY<br/>CLIMBED 2 POSITIONS SINCE YESTERDAY</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Monthly Challenge + Activity Feed -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <!-- Monthly Challenge Spotlight -->
+      <div class="lg:col-span-8">
+        <div class="bg-surface-container-low rounded-xl overflow-hidden relative group">
+          <div class="grid md:grid-cols-2">
+            <div class="p-8 md:p-12 relative z-10 flex flex-col justify-center">
+              <span class="px-3 py-1 bg-primary text-on-primary text-[10px] font-black tracking-[0.2em] uppercase rounded-full w-fit mb-6">Spotlight Challenge</span>
+              <h3 class="font-headline text-4xl font-black tracking-tight mb-4 uppercase">MIDNIGHT SPRINT SERIES</h3>
+              <p class="text-on-surface-variant text-sm mb-8 leading-relaxed max-w-sm">Complete 5 runs after 10:00 PM this month to unlock the exclusive 'Neon Pulse' performance modifier card.</p>
+              <div class="flex items-center gap-6">
+                <button class="kinetic-gradient text-on-primary font-headline font-black text-xs px-8 py-4 rounded-full tracking-widest uppercase hover:scale-105 transition-transform">ACCEPT CHALLENGE</button>
+                <div class="flex flex-col">
+                  <span class="text-[10px] text-on-surface-variant uppercase font-bold">Time Remaining</span>
+                  <span class="text-primary font-headline font-bold">12D : 04H : 22M</span>
+                </div>
+              </div>
+            </div>
+            <div class="relative min-h-[300px] h-full overflow-hidden">
+              <img alt="Night runner" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAw7uE4f3AK0-Z-F-_0DILZfsSBePZhaG3RYOLJ121xQrtGh8CY9jwHO4SoUu-38Sia60Xa37DrEMXn51YP2aZvBIN0zXepGlFmbatOGyADgH7x4rn0L7FdTSY62WinxlRe2p4Qe-PExG8MHLhJshsN8nhHWtcAf0xyYqHHchdebGeJzq3VYxSjA4nYQBeSs016Onns1TsOvNx43PGu_mqebM8jBpak2TmKCi8Mlv5zgWTxb0rk6QealSRvQ5p3rZ6ZPviHwb4Gdyk"/>
+              <div class="absolute inset-0 bg-gradient-to-r from-surface-container-low via-surface-container-low/80 to-transparent"></div>
+              <!-- Special Card -->
+              <div class="absolute right-8 top-1/2 -translate-y-1/2 rotate-12 group-hover:rotate-6 transition-transform duration-500">
+                <div class="w-48 h-64 bg-surface-container-highest rounded-xl border border-primary/20 shadow-2xl flex flex-col p-4 glass-panel">
+                  <div class="w-full h-32 bg-primary/10 rounded-lg mb-4 flex items-center justify-center border border-primary/10">
+                    <span class="material-symbols-outlined text-primary text-5xl" style="font-variation-settings:'FILL' 1;">bolt</span>
+                  </div>
+                  <div class="text-center">
+                    <p class="text-[10px] text-primary font-black uppercase tracking-tighter">Special Reward</p>
+                    <h4 class="font-headline text-lg font-black text-on-surface leading-tight">NEON PULSE</h4>
+                    <p class="text-[8px] text-on-surface-variant mt-2">SPEED MULTIPLIER +15%<br/>NIGHT SESSIONS ONLY</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Activity Feed -->
+      <div class="lg:col-span-4">
+        <div class="bg-surface-container-low p-6 rounded-xl h-full flex flex-col">
+          <div class="flex items-center justify-between mb-8">
+            <h3 class="font-headline font-black text-xl tracking-tight uppercase">Recent Activity</h3>
+            <button class="text-on-surface-variant hover:text-primary transition-colors">
+              <span class="material-symbols-outlined">more_horiz</span>
+            </button>
+          </div>
+          <div class="space-y-6 flex-1 overflow-y-auto pr-2">
+            <!-- Activity 1 -->
+            <div class="flex gap-4 group">
+              <div class="w-10 h-10 rounded-full border-2 border-secondary overflow-hidden shrink-0">
+                <img alt="Marcus Chen" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQHFDyXYUk73gLMIsZGYtSJ86Q0J6Z-rf0XNP3nttoHLoMHjx99RqVeMkojTEEosdu6mlF-NgFWHeoHCLHQ_2qHkMx7-IjBRtSsv2iF3RZ-g8F0mfqNQJs81woeZkW0pGm287tEYYX7SbSynZYEXiUuJSRtGLFCaHFG-hKtM7hVCL3tjSRw9-6iwi6s4FnJN1wuIQm9015VsIe_1W9cGCWM3-9ORPBj_G4twbzPn6VOgaVxYzuYkQ8x8vHsQQqhEYA7k6WxMxtNb8"/>
+              </div>
+              <div class="flex-1 border-b border-surface-container-highest pb-4">
+                <div class="flex justify-between items-start mb-1">
+                  <p class="text-sm font-bold text-on-surface group-hover:text-secondary transition-colors">Marcus Chen</p>
+                  <span class="text-[10px] text-on-surface-variant">2M AGO</span>
+                </div>
+                <p class="text-xs text-on-surface-variant leading-snug">Smashed a personal best! Logged <span class="text-tertiary">12.4km</span> in the Central Park Loop.</p>
+                <div class="flex items-center gap-3 mt-3">
+                  <button class="text-[10px] font-bold text-primary flex items-center gap-1">
+                    <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1;">favorite</span> CHEER
+                  </button>
+                  <button class="text-[10px] font-bold text-on-surface-variant flex items-center gap-1">
+                    <span class="material-symbols-outlined text-sm">chat_bubble</span> COMMENT
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Activity 2 -->
+            <div class="flex gap-4 group">
+              <div class="w-10 h-10 rounded-full border-2 border-primary overflow-hidden shrink-0">
+                <img alt="Sarah Jenkins" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYJvuWqph9XDTJ74IKbnzA_Ld1hOSk3_8INm5OHlqplbIqCmhGR7lIWuDRumevucSStXrg6jIoAOV1mvbVx3q1rtL2_n395GLNgqmsIZfkY7ZQoxdfZTyHWQqhZi6Ur2ZbuID0KD9cG5sHFa0qQN4OSFTkpGivYB99LhjXb3nenAaXfUnE83a1WaZ2XnH-XvsW6ajhOrD51YW_fzkTj4nPUEJ2qcFMW9ELXuvmYUN4RIbM0CnrBWKgdvtaaFGO2B0o4BTRa-TRSPg"/>
+              </div>
+              <div class="flex-1 border-b border-surface-container-highest pb-4">
+                <div class="flex justify-between items-start mb-1">
+                  <p class="text-sm font-bold text-on-surface group-hover:text-primary transition-colors">Sarah Jenkins</p>
+                  <span class="text-[10px] text-on-surface-variant">45M AGO</span>
+                </div>
+                <p class="text-xs text-on-surface-variant leading-snug">Earned the <span class="text-primary font-bold">EARLY BIRD</span> badge for 5 consecutive 6AM sessions.</p>
+                <div class="mt-3 flex items-center gap-2">
+                  <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-primary text-[14px]" style="font-variation-settings:'FILL' 1;">verified</span>
+                  </div>
+                  <span class="text-[10px] font-bold text-on-surface">TITAN VELOCITY LEADERSHIP +50 PTS</span>
+                </div>
+              </div>
+            </div>
+            <!-- Activity 3 -->
+            <div class="flex gap-4 group">
+              <div class="w-10 h-10 rounded-full border-2 border-tertiary overflow-hidden shrink-0">
+                <img alt="Liam Rodriguez" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBA76BFF6E5bpFJ2_K4bOfcYQtTVUoI60f8ZskUzG0hatOqrYnfxrwLwAdNyrD0UUAReFpAthUC87tzxrhX3FIk4N6uDhwz-vDr0DWwHXVGwhuDeT0vxqiVwUx0BnWnxc-xcIi-DCxdd3tXPBykk7ylNuAlsLDNQgh4SzeeN8FuAPEslkKPQoy3MnA039UP_hz-9yubsjm39h0YTZk26rODXvsI3GGuPjRlqzB_eawMm5owb6wDLyTohlVm0blZKNBf9Ct5uYgowdA"/>
+              </div>
+              <div class="flex-1 border-b border-surface-container-highest pb-4">
+                <div class="flex justify-between items-start mb-1">
+                  <p class="text-sm font-bold text-on-surface group-hover:text-tertiary transition-colors">Liam Rodriguez</p>
+                  <span class="text-[10px] text-on-surface-variant">2H AGO</span>
+                </div>
+                <p class="text-xs text-on-surface-variant leading-snug">Just completed the <span class="text-on-surface italic">Uphill Grind</span> circuit. Team average up by 2%.</p>
+              </div>
+            </div>
+          </div>
+          <button class="mt-6 w-full py-3 bg-surface-container-highest rounded-lg text-[10px] font-black uppercase tracking-widest text-on-surface-variant hover:text-on-surface transition-all">VIEW ALL TEAM ACTIVITY</button>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-[#131313] z-50 flex items-center justify-around px-4">
+  <a class="flex flex-col items-center justify-center text-[#ff8f6f]" href="index.html">
+    <span class="material-symbols-outlined">dashboard</span>
+    <span class="text-[10px] font-bold font-['Space_Grotesk']">Dashboard</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-gray-500" href="individuals.html">
+    <span class="material-symbols-outlined">leaderboard</span>
+    <span class="text-[10px] font-bold font-['Space_Grotesk']">Individuals</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-gray-500" href="teams.html">
+    <span class="material-symbols-outlined">group</span>
+    <span class="text-[10px] font-bold font-['Space_Grotesk']">Teams</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-gray-500" href="rules.html">
+    <span class="material-symbols-outlined">info</span>
+    <span class="text-[10px] font-bold font-['Space_Grotesk']">Rules</span>
+  </a>
+</nav>
+</body>
+</html>

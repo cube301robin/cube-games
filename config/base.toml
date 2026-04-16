@@ -1,0 +1,17 @@
+[server]
+host = "0.0.0.0"
+port = 3000
+
+[database]
+url = "postgres://postgres:postgres@localhost:5432/cubegames"
+max_connections = 20
+
+[strava]
+client_id = ""
+client_secret = ""
+webhook_verify_token = "cube_verify_2026"
+redirect_uri = "http://localhost:3000/api/auth/strava/callback"
+
+[auth]
+jwt_secret = "change-me-in-production"
+session_duration_hours = 720
