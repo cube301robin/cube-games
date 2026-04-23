@@ -31,3 +31,5 @@ config = "0.14"
 dotenvy = "0.15"
 axum-extra = { version = "0.9", features = ["cookie", "typed-header"] }
 jsonwebtoken = "9"
+urlencoding = "2"
+rust_xlsxwriter = "0.79"

@@ -1,8 +1,4 @@
 use anyhow::Context;
-use oauth2::{
-    basic::BasicClient, AuthUrl, ClientId, ClientSecret, RedirectUrl, TokenUrl,
-    AuthorizationCode, TokenResponse,
-};
 use serde::Deserialize;
 
 #[derive(Debug, Deserialize)]

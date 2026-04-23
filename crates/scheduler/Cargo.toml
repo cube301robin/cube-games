@@ -8,7 +8,7 @@ name = "scheduler"
 path = "src/main.rs"
 
 [dependencies]
-core = { path = "../core" }
+cube_core = { path = "../core" }
 db = { path = "../db" }
 scoring = { path = "../scoring" }
 strava = { path = "../strava" }

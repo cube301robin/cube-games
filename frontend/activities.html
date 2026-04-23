@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Season Challenges | Cube Games 2026</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "tertiary-fixed": "#00e3fd", "secondary-fixed": "#cbceff",
+          "primary-fixed-dim": "#ff5d2b", "primary-dim": "#ff734a",
+          "primary-container": "#ff7851", "primary": "#ff8f6f",
+          "outline-variant": "#484847", "tertiary-container": "#00e3fd",
+          "on-primary": "#5c1400", "surface-variant": "#262626",
+          "on-primary-container": "#470e00", "on-error-container": "#ffa8a3",
+          "surface-tint": "#ff8f6f", "background": "#0e0e0e", "surface": "#0e0e0e",
+          "secondary-fixed-dim": "#babfff", "primary-fixed": "#ff7851",
+          "on-tertiary-fixed-variant": "#005762", "inverse-on-surface": "#565555",
+          "on-error": "#490006", "tertiary-dim": "#00d4ec",
+          "on-background": "#ffffff", "secondary": "#929bfa", "tertiary": "#81ecff",
+          "surface-container-lowest": "#000000", "on-tertiary-fixed": "#003840",
+          "on-primary-fixed-variant": "#581300", "surface-container-highest": "#262626",
+          "on-secondary-fixed-variant": "#3e47a0", "on-tertiary": "#005762",
+          "on-secondary": "#0b1574", "surface-container": "#1a1a1a",
+          "surface-container-high": "#20201f", "on-tertiary-container": "#004d57",
+          "error-dim": "#d7383b", "tertiary-fixed-dim": "#00d4ec",
+          "secondary-dim": "#8d96f4", "on-surface-variant": "#adaaaa",
+          "on-secondary-container": "#c9cdff", "inverse-primary": "#b12f00",
+          "outline": "#767575", "surface-container-low": "#131313",
+          "inverse-surface": "#fcf9f8", "secondary-container": "#343d96",
+          "error": "#ff716c", "on-primary-fixed": "#000000",
+          "error-container": "#9f0519", "on-surface": "#ffffff",
+          "surface-bright": "#2c2c2c", "surface-dim": "#0e0e0e",
+          "on-secondary-fixed": "#1f2882"
+        },
+        borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+        fontFamily: { headline: ["Space Grotesk"], body: ["Lexend"], label: ["Lexend"] }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  body { font-family: 'Lexend', sans-serif; background-color: #0e0e0e; color: #ffffff; }
+  .kinetic-gradient { background: linear-gradient(45deg, #ff8f6f, #ff7851); }
+</style>
+</head>
+<body class="bg-background text-on-surface overflow-x-hidden">
+
+<!-- Top Navigation -->
+<header class="bg-[#0e0e0e] flex justify-between items-center w-full px-6 h-20 fixed top-0 z-50">
+  <div class="text-2xl font-black italic tracking-tighter text-[#ff8f6f] font-['Space_Grotesk'] uppercase">Cube Games 2026</div>
+  <nav class="hidden md:flex gap-6 items-center font-['Space_Grotesk'] tracking-tighter uppercase font-bold text-sm">
+    <a class="text-[#929bfa] hover:bg-[#262626] transition-colors px-3 py-2 rounded-lg" href="index.html">Dashboard</a>
+    <a class="text-[#929bfa] hover:bg-[#262626] transition-colors px-3 py-2 rounded-lg" href="individuals.html">Individuals</a>
+    <a class="text-[#929bfa] hover:bg-[#262626] transition-colors px-3 py-2 rounded-lg" href="teams.html">Teams</a>
+    <a class="text-[#ff8f6f] px-3 py-2 rounded-lg" href="activities.html">Activities</a>
+    <a class="text-[#929bfa] hover:bg-[#262626] transition-colors px-3 py-2 rounded-lg" href="rules.html">Rules</a>
+  </nav>
+  <span class="text-on-surface-variant font-['Space_Grotesk'] text-xs font-bold tracking-[0.2em] uppercase">Public Dashboard</span>
+</header>
+
+<!-- Side Navigation -->
+<aside class="fixed left-0 top-0 h-full hidden lg:flex flex-col py-8 bg-[#131313] w-72 z-40 pt-24 shadow-[32px_0_64px_-20px_rgba(255,143,111,0.08)]">
+  <div class="px-6 mb-10">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 kinetic-gradient rounded flex items-center justify-center">
+        <span class="material-symbols-outlined text-on-primary" style="font-variation-settings:'FILL' 1;">deployed_code</span>
+      </div>
+      <div>
+        <h2 class="text-orange-500 font-black font-['Space_Grotesk'] leading-none">KINETIC VELOCITY</h2>
+        <p class="text-gray-500 text-[10px] font-bold tracking-widest uppercase">2026 SEASON</p>
+      </div>
+    </div>
+  </div>
+  <nav class="flex-1 px-4 space-y-1">
+    <a class="flex items-center gap-4 px-4 py-3 text-gray-500 hover:text-[#929bfa] hover:translate-x-1 transition-all duration-300 font-['Space_Grotesk'] text-sm font-bold tracking-tight" href="index.html">
+      <span class="material-symbols-outlined">dashboard</span> Dashboard
+    </a>
+    <a class="flex items-center gap-4 px-4 py-3 text-gray-500 hover:text-[#929bfa] hover:translate-x-1 transition-all duration-300 font-['Space_Grotesk'] text-sm font-bold tracking-tight" href="individuals.html">
+      <span class="material-symbols-outlined">leaderboard</span> Individuals
+    </a>
+    <a class="flex items-center gap-4 px-4 py-3 text-gray-500 hover:text-[#929bfa] hover:translate-x-1 transition-all duration-300 font-['Space_Grotesk'] text-sm font-bold tracking-tight" href="teams.html">
+      <span class="material-symbols-outlined">group</span> Teams
+    </a>
+    <a class="flex items-center gap-4 px-4 py-3 text-[#ff8f6f] border-l-4 border-[#ff8f6f] bg-gradient-to-r from-[#ff8f6f15] to-transparent font-['Space_Grotesk'] text-sm font-bold tracking-tight" href="activities.html">
+      <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">flag</span> Activities
+    </a>
+    <a class="flex items-center gap-4 px-4 py-3 text-gray-500 hover:text-[#929bfa] hover:translate-x-1 transition-all duration-300 font-['Space_Grotesk'] text-sm font-bold tracking-tight" href="rules.html">
+      <span class="material-symbols-outlined">info</span> Rules
+    </a>
+  </nav>
+</aside>
+
+<!-- Main Content -->
+<main class="lg:ml-72 pt-28 px-6 pb-24 max-w-[1200px] mx-auto">
+
+  <!-- Hero -->
+  <section class="mb-10">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <div>
+        <p class="text-on-surface-variant font-['Space_Grotesk'] text-xs font-bold tracking-[0.3em] uppercase mb-2">Cube Games 2026</p>
+        <h1 class="text-5xl md:text-7xl font-black font-['Space_Grotesk'] tracking-tighter uppercase leading-[0.85] italic mb-4">
+          SEASON <span class="text-secondary">CHALLENGES</span>
+        </h1>
+        <p class="text-on-surface-variant max-w-lg leading-relaxed">
+          Special team events that contribute bonus points to the Season Standings.
+          These scores stack on top of weekly Strava totals.
+        </p>
+      </div>
+      <div class="flex items-center gap-3 text-xs font-bold font-['Space_Grotesk'] uppercase tracking-widest shrink-0">
+        <span class="flex items-center gap-2 bg-surface-container-low px-4 py-2 rounded-full border border-outline-variant/20">
+          <span class="w-2 h-2 rounded-full bg-primary"></span>
+          <span class="text-on-surface-variant">Strava pts (weekly)</span>
+        </span>
+        <span class="text-on-surface-variant">+</span>
+        <span class="flex items-center gap-2 bg-surface-container-low px-4 py-2 rounded-full border border-outline-variant/20">
+          <span class="w-2 h-2 rounded-full bg-secondary"></span>
+          <span class="text-on-surface-variant">Challenge pts</span>
+        </span>
+        <span class="text-on-surface-variant">=</span>
+        <span class="flex items-center gap-2 bg-surface-container-low px-4 py-2 rounded-full border border-tertiary/30">
+          <span class="w-2 h-2 rounded-full bg-tertiary"></span>
+          <span class="text-tertiary">Season Total</span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Activity list -->
+  <div class="space-y-8" id="activities-container">
+
+    <!-- ─── Team Naming Challenge ─────────────────────────────────── -->
+    <article class="bg-surface-container-low rounded-2xl overflow-hidden border border-outline-variant/10" id="act-team-naming">
+
+      <!-- Card header -->
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 px-8 py-6 border-b border-outline-variant/10">
+        <div class="flex items-center gap-5">
+          <div class="w-14 h-14 bg-secondary/15 rounded-xl flex items-center justify-center shrink-0 border border-secondary/20">
+            <span class="material-symbols-outlined text-secondary text-3xl" style="font-variation-settings:'FILL' 1;">local_activity</span>
+          </div>
+          <div>
+            <div class="flex items-center gap-3 mb-1">
+              <h2 class="font-['Space_Grotesk'] font-black text-xl uppercase tracking-tight text-on-surface">Team Naming Challenge</h2>
+              <span class="px-2.5 py-1 rounded-full text-[9px] font-black uppercase tracking-widest bg-[#4ade8015] text-[#4ade80] border border-[#4ade8030]">
+                ✓ Completed
+              </span>
+            </div>
+            <p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest flex items-center gap-2">
+              <span class="material-symbols-outlined text-sm">calendar_today</span> Apr 8–14, 2026
+            </p>
+          </div>
+        </div>
+        <!-- Max pts display -->
+        <div class="flex items-center gap-2 shrink-0">
+          <div class="text-right bg-surface-container-highest px-4 py-2.5 rounded-xl">
+            <div class="text-[9px] text-on-surface-variant font-bold uppercase tracking-widest mb-0.5">Max Points</div>
+            <div class="font-['Space_Grotesk'] font-black text-2xl italic text-secondary">145 <span class="text-sm text-on-surface-variant font-bold">pts</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scoring formula -->
+      <div class="px-8 py-5 bg-surface-container-highest/30 border-b border-outline-variant/10">
+        <p class="text-[10px] text-on-surface-variant font-black uppercase tracking-[0.2em] mb-4">Score Formula</p>
+        <div class="flex flex-wrap items-center gap-3">
+          <div class="bg-surface-container-highest rounded-xl px-5 py-3 text-center min-w-[110px]">
+            <div class="text-[9px] text-on-surface-variant font-black uppercase tracking-widest mb-1">Base</div>
+            <div class="font-['Space_Grotesk'] font-black text-lg italic text-on-surface">100 <span class="text-xs text-on-surface-variant">pts</span></div>
+            <div class="text-[9px] text-on-surface-variant mt-1">All teams</div>
+          </div>
+          <span class="font-['Space_Grotesk'] font-black text-xl text-on-surface-variant">+</span>
+          <div class="bg-surface-container-highest rounded-xl px-5 py-3 text-center min-w-[110px]">
+            <div class="text-[9px] text-on-surface-variant font-black uppercase tracking-widest mb-1">Participation</div>
+            <div class="font-['Space_Grotesk'] font-black text-lg italic text-primary">+20 <span class="text-xs text-on-surface-variant">pts</span></div>
+            <div class="text-[9px] text-on-surface-variant mt-1">1 team wins this</div>
+          </div>
+          <span class="font-['Space_Grotesk'] font-black text-xl text-on-surface-variant">+</span>
+          <div class="bg-surface-container-highest rounded-xl px-5 py-3 text-center min-w-[110px]">
+            <div class="text-[9px] text-on-surface-variant font-black uppercase tracking-widest mb-1">Most Creative</div>
+            <div class="font-['Space_Grotesk'] font-black text-lg italic text-tertiary">+25 <span class="text-xs text-on-surface-variant">pts</span></div>
+            <div class="text-[9px] text-on-surface-variant mt-1">1 team wins this</div>
+          </div>
+          <span class="font-['Space_Grotesk'] font-black text-xl text-on-surface-variant">=</span>
+          <div class="bg-secondary/10 border border-secondary/20 rounded-xl px-5 py-3 text-center min-w-[110px]">
+            <div class="text-[9px] text-secondary font-black uppercase tracking-widest mb-1">Total</div>
+            <div class="font-['Space_Grotesk'] font-black text-lg italic text-secondary">≤ 145 <span class="text-xs font-bold">pts</span></div>
+            <div class="text-[9px] text-on-surface-variant mt-1">Adds to Season</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scores table -->
+      <div class="px-8 py-6">
+        <div class="flex items-center justify-between mb-4">
+          <p class="text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant flex items-center gap-2">
+            <span class="material-symbols-outlined text-sm">emoji_events</span> Team Scores
+          </p>
+          <span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant" id="naming-count"></span>
+        </div>
+
+        <!-- Table header -->
+        <div class="hidden md:grid px-4 py-2 text-[9px] font-black uppercase tracking-[0.15em] text-on-surface-variant border-b border-outline-variant/15 mb-1"
+             style="grid-template-columns:48px 1fr 80px 110px 90px 80px;">
+          <div>Rank</div><div>Team</div>
+          <div class="text-center">Base</div>
+          <div class="text-center">Participation</div>
+          <div class="text-center">Creative</div>
+          <div class="text-right">Total</div>
+        </div>
+
+        <div id="naming-rows">
+          <div class="flex items-center justify-center py-10 text-on-surface-variant text-xs font-bold uppercase tracking-widest gap-2" id="naming-loading">
+            <span class="material-symbols-outlined" style="animation:spin 1s linear infinite;">progress_activity</span> Loading scores…
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ─── Upcoming placeholder ──────────────────────────────────── -->
+    <article class="bg-surface-container-low rounded-2xl overflow-hidden border border-outline-variant/10 opacity-40">
+      <div class="flex items-center gap-5 px-8 py-6">
+        <div class="w-14 h-14 bg-surface-container-highest rounded-xl flex items-center justify-center shrink-0 border border-dashed border-outline-variant/40">
+          <span class="material-symbols-outlined text-on-surface-variant text-3xl">add</span>
+        </div>
+        <div>
+          <div class="flex items-center gap-3 mb-1">
+            <h2 class="font-['Space_Grotesk'] font-black text-xl uppercase tracking-tight text-on-surface-variant">Next Challenge</h2>
+            <span class="px-2.5 py-1 rounded-full text-[9px] font-black uppercase tracking-widest bg-surface-container-highest text-on-surface-variant border border-outline-variant/20">
+              Upcoming
+            </span>
+          </div>
+          <p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest">Details to be announced</p>
+        </div>
+      </div>
+    </article>
+
+  </div><!-- /activities-container -->
+</main>
+
+<!-- Bottom Nav (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-[#131313] z-50 flex items-center justify-around px-4 border-t border-outline-variant/10">
+  <a class="flex flex-col items-center gap-1 text-on-surface-variant" href="index.html">
+    <span class="material-symbols-outlined">dashboard</span>
+    <span class="text-[10px] font-bold font-['Space_Grotesk'] uppercase">Home</span>
+  </a>
+  <a class="flex flex-col items-center gap-1 text-on-surface-variant" href="individuals.html">
+    <span class="material-symbols-outlined">leaderboard</span>
+    <span class="text-[10px] font-bold font-['Space_Grotesk'] uppercase">Indiv</span>
+  </a>
+  <a class="flex flex-col items-center gap-1 text-on-surface-variant" href="teams.html">
+    <span class="material-symbols-outlined">group</span>
+    <span class="text-[10px] font-bold font-['Space_Grotesk'] uppercase">Teams</span>
+  </a>
+  <a class="flex flex-col items-center gap-1 text-[#ff8f6f]" href="activities.html">
+    <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">flag</span>
+    <span class="text-[10px] font-bold font-['Space_Grotesk'] uppercase">Events</span>
+  </a>
+  <a class="flex flex-col items-center gap-1 text-on-surface-variant" href="rules.html">
+    <span class="material-symbols-outlined">info</span>
+    <span class="text-[10px] font-bold font-['Space_Grotesk'] uppercase">Rules</span>
+  </a>
+</nav>
+
+<style>
+@keyframes spin { to { transform: rotate(360deg); } }
+</style>
+
+<script src="data.js"></script>
+<script>
+(function () {
+
+  function esc(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+  function fmt(n) { return (+n).toLocaleString(undefined, { maximumFractionDigits: 1 }); }
+
+  var RANK_MEDALS = ['emoji_events','military_tech','workspace_premium'];
+  var RANK_COLORS = ['#ff8f6f','#c0c0c0','#cd7f32'];
+
+  function buildNamingRow(entry, i) {
+    var medal = RANK_MEDALS[i]
+      ? '<span class="material-symbols-outlined" style="font-size:13px;color:' + RANK_COLORS[i] + ';font-variation-settings:\'FILL\' 1;">' + RANK_MEDALS[i] + '</span>'
+      : '';
+    var rankColor = i === 0 ? '#ff8f6f' : i < 3 ? '#ffffff' : '#adaaaa';
+    var totalColor = i === 0 ? '#929bfa' : '#ffffff';
+
+    // Desktop row
+    var desktopRow =
+      '<div class="hidden md:grid items-center px-4 py-4 rounded-xl hover:bg-surface-container-high transition-colors border-b border-outline-variant/10 last:border-0"' +
+      ' style="grid-template-columns:48px 1fr 80px 110px 90px 80px;">' +
+        '<div style="display:flex;flex-direction:column;align-items:center;gap:2px;">' +
+          '<span style="font-family:\'Space Grotesk\',sans-serif;font-weight:900;font-style:italic;font-size:18px;color:' + rankColor + ';">' + String(i+1).padStart(2,'0') + '</span>' +
+          medal +
+        '</div>' +
+        '<div>' +
+          '<p style="font-family:\'Space Grotesk\',sans-serif;font-weight:900;font-size:14px;text-transform:uppercase;letter-spacing:-0.01em;">' + esc(entry.team_name) + '</p>' +
+        '</div>' +
+        '<div style="text-align:center;font-family:\'Space Grotesk\',sans-serif;font-weight:900;font-style:italic;font-size:14px;color:#adaaaa;">' + (entry.base_pts || 0) + '</div>' +
+        '<div style="text-align:center;font-family:\'Space Grotesk\',sans-serif;font-weight:900;font-style:italic;font-size:14px;color:#ff8f6f;">+' + (entry.participation_pts || 0) + '</div>' +
+        '<div style="text-align:center;font-family:\'Space Grotesk\',sans-serif;font-weight:900;font-style:italic;font-size:14px;color:#81ecff;">+' + (entry.creative_pts || 0) + '</div>' +
+        '<div style="text-align:right;font-family:\'Space Grotesk\',sans-serif;font-weight:900;font-style:italic;font-size:20px;color:' + totalColor + ';">' + fmt(entry.total_pts) + '</div>' +
+      '</div>';
+
+    // Mobile row
+    var mobileRow =
+      '<div class="md:hidden flex items-center justify-between px-3 py-4 border-b border-outline-variant/10 last:border-0">' +
+        '<div class="flex items-center gap-3">' +
+          '<span style="font-family:\'Space Grotesk\',sans-serif;font-weight:900;font-style:italic;font-size:16px;color:' + rankColor + ';min-width:28px;">' + String(i+1).padStart(2,'0') + '</span>' +
+          '<div>' +
+            '<p style="font-family:\'Space Grotesk\',sans-serif;font-weight:900;font-size:13px;text-transform:uppercase;">' + esc(entry.team_name) + '</p>' +
+            '<p style="font-size:10px;color:#adaaaa;font-weight:700;margin-top:2px;">' +
+              'Base ' + (entry.base_pts || 0) + ' · Part +' + (entry.participation_pts || 0) + ' · Creative +' + (entry.creative_pts || 0) +
+            '</p>' +
+          '</div>' +
+        '</div>' +
+        '<div style="font-family:\'Space Grotesk\',sans-serif;font-weight:900;font-style:italic;font-size:20px;color:' + totalColor + ';">' + fmt(entry.total_pts) + '</div>' +
+      '</div>';
+
+    return desktopRow + mobileRow;
+  }
+
+  function renderNamingEmpty() {
+    document.getElementById('naming-rows').innerHTML =
+      '<div class="flex flex-col items-center gap-3 py-12 text-center">' +
+        '<span class="material-symbols-outlined text-on-surface-variant text-4xl">pending_actions</span>' +
+        '<p class="text-on-surface-variant text-sm font-bold">Scores pending — organizer will update shortly.</p>' +
+        '<p class="text-on-surface-variant text-[10px] uppercase tracking-widest">Check back after the challenge closes.</p>' +
+      '</div>';
+  }
+
+  async function loadNamingActivity() {
+    try {
+      var data = await CubeData.getActivityScores('team_naming_2026');
+      document.getElementById('naming-loading').style.display = 'none';
+
+      if (!data || !data.entries || data.entries.length === 0) {
+        renderNamingEmpty();
+        return;
+      }
+
+      document.getElementById('naming-count').textContent = data.entries.length + ' teams scored';
+      document.getElementById('naming-rows').innerHTML = data.entries.map(buildNamingRow).join('');
+    } catch (e) {
+      document.getElementById('naming-rows').innerHTML =
+        '<p style="color:#ff716c;padding:24px;text-align:center;font-size:13px;">Failed to load scores: ' + esc(e.message) + '</p>';
+    }
+  }
+
+  loadNamingActivity();
+})();
+</script>
+</body>
+</html>

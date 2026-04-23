@@ -1,6 +1,6 @@
 use chrono::{Datelike, Utc};
 use chrono_tz::Asia::Bangkok;
-use core::AppConfig;
+use cube_core::AppConfig;
 use scoring::ScoringContext;
 use std::sync::Arc;
 use tokio_cron_scheduler::{Job, JobScheduler};

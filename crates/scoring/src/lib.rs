@@ -1,7 +1,7 @@
 pub mod walk_run;
 
 use async_trait::async_trait;
-use chrono::{Datelike, NaiveDate};
+use chrono::NaiveDate;
 use std::collections::HashMap;
 use std::sync::Arc;
 

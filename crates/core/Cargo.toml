@@ -1,5 +1,5 @@
 [package]
-name = "core"
+name = "cube_core"
 version = "0.1.0"
 edition = "2021"
 
@@ -9,6 +9,7 @@ serde_json = { workspace = true }
 chrono = { workspace = true }
 anyhow = { workspace = true }
 thiserror = { workspace = true }
+sqlx = { workspace = true }
 uuid = { workspace = true }
 config = { workspace = true }
 dotenvy = { workspace = true }

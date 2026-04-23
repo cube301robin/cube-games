@@ -62,6 +62,7 @@
     <a class="text-[#929bfa] hover:bg-[#262626] transition-colors duration-300 px-3 py-2 rounded-lg" href="index.html">Dashboard</a>
     <a class="text-[#929bfa] hover:bg-[#262626] transition-colors duration-300 px-3 py-2 rounded-lg" href="individuals.html">Individuals</a>
     <a class="text-[#929bfa] hover:bg-[#262626] transition-colors duration-300 px-3 py-2 rounded-lg" href="teams.html">Teams</a>
+    <a class="text-[#929bfa] hover:bg-[#262626] transition-colors duration-300 px-3 py-2 rounded-lg" href="activities.html">Activities</a>
     <a class="text-[#ff8f6f] font-bold px-3 py-2 rounded-lg" href="rules.html">Rules</a>
   </div>
   <div class="flex items-center gap-3">
@@ -90,6 +91,9 @@
     <a class="flex items-center gap-3 px-4 py-4 text-gray-500 hover:text-[#929bfa] hover:translate-x-1 transition-all duration-300 font-bold text-sm" href="teams.html">
       <span class="material-symbols-outlined">group</span> Teams
     </a>
+    <a class="flex items-center gap-3 px-4 py-4 text-gray-500 hover:text-[#929bfa] hover:translate-x-1 transition-all duration-300 font-bold text-sm" href="activities.html">
+      <span class="material-symbols-outlined">flag</span> Activities
+    </a>
     <a class="flex items-center gap-3 px-4 py-4 text-[#ff8f6f] border-l-4 border-[#ff8f6f] bg-gradient-to-r from-[#ff8f6f15] to-transparent font-bold text-sm" href="rules.html">
       <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">info</span> Rules
     </a>
@@ -106,6 +110,45 @@
       <span class="text-primary font-headline font-black tracking-widest uppercase text-xs mb-2 block">Competitive Manual</span>
       <h1 class="text-4xl lg:text-6xl font-headline font-black italic tracking-tighter text-on-background mb-4 uppercase">Rules &amp; Scoring</h1>
       <p class="text-on-surface-variant text-lg max-w-lg leading-relaxed">Master the 3-layer architecture of Cube Games 2026. Every kilometer counts toward individual glory and team dominance.</p>
+    </div>
+  </div>
+
+  <!-- Season Scoring Formula -->
+  <div class="bg-surface-container-low rounded-xl p-8 mb-12 border border-tertiary/15 relative overflow-hidden">
+    <div class="absolute -right-16 -top-16 w-48 h-48 bg-tertiary/5 rounded-full blur-[60px]"></div>
+    <div class="relative z-10">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="material-symbols-outlined text-tertiary text-3xl" style="font-variation-settings:'FILL' 1;">calculate</span>
+        <div>
+          <p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest">How the season winner is determined</p>
+          <h2 class="text-2xl font-headline font-black uppercase tracking-tighter">Season Score Formula</h2>
+        </div>
+      </div>
+      <div class="flex flex-wrap items-center gap-4">
+        <div class="bg-primary/10 border border-primary/20 rounded-xl px-6 py-4 text-center min-w-[160px]">
+          <div class="text-[10px] text-on-surface-variant font-black uppercase tracking-widest mb-1">Strava Challenge</div>
+          <div class="font-headline font-black text-lg italic text-primary">∑ Weekly Avg Pts</div>
+          <div class="text-[10px] text-on-surface-variant mt-1">All weeks accumulated</div>
+        </div>
+        <span class="font-headline font-black text-2xl text-on-surface-variant">+</span>
+        <div class="bg-secondary/10 border border-secondary/20 rounded-xl px-6 py-4 text-center min-w-[160px]">
+          <div class="text-[10px] text-on-surface-variant font-black uppercase tracking-widest mb-1">Team Naming</div>
+          <div class="font-headline font-black text-lg italic text-secondary">Challenge Pts</div>
+          <div class="text-[10px] text-on-surface-variant mt-1">One-time event score</div>
+        </div>
+        <span class="font-headline font-black text-2xl text-on-surface-variant">+</span>
+        <div class="bg-surface-container-highest rounded-xl px-6 py-4 text-center min-w-[160px] border border-dashed border-outline-variant/30">
+          <div class="text-[10px] text-on-surface-variant font-black uppercase tracking-widest mb-1">Future Challenges</div>
+          <div class="font-headline font-black text-lg italic text-on-surface-variant">TBA</div>
+          <div class="text-[10px] text-on-surface-variant mt-1">More events to come</div>
+        </div>
+        <span class="font-headline font-black text-2xl text-on-surface-variant">=</span>
+        <div class="bg-tertiary/10 border border-tertiary/25 rounded-xl px-6 py-4 text-center min-w-[160px]">
+          <div class="text-[10px] text-tertiary font-black uppercase tracking-widest mb-1">Season Total</div>
+          <div class="font-headline font-black text-lg italic text-tertiary">Final Ranking</div>
+          <div class="text-[10px] text-on-surface-variant mt-1">Visible on Dashboard</div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -200,27 +243,27 @@
         </div>
         <div>
           <p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest">Layer 03</p>
-          <h3 class="text-xl font-headline font-black uppercase text-on-surface">Monthly Finale</h3>
+          <h3 class="text-xl font-headline font-black uppercase text-on-surface">Special Challenges</h3>
         </div>
       </div>
       <div class="space-y-6 flex-1">
         <div class="flex items-start gap-4">
           <div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center shrink-0 border border-outline-variant/30 text-tertiary font-black">1</div>
           <div>
-            <p class="font-bold text-on-surface mb-1">Monthly Challenge</p>
-            <p class="text-sm text-on-surface-variant">Complete the themed monthly challenge to earn activity points and a Special Card.</p>
+            <p class="font-bold text-on-surface mb-1">One-off Team Events</p>
+            <p class="text-sm text-on-surface-variant">Special events (e.g. Team Naming) award bonus points that stack on top of Strava scores.</p>
           </div>
         </div>
         <div class="flex items-start gap-4">
           <div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center shrink-0 border border-outline-variant/30 text-tertiary font-black">2</div>
           <div>
-            <p class="font-bold text-on-surface mb-1">Special Card Event</p>
-            <p class="text-sm text-on-surface-variant">Unlocked only in the final week of each month. High risk, high reward.</p>
+            <p class="font-bold text-on-surface mb-1">Score Composition</p>
+            <p class="text-sm text-on-surface-variant">Each challenge has its own scoring breakdown. Results are visible on the Activities page.</p>
           </div>
         </div>
       </div>
       <div class="mt-8 pt-6 border-t border-outline-variant/20">
-        <button class="w-full py-3 rounded-lg border border-tertiary/20 text-tertiary text-xs font-bold uppercase tracking-widest hover:bg-tertiary/5 transition-colors">View Season Calendar</button>
+        <a href="activities.html" class="block w-full py-3 rounded-lg border border-tertiary/20 text-tertiary text-xs font-bold uppercase tracking-widest hover:bg-tertiary/5 transition-colors text-center">View All Activities</a>
       </div>
     </div>
   </div>
@@ -283,6 +326,57 @@
           </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+
+  <!-- Team Naming Challenge Rules -->
+  <div class="bg-surface-container-low rounded-xl p-8 mb-12 border border-secondary/15">
+    <div class="flex items-center gap-4 mb-6">
+      <div class="w-12 h-12 rounded-lg bg-secondary/15 flex items-center justify-center text-secondary border border-secondary/20">
+        <span class="material-symbols-outlined text-2xl" style="font-variation-settings:'FILL' 1;">local_activity</span>
+      </div>
+      <div>
+        <div class="flex items-center gap-3">
+          <h2 class="text-2xl font-headline font-black uppercase tracking-tighter">Team Naming Challenge</h2>
+          <span class="px-2.5 py-1 rounded-full text-[9px] font-black uppercase tracking-widest bg-[#4ade8015] text-[#4ade80] border border-[#4ade8030]">✓ Completed</span>
+        </div>
+        <p class="text-on-surface-variant text-sm mt-1">Apr 8–14, 2026 · Scores contribute to Season Total</p>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+      <div class="bg-surface-container-highest rounded-xl p-5">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="w-6 h-6 rounded-full bg-surface-container-low flex items-center justify-center text-xs font-black text-on-surface">1</span>
+          <p class="font-bold text-on-surface text-sm">Base Points</p>
+        </div>
+        <div class="font-headline font-black text-3xl italic mb-1">100 <span class="text-base text-on-surface-variant">pts</span></div>
+        <p class="text-xs text-on-surface-variant">Every team receives the base score automatically.</p>
+      </div>
+      <div class="bg-surface-container-highest rounded-xl p-5">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="w-6 h-6 rounded-full bg-surface-container-low flex items-center justify-center text-xs font-black text-on-surface">2</span>
+          <p class="font-bold text-on-surface text-sm">Participation Bonus</p>
+        </div>
+        <div class="font-headline font-black text-3xl italic text-primary mb-1">+20 <span class="text-base text-on-surface-variant">pts</span></div>
+        <p class="text-xs text-on-surface-variant">Awarded to the 1 team with the highest member participation in the naming process.</p>
+      </div>
+      <div class="bg-surface-container-highest rounded-xl p-5">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="w-6 h-6 rounded-full bg-surface-container-low flex items-center justify-center text-xs font-black text-on-surface">3</span>
+          <p class="font-bold text-on-surface text-sm">Most Creative Bonus</p>
+        </div>
+        <div class="font-headline font-black text-3xl italic text-tertiary mb-1">+25 <span class="text-base text-on-surface-variant">pts</span></div>
+        <p class="text-xs text-on-surface-variant">Awarded to the 1 team judged most creative, original, and on-theme.</p>
+      </div>
+    </div>
+    <div class="flex items-center justify-between p-4 bg-secondary/8 rounded-xl border border-secondary/15">
+      <div>
+        <p class="text-xs text-on-surface-variant font-bold uppercase tracking-widest">Maximum Possible Score</p>
+        <p class="font-headline font-black text-2xl italic text-secondary mt-0.5">145 pts</p>
+      </div>
+      <a href="activities.html#act-team-naming" class="flex items-center gap-2 text-secondary text-xs font-black uppercase tracking-widest hover:text-on-surface transition-colors">
+        View Scores <span class="material-symbols-outlined text-sm">chevron_right</span>
+      </a>
     </div>
   </div>
 
@@ -414,15 +508,19 @@
   </a>
   <a class="flex flex-col items-center text-gray-500" href="individuals.html">
     <span class="material-symbols-outlined">leaderboard</span>
-    <span class="text-[10px] font-bold uppercase tracking-tighter">Stats</span>
-  </a>
-  <a class="flex flex-col items-center text-primary" href="rules.html">
-    <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">info</span>
-    <span class="text-[10px] font-bold uppercase tracking-tighter">Rules</span>
+    <span class="text-[10px] font-bold uppercase tracking-tighter">Indiv</span>
   </a>
   <a class="flex flex-col items-center text-gray-500" href="teams.html">
     <span class="material-symbols-outlined">group</span>
     <span class="text-[10px] font-bold uppercase tracking-tighter">Teams</span>
+  </a>
+  <a class="flex flex-col items-center text-gray-500" href="activities.html">
+    <span class="material-symbols-outlined">flag</span>
+    <span class="text-[10px] font-bold uppercase tracking-tighter">Events</span>
+  </a>
+  <a class="flex flex-col items-center text-primary" href="rules.html">
+    <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">info</span>
+    <span class="text-[10px] font-bold uppercase tracking-tighter">Rules</span>
   </a>
 </div>
 </body>

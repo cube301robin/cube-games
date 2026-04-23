@@ -1,6 +1,10 @@
 use super::{GameScoring, ScoringContext};
 use async_trait::async_trait;
+use chrono::NaiveDate;
 use tracing::info;
+
+/// Activities before this date are ignored (competition start).
+const GAME_START: &str = "2026-04-08";
 
 pub struct WalkRunGame;
 
@@ -60,6 +64,10 @@ impl GameScoring for WalkRunGame {
 
     async fn compute_weekly_individual(&self, ctx: &ScoringContext) -> anyhow::Result<usize> {
         let end_exclusive = ctx.end_date + chrono::Duration::days(1);
+        let game_start = NaiveDate::parse_from_str(GAME_START, "%Y-%m-%d")
+            .expect("GAME_START is a valid date");
+        // Effective week start: the later of the week boundary and the competition start.
+        let effective_start = ctx.start_date.max(game_start);
 
         let users = sqlx::query!(
             "SELECT id, team_id FROM users WHERE team_id IS NOT NULL"
@@ -79,7 +87,7 @@ impl GameScoring for WalkRunGame {
                      AND activity_type IN ('Run', 'Walk')"#,
                 user.id,
                 ctx.game_id,
-                ctx.start_date,
+                effective_start,
                 end_exclusive,
             )
             .fetch_one(&ctx.db)
@@ -135,9 +143,12 @@ impl GameScoring for WalkRunGame {
                  $1,
                  $2,
                  $3,
-                 COALESCE(AVG(s.total_points), 0.0)::DOUBLE PRECISION,
+                 CASE WHEN t.roster_size > 0
+                      THEN COALESCE(SUM(s.total_points), 0.0) / t.roster_size
+                      ELSE 0.0
+                 END::DOUBLE PRECISION,
                  COUNT(s.id) FILTER (WHERE s.total_points > 0),
-                 COUNT(u.id)
+                 t.roster_size
                FROM teams t
                LEFT JOIN users u ON u.team_id = t.id
                LEFT JOIN weekly_individual_scores s
@@ -145,7 +156,7 @@ impl GameScoring for WalkRunGame {
                  AND s.game_id = $1
                  AND s.year    = $2
                  AND s.iso_week = $3
-               GROUP BY t.id
+               GROUP BY t.id, t.roster_size
                ON CONFLICT (team_id, game_id, year, iso_week) DO UPDATE SET
                  avg_score           = EXCLUDED.avg_score,
                  active_member_count = EXCLUDED.active_member_count,

@@ -58,7 +58,7 @@ CREATE TABLE activities (
     UNIQUE(source, external_id)
 );
 CREATE INDEX idx_activities_lookup ON activities(user_id, game_id, occurred_at);
-CREATE INDEX idx_activities_week   ON activities(game_id, date_trunc('week', occurred_at));
+CREATE INDEX idx_activities_week   ON activities(game_id, occurred_at);
 
 CREATE TABLE weekly_individual_scores (
     id           BIGSERIAL PRIMARY KEY,

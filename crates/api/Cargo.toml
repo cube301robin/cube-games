@@ -8,7 +8,7 @@ name = "api"
 path = "src/main.rs"
 
 [dependencies]
-core = { path = "../core" }
+cube_core = { path = "../core" }
 db = { path = "../db" }
 scoring = { path = "../scoring" }
 strava = { path = "../strava" }
@@ -27,3 +27,4 @@ tracing-subscriber = { workspace = true }
 tower-http = { workspace = true }
 jsonwebtoken = { workspace = true }
 uuid = { workspace = true }
+rust_xlsxwriter = { workspace = true }

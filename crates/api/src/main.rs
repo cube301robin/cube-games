@@ -6,7 +6,7 @@ use axum::{
     routing::{get, post},
     Router,
 };
-use core::AppConfig;
+use cube_core::AppConfig;
 use std::sync::Arc;
 use tower_http::{cors::CorsLayer, services::ServeDir, trace::TraceLayer};
 use tracing_subscriber::EnvFilter;
@@ -62,6 +62,9 @@ async fn main() -> anyhow::Result<()> {
         // Admin
         .route("/api/admin/recompute", post(handlers::admin::recompute))
         .route("/api/admin/adjustment", post(handlers::admin::add_adjustment))
+        .route("/api/admin/sync-club", post(handlers::admin::sync_club))
+        .route("/api/admin/sync-club-members", post(handlers::admin::sync_club_members))
+        .route("/api/admin/export-members", get(handlers::admin::export_members))
         .with_state(state);
 
     // Serve static HTML frontend from the `frontend/` directory

@@ -74,6 +74,9 @@
     <a class="flex items-center gap-4 py-3 px-4 text-gray-500 hover:text-[#929bfa] hover:translate-x-1 transition-all duration-300 font-['Space_Grotesk'] text-sm font-bold tracking-tight" href="teams.html">
       <span class="material-symbols-outlined">group</span><span>Teams</span>
     </a>
+    <a class="flex items-center gap-4 py-3 px-4 text-gray-500 hover:text-[#929bfa] hover:translate-x-1 transition-all duration-300 font-['Space_Grotesk'] text-sm font-bold tracking-tight" href="activities.html">
+      <span class="material-symbols-outlined">flag</span><span>Activities</span>
+    </a>
     <a class="flex items-center gap-4 py-3 px-4 text-gray-500 hover:text-[#929bfa] hover:translate-x-1 transition-all duration-300 font-['Space_Grotesk'] text-sm font-bold tracking-tight" href="rules.html">
       <span class="material-symbols-outlined">info</span><span>Rules</span>
     </a>
@@ -114,7 +117,7 @@
 
     <!-- ② Stats Grid -->
     <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <!-- Company KM -->
+      <!-- Company KM This Week -->
       <div class="bg-surface-container-low p-8 rounded-xl relative overflow-hidden group">
         <div class="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
           <span class="material-symbols-outlined text-[120px]" style="font-variation-settings:'wght' 700;">route</span>
@@ -128,64 +131,139 @@
             <span class="font-headline text-6xl font-black tracking-tighter text-on-surface" id="company-km">—</span>
             <span class="font-headline text-xl font-bold text-primary italic">KM</span>
           </div>
-          <p class="mt-6 text-[10px] text-on-surface-variant font-medium uppercase tracking-widest">COMBINED ACROSS ALL PARTICIPANTS</p>
+          <p class="mt-6 text-[10px] text-on-surface-variant font-medium uppercase tracking-widest">STRAVA · COMBINED ALL PARTICIPANTS</p>
         </div>
       </div>
-      <!-- ③ Participation Rate -->
-      <div class="bg-surface-container-low p-8 rounded-xl relative overflow-hidden group">
+      <!-- Weekly Strava Leader -->
+      <div class="bg-surface-container-low p-8 rounded-xl relative overflow-hidden group border-l-4 border-primary">
         <div class="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
-          <span class="material-symbols-outlined text-[120px]" style="font-variation-settings:'wght' 700;">groups</span>
+          <span class="material-symbols-outlined text-[120px]" style="font-variation-settings:'wght' 700;">directions_run</span>
         </div>
         <div class="relative z-10">
-          <div class="flex items-center gap-2 mb-6">
-            <span class="material-symbols-outlined text-secondary">person</span>
-            <span class="text-on-surface-variant text-xs font-bold uppercase tracking-widest">Participation</span>
+          <div class="flex items-center gap-2 mb-3">
+            <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">workspace_premium</span>
+            <span class="text-on-surface-variant text-xs font-bold uppercase tracking-widest">This Week · Strava Leader</span>
           </div>
           <div class="flex items-baseline gap-2">
-            <span class="font-headline text-6xl font-black tracking-tighter text-on-surface" id="active-count">—</span>
-            <span class="font-headline text-xl font-bold text-secondary italic" id="total-count"></span>
+            <span class="font-headline text-6xl font-black tracking-tighter text-on-surface" id="weekly-leader-score">—</span>
+            <span class="font-headline text-xl font-bold text-primary italic">PTS</span>
           </div>
-          <div class="mt-4 h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
-            <div class="h-full bg-secondary rounded-full transition-all duration-700" id="participation-bar" style="width:0%"></div>
-          </div>
-          <p class="mt-2 text-[10px] font-bold uppercase tracking-widest" id="participation-pct">
-            <span class="text-secondary">— %</span> <span class="text-on-surface-variant">ACTIVE THIS WEEK</span>
-          </p>
+          <p class="mt-3 text-sm font-headline font-black text-primary leading-tight uppercase tracking-tight truncate" id="weekly-leader-name">Loading…</p>
+          <p class="mt-2 text-[10px] text-on-surface-variant font-bold uppercase tracking-widest" id="weekly-leader-dist">STRAVA CHALLENGE · TEAM AVG</p>
         </div>
       </div>
-      <!-- Leading Team -->
+      <!-- Season Leader -->
       <div class="bg-secondary-container p-8 rounded-xl relative overflow-hidden">
         <div class="absolute top-0 right-0 p-4">
           <span class="material-symbols-outlined text-secondary opacity-30 text-4xl" style="font-variation-settings:'FILL' 1;">emoji_events</span>
         </div>
         <div class="relative z-10">
-          <div class="flex items-center gap-2 mb-6 text-on-secondary-container">
+          <div class="flex items-center gap-2 mb-3 text-on-secondary-container">
             <span class="material-symbols-outlined text-secondary">military_tech</span>
-            <span class="text-xs font-bold uppercase tracking-widest">Leading Team</span>
+            <span class="text-xs font-bold uppercase tracking-widest">Season Leader</span>
           </div>
           <div class="flex items-baseline gap-2">
             <span class="font-headline text-6xl font-black tracking-tighter text-on-secondary-container" id="top-team-score">—</span>
-            <span class="font-headline text-base font-bold text-tertiary italic">AVG PTS</span>
+            <span class="font-headline text-base font-bold text-tertiary italic">PTS</span>
           </div>
-          <p class="mt-6 text-sm text-secondary-fixed-dim font-medium leading-tight uppercase tracking-tight" id="top-team-name">Loading...</p>
+          <p class="mt-3 text-sm text-secondary-fixed-dim font-medium leading-tight uppercase tracking-tight" id="top-team-name">Loading…</p>
+          <p class="mt-2 text-[10px] text-secondary/70 font-bold uppercase tracking-widest">STRAVA + CHALLENGES COMBINED</p>
         </div>
       </div>
     </section>
 
-    <!-- ④ Top 3 Individuals Podium -->
+    <!-- ③ Season Standings -->
     <section>
       <div class="flex items-center justify-between mb-5">
         <div>
-          <h3 class="font-headline font-black text-xl tracking-tight uppercase">Top Performers</h3>
-          <p class="text-on-surface-variant text-[10px] font-bold uppercase tracking-widest mt-0.5" id="top3-week-label">This Week</p>
+          <h3 class="font-headline font-black text-xl tracking-tight uppercase">Season Standings</h3>
+          <p class="text-on-surface-variant text-[10px] font-bold uppercase tracking-widest mt-0.5">Strava accumulated + challenge scores</p>
         </div>
-        <a href="individuals.html" class="text-secondary text-xs font-black uppercase tracking-widest hover:text-on-surface transition-colors flex items-center gap-1">
-          View All <span class="material-symbols-outlined text-sm">chevron_right</span>
-        </a>
+        <div class="flex items-center gap-5">
+          <!-- Legend -->
+          <div class="hidden sm:flex items-center gap-4 text-[10px] font-bold uppercase tracking-widest">
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-primary inline-block"></span><span class="text-on-surface-variant">Strava</span></span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-secondary inline-block"></span><span class="text-on-surface-variant">Challenges</span></span>
+          </div>
+          <a href="teams.html" class="text-secondary text-xs font-black uppercase tracking-widest hover:text-on-surface transition-colors flex items-center gap-1">
+            Details <span class="material-symbols-outlined text-sm">chevron_right</span>
+          </a>
+        </div>
+      </div>
+      <div class="bg-surface-container-low rounded-xl overflow-hidden">
+        <div class="hidden sm:flex items-center gap-4 px-6 py-2.5 border-b border-surface-container-highest text-[9px] font-bold uppercase tracking-widest bg-surface-container">
+          <div class="w-8 shrink-0"></div>
+          <div class="flex-1 text-on-surface-variant">Team</div>
+          <div class="w-24 text-right text-secondary">Other Acts</div>
+          <div class="w-16 text-right text-primary">Strava</div>
+          <div class="w-px invisible">·</div>
+          <div class="w-20 text-right text-on-surface">Total Pts</div>
+        </div>
+        <div id="season-rows">
+          <div class="flex items-center justify-center py-16 text-on-surface-variant text-xs font-bold uppercase tracking-widest gap-2">
+            <span class="material-symbols-outlined animate-spin">progress_activity</span> Loading…
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ④ Strava Challenge — Team Leaderboard -->
+    <section id="strava-section">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-5">
+        <div>
+          <div class="flex items-center gap-3 mb-1">
+            <span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings:'FILL' 1;">directions_run</span>
+            <p class="text-on-surface-variant font-headline text-xs font-bold tracking-[0.25em] uppercase">Strava Challenge</p>
+          </div>
+          <h3 class="font-headline font-black text-xl tracking-tight uppercase">Team Leaderboard</h3>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <div class="flex items-center bg-surface-container rounded-lg p-1 gap-1">
+            <button id="strava-btn-all" onclick="window.switchStravaMode('all')"
+              class="px-3 py-1.5 rounded-md text-[10px] font-black uppercase tracking-widest transition-all duration-200 bg-primary text-on-primary">All Weeks</button>
+            <button id="strava-btn-week" onclick="window.switchStravaMode('week')"
+              class="px-3 py-1.5 rounded-md text-[10px] font-black uppercase tracking-widest transition-all duration-200 text-on-surface-variant hover:text-on-surface">By Week</button>
+          </div>
+          <div id="week-picker" class="hidden flex items-center gap-1"></div>
+        </div>
+      </div>
+      <div class="bg-surface-container-low rounded-xl overflow-hidden">
+        <div class="hidden sm:flex items-center gap-4 px-6 py-2.5 border-b border-surface-container-highest text-[9px] font-bold uppercase tracking-widest bg-surface-container">
+          <div class="w-8 shrink-0"></div>
+          <div class="flex-1 text-on-surface-variant">Team</div>
+          <div class="w-24 text-right text-tertiary">Distance</div>
+          <div class="w-16 text-right text-secondary">Bonus</div>
+          <div class="w-px invisible">·</div>
+          <div class="w-20 text-right text-primary">Total Pts</div>
+        </div>
+        <div id="strava-rows">
+          <div class="flex items-center justify-center py-16 text-on-surface-variant text-xs font-bold uppercase tracking-widest gap-2">
+            <span class="material-symbols-outlined animate-spin">progress_activity</span> Loading…
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⑤ Strava Challenge — Top Performers -->
+    <section>
+      <div class="mb-5">
+        <div class="flex items-center gap-3 mb-1">
+          <span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings:'FILL' 1;">directions_run</span>
+          <p class="text-on-surface-variant font-headline text-xs font-bold tracking-[0.25em] uppercase">Strava Challenge</p>
+        </div>
+        <div class="flex items-center justify-between">
+          <h3 class="font-headline font-black text-xl tracking-tight uppercase">Top Performers</h3>
+          <div class="flex items-center gap-4">
+            <span class="text-on-surface-variant text-[10px] font-bold uppercase tracking-widest" id="top3-week-label">This Week</span>
+            <a href="individuals.html" class="text-secondary text-xs font-black uppercase tracking-widest hover:text-on-surface transition-colors flex items-center gap-1">
+              View All <span class="material-symbols-outlined text-sm">chevron_right</span>
+            </a>
+          </div>
+        </div>
       </div>
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-5" id="top3-container">
         <div class="lg:col-span-3 flex items-center justify-center py-10 text-on-surface-variant text-xs font-bold uppercase tracking-widest gap-2">
-          <span class="material-symbols-outlined animate-spin">progress_activity</span> Loading...
+          <span class="material-symbols-outlined animate-spin">progress_activity</span> Loading…
         </div>
       </div>
     </section>
@@ -197,84 +275,10 @@
           <h3 class="font-headline font-black text-xl tracking-tight uppercase">Company Tier Distribution</h3>
           <span class="text-on-surface-variant text-[10px] font-bold uppercase tracking-widest" id="tier-total-label"></span>
         </div>
-        <!-- Stacked bar -->
         <div class="h-5 w-full rounded-full overflow-hidden flex gap-px bg-surface-container-highest" id="tier-bar">
           <div class="h-full bg-surface-container-highest w-full rounded-full"></div>
         </div>
-        <!-- Legend -->
-        <div class="flex flex-wrap gap-x-6 gap-y-3 mt-5" id="tier-legend">
-        </div>
-      </div>
-    </section>
-
-    <!-- Team Rankings + Recent Activity -->
-    <section class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-      <!-- Team Rankings -->
-      <div class="lg:col-span-8">
-        <div class="bg-surface-container-low rounded-xl overflow-hidden">
-          <div class="flex items-center justify-between px-8 py-5 border-b border-surface-container-highest">
-            <div>
-              <h3 class="font-headline font-black text-xl tracking-tight uppercase">Team Rankings</h3>
-              <p class="text-on-surface-variant text-[10px] font-bold uppercase tracking-widest mt-0.5" id="week-label">This Week</p>
-            </div>
-            <a href="teams.html" class="text-secondary text-xs font-black uppercase tracking-widest hover:text-on-surface transition-colors flex items-center gap-1">
-              View All <span class="material-symbols-outlined text-sm">chevron_right</span>
-            </a>
-          </div>
-          <div id="team-rows" class="divide-y divide-surface-container-highest">
-            <div class="flex items-center justify-center py-16 text-on-surface-variant text-xs font-bold uppercase tracking-widest gap-2" id="teams-loading">
-              <span class="material-symbols-outlined animate-spin">progress_activity</span> Loading...
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Recent Activity -->
-      <div class="lg:col-span-4">
-        <div class="bg-surface-container-low p-6 rounded-xl h-full flex flex-col">
-          <div class="flex items-center justify-between mb-8">
-            <h3 class="font-headline font-black text-xl tracking-tight uppercase">Recent Activity</h3>
-          </div>
-          <div class="space-y-6 flex-1 overflow-y-auto pr-2" id="activity-feed">
-            <div class="flex gap-4 group">
-              <div class="w-10 h-10 rounded-full border-2 border-secondary bg-surface-container-highest shrink-0 flex items-center justify-center">
-                <span class="material-symbols-outlined text-secondary text-sm">person</span>
-              </div>
-              <div class="flex-1 border-b border-surface-container-highest pb-4">
-                <div class="flex justify-between items-start mb-1">
-                  <p class="text-sm font-bold text-on-surface group-hover:text-secondary transition-colors">Marcus Chen</p>
-                  <span class="text-[10px] text-on-surface-variant">2M AGO</span>
-                </div>
-                <p class="text-xs text-on-surface-variant leading-snug">Logged <span class="text-tertiary">12.4km</span> · Titan Pulse</p>
-              </div>
-            </div>
-            <div class="flex gap-4 group">
-              <div class="w-10 h-10 rounded-full border-2 border-primary bg-surface-container-highest shrink-0 flex items-center justify-center">
-                <span class="material-symbols-outlined text-primary text-sm">person</span>
-              </div>
-              <div class="flex-1 border-b border-surface-container-highest pb-4">
-                <div class="flex justify-between items-start mb-1">
-                  <p class="text-sm font-bold text-on-surface group-hover:text-primary transition-colors">Sarah Jenkins</p>
-                  <span class="text-[10px] text-on-surface-variant">45M AGO</span>
-                </div>
-                <p class="text-xs text-on-surface-variant leading-snug">Logged <span class="text-tertiary">8.1km</span> · Vortex Velocity</p>
-              </div>
-            </div>
-            <div class="flex gap-4 group">
-              <div class="w-10 h-10 rounded-full border-2 border-tertiary bg-surface-container-highest shrink-0 flex items-center justify-center">
-                <span class="material-symbols-outlined text-tertiary text-sm">person</span>
-              </div>
-              <div class="flex-1 border-b border-surface-container-highest pb-4">
-                <div class="flex justify-between items-start mb-1">
-                  <p class="text-sm font-bold text-on-surface group-hover:text-tertiary transition-colors">Liam Rodriguez</p>
-                  <span class="text-[10px] text-on-surface-variant">2H AGO</span>
-                </div>
-                <p class="text-xs text-on-surface-variant leading-snug">Logged <span class="text-tertiary">5.6km</span> · Neon Shadows</p>
-              </div>
-            </div>
-          </div>
-          <a href="individuals.html" class="mt-6 block w-full py-3 bg-surface-container-highest rounded-lg text-center text-[10px] font-black uppercase tracking-widest text-on-surface-variant hover:text-on-surface transition-all">VIEW ALL INDIVIDUALS</a>
-        </div>
+        <div class="flex flex-wrap gap-x-6 gap-y-3 mt-5" id="tier-legend"></div>
       </div>
     </section>
 
@@ -283,7 +287,7 @@
       <h3 class="font-headline font-black text-xl tracking-tight uppercase mb-5">Last Week's Champions</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="last-week-cards">
         <div class="md:col-span-2 flex items-center justify-center py-10 text-on-surface-variant text-xs font-bold uppercase tracking-widest gap-2">
-          <span class="material-symbols-outlined animate-spin">progress_activity</span> Loading...
+          <span class="material-symbols-outlined animate-spin">progress_activity</span> Loading…
         </div>
       </div>
     </section>
@@ -292,18 +296,22 @@
 </main>
 
 <!-- BottomNavBar (Mobile) -->
-<nav class="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-[#131313] z-50 flex items-center justify-around px-4">
+<nav class="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-[#131313] z-50 flex items-center justify-around px-4 border-t border-outline-variant/10">
   <a class="flex flex-col items-center justify-center text-[#ff8f6f]" href="index.html">
     <span class="material-symbols-outlined">dashboard</span>
-    <span class="text-[10px] font-bold font-['Space_Grotesk']">Dashboard</span>
+    <span class="text-[10px] font-bold font-['Space_Grotesk']">Home</span>
   </a>
   <a class="flex flex-col items-center justify-center text-gray-500" href="individuals.html">
     <span class="material-symbols-outlined">leaderboard</span>
-    <span class="text-[10px] font-bold font-['Space_Grotesk']">Individuals</span>
+    <span class="text-[10px] font-bold font-['Space_Grotesk']">Indiv</span>
   </a>
   <a class="flex flex-col items-center justify-center text-gray-500" href="teams.html">
     <span class="material-symbols-outlined">group</span>
     <span class="text-[10px] font-bold font-['Space_Grotesk']">Teams</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-gray-500" href="activities.html">
+    <span class="material-symbols-outlined">flag</span>
+    <span class="text-[10px] font-bold font-['Space_Grotesk']">Events</span>
   </a>
   <a class="flex flex-col items-center justify-center text-gray-500" href="rules.html">
     <span class="material-symbols-outlined">info</span>
@@ -311,55 +319,49 @@
   </a>
 </nav>
 
+<script src="data.js"></script>
 <script>
 (function () {
-  // ─── helpers ─────────────────────────────────────────────────────────────
-
-  function fmt(n, decimals = 1) {
+  function fmt(n, decimals) {
+    if (decimals === undefined) decimals = 1;
     return Number(n).toLocaleString(undefined, { maximumFractionDigits: decimals });
   }
 
-  // Return { year, week } for Bangkok time, optionally shifted by weekOffset weeks
-  function bangkokIsoWeek(weekOffset = 0) {
-    const bkk = new Date(Date.now() + 7 * 3600 * 1000); // UTC+7
-    const shifted = new Date(Date.UTC(
-      bkk.getUTCFullYear(), bkk.getUTCMonth(), bkk.getUTCDate() - weekOffset * 7
-    ));
-    const day = shifted.getUTCDay() || 7; // Mon=1 … Sun=7
-    shifted.setUTCDate(shifted.getUTCDate() + 4 - day); // nearest Thursday
-    const jan1 = new Date(Date.UTC(shifted.getUTCFullYear(), 0, 1));
-    const week = Math.ceil((((shifted - jan1) / 86400000) + 1) / 7);
-    return { year: shifted.getUTCFullYear(), week };
+  function bangkokIsoWeek(weekOffset) {
+    if (weekOffset === undefined) weekOffset = 0;
+    var bkk     = new Date(Date.now() + 7 * 3600 * 1000);
+    var shifted = new Date(Date.UTC(bkk.getUTCFullYear(), bkk.getUTCMonth(), bkk.getUTCDate() - weekOffset * 7));
+    var day = shifted.getUTCDay() || 7;
+    shifted.setUTCDate(shifted.getUTCDate() + 4 - day);
+    var jan1 = new Date(Date.UTC(shifted.getUTCFullYear(), 0, 1));
+    var week = Math.ceil((((shifted - jan1) / 86400000) + 1) / 7);
+    return { year: shifted.getUTCFullYear(), week: week };
   }
 
-  // ─── ① Week countdown ────────────────────────────────────────────────────
-
+  // ─── Countdown ───────────────────────────────────────────────────────────
   function nextWeekLock() {
-    // Locks Sunday 16:59:59 UTC (= Sunday 23:59:59 Bangkok)
-    const now = new Date();
-    const target = new Date(now);
+    var now    = new Date();
+    var target = new Date(now);
     target.setUTCHours(16, 59, 59, 0);
-    const daysUntilSun = (7 - target.getUTCDay()) % 7;
+    var daysUntilSun = (7 - target.getUTCDay()) % 7;
     target.setUTCDate(target.getUTCDate() + daysUntilSun);
     if (target <= now) target.setUTCDate(target.getUTCDate() + 7);
     return target;
   }
-
   function updateCountdown() {
-    const diff = nextWeekLock() - new Date();
-    if (diff <= 0) { document.getElementById('countdown').textContent = 'LOCKING...'; return; }
-    const d = Math.floor(diff / 86400000);
-    const h = Math.floor((diff % 86400000) / 3600000);
-    const m = Math.floor((diff % 3600000) / 60000);
+    var diff = nextWeekLock() - new Date();
+    if (diff <= 0) { document.getElementById('countdown').textContent = 'LOCKING…'; return; }
+    var d = Math.floor(diff / 86400000);
+    var h = Math.floor((diff % 86400000) / 3600000);
+    var m = Math.floor((diff % 3600000) / 60000);
     document.getElementById('countdown').textContent =
-      `${d}D ${String(h).padStart(2,'0')}H ${String(m).padStart(2,'0')}M`;
+      d + 'D ' + String(h).padStart(2,'0') + 'H ' + String(m).padStart(2,'0') + 'M';
   }
   updateCountdown();
   setInterval(updateCountdown, 60000);
 
-  // ─── Tier config ─────────────────────────────────────────────────────────
-
-  const TIERS = [
+  // ─── Tier config ──────────────────────────────────────────────────────────
+  var TIERS = [
     { name: 'ELITE',    color: '#ffd700', order: 6 },
     { name: 'PACER',    color: '#c0c0c0', order: 5 },
     { name: 'STRIDER',  color: '#cd7f32', order: 4 },
@@ -368,313 +370,378 @@
     { name: 'STARTER',  color: '#81ecff', order: 1 },
     { name: 'INACTIVE', color: '#3a3a3a', order: 0 },
   ];
-  const TIER_MAP = Object.fromEntries(TIERS.map(t => [t.name, t]));
+  var TIER_MAP = {};
+  TIERS.forEach(function(t) { TIER_MAP[t.name] = t; });
 
   function tierBadge(tierName) {
-    const t = TIER_MAP[tierName] ?? TIER_MAP['STARTER'];
-    return `<span style="color:${t.color};background:${t.color}18;border:1px solid ${t.color}35;"
-                  class="px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest">${tierName ?? '—'}</span>`;
+    var t = TIER_MAP[tierName] || TIER_MAP['STARTER'];
+    return '<span style="color:' + t.color + ';background:' + t.color + '18;border:1px solid ' + t.color + '35;"' +
+      ' class="px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest">' + (tierName || '—') + '</span>';
   }
 
-  // ─── ④ Team row builder ──────────────────────────────────────────────────
+  // ─── Season Standings row ────────────────────────────────────────────────
+  var MEDALS  = ['emoji_events','military_tech','workspace_premium','',''];
+  var RANK_C  = ['text-primary','text-on-surface','text-on-surface','text-on-surface-variant','text-on-surface-variant'];
+  var RANK_BG = ['bg-surface-container-high','bg-transparent','bg-transparent','bg-transparent','bg-transparent'];
 
-  const RANK_COLORS = ['text-primary','text-on-surface','text-on-surface','text-on-surface-variant','text-on-surface-variant'];
-  const RANK_BG     = ['bg-surface-container-high','bg-transparent','bg-transparent','bg-transparent','bg-transparent'];
-  const MEDALS      = ['emoji_events','military_tech','workspace_premium','',''];
-
-  function buildTeamRow(team, index) {
-    const color  = RANK_COLORS[index] ?? 'text-on-surface-variant';
-    const bg     = RANK_BG[index]     ?? 'bg-transparent';
-    const medal  = MEDALS[index];
-    const score  = fmt(team.avg_score ?? 0);
-    const active = team.active_member_count ?? '—';
-    const total  = team.total_member_count  ?? '—';
-    const barPct = Math.min(100, ((team.avg_score ?? 0) / 50) * 100).toFixed(1);
-    const medalHtml = medal
-      ? `<span class="material-symbols-outlined text-sm ${color}" style="font-variation-settings:'FILL' 1;">${medal}</span>` : '';
-    return `
-      <div class="flex items-center gap-5 px-8 py-5 ${bg} hover:bg-surface-container-high transition-colors">
-        <div class="w-8 shrink-0 flex flex-col items-center gap-0.5">
-          <span class="font-headline font-black text-lg italic leading-none ${color}">${String(index+1).padStart(2,'0')}</span>
-          ${medalHtml}
-        </div>
-        <div class="flex-1 min-w-0">
-          <p class="font-headline font-black text-sm uppercase tracking-tight text-on-surface truncate">${team.team_name}</p>
-          <p class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest mt-0.5">
-            <span class="material-symbols-outlined align-middle" style="font-size:12px;">group</span>
-            ${active} / ${total} active
-          </p>
-          <div class="mt-2 h-1 w-full max-w-[180px] bg-surface-container-highest rounded-full overflow-hidden">
-            <div class="h-full kinetic-gradient rounded-full transition-all duration-700" style="width:${barPct}%"></div>
-          </div>
-        </div>
-        <div class="text-right shrink-0">
-          <div class="font-headline font-black text-2xl italic tracking-tighter ${color}">${score}</div>
-          <div class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest">avg pts</div>
-        </div>
-      </div>`;
+  function buildSeasonRow(team, index) {
+    var color   = RANK_C[index]  || 'text-on-surface-variant';
+    var bg      = RANK_BG[index] || 'bg-transparent';
+    var medal   = MEDALS[index]  || '';
+    var medalHtml = medal
+      ? '<span class="material-symbols-outlined text-xs ' + color + '" style="font-variation-settings:\'FILL\' 1;">' + medal + '</span>'
+      : '';
+    var total = team.total_pts || 1;
+    var sPct  = Math.round((team.strava_pts   / total) * 100);
+    var aPct  = Math.round((team.activity_pts / total) * 100);
+    return '<div class="flex items-center gap-4 px-6 py-4 ' + bg + ' hover:bg-surface-container-high transition-colors border-b border-surface-container-highest last:border-0">' +
+      '<div class="w-8 shrink-0 flex flex-col items-center gap-0.5">' +
+        '<span class="font-headline font-black text-lg italic leading-none ' + color + '">' + String(index+1).padStart(2,'0') + '</span>' +
+        medalHtml +
+      '</div>' +
+      '<div class="flex-1 min-w-0">' +
+        '<p class="font-headline font-black text-sm uppercase tracking-tight text-on-surface truncate">' + team.team_name + '</p>' +
+        '<p class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest mt-0.5">' +
+          team.active_member_count + '/' + team.total_member_count + ' active' +
+        '</p>' +
+        '<div class="mt-2 h-1 w-full max-w-[120px] bg-surface-container-highest rounded-full overflow-hidden flex">' +
+          '<div class="h-full bg-primary transition-all duration-700" style="width:' + sPct + '%"></div>' +
+          '<div class="h-full bg-secondary transition-all duration-700" style="width:' + aPct + '%"></div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="w-24 text-right hidden sm:block">' +
+        '<div class="font-headline text-sm font-black text-secondary italic">' + fmt(team.activity_pts) + '</div>' +
+        '<div class="text-[9px] text-on-surface-variant font-bold uppercase tracking-widest">other acts</div>' +
+      '</div>' +
+      '<div class="w-16 text-right hidden sm:block">' +
+        '<div class="font-headline text-sm font-black text-primary italic">' + fmt(team.strava_pts) + '</div>' +
+        '<div class="text-[9px] text-on-surface-variant font-bold uppercase tracking-widest">strava</div>' +
+      '</div>' +
+      '<div class="w-px h-8 bg-surface-container-highest hidden sm:block"></div>' +
+      '<div class="w-20 text-right">' +
+        '<div class="font-headline text-2xl font-black italic tracking-tighter ' + color + '">' + fmt(team.total_pts) + '</div>' +
+        '<div class="text-[9px] text-on-surface-variant font-bold uppercase tracking-widest">total pts</div>' +
+      '</div>' +
+    '</div>';
   }
 
-  // ─── ④ Top-3 podium builder ──────────────────────────────────────────────
-
+  // ─── Top-3 podium ─────────────────────────────────────────────────────────
   function buildPodiumCard(entry, index) {
-    const isFirst = index === 0;
-    const medals  = ['workspace_premium','military_tech','social_leaderboard'];
-    const colors  = ['text-[#ffd700]','text-[#c0c0c0]','text-[#cd7f32]'];
-    const borders = ['border-[#ffd70040]','border-[#c0c0c040]','border-[#cd7f3240]'];
-    const km      = fmt(entry.raw_value ?? 0);
-    const pts     = fmt(entry.total_points ?? 0);
-    const team    = entry.team_name ?? '—';
-    const tier    = entry.tier_name ?? 'STARTER';
+    var isFirst = index === 0;
+    var medals  = ['workspace_premium','military_tech','social_leaderboard'];
+    var colors  = ['text-[#ffd700]','text-[#c0c0c0]','text-[#cd7f32]'];
+    var borders = ['border-[#ffd70040]','border-[#c0c0c040]','border-[#cd7f3240]'];
+    var km  = fmt(entry.raw_value || 0);
+    var pts = fmt(entry.total_points || 0);
+    var team = entry.team_name || '—';
+    var tier = entry.tier_name || 'STARTER';
 
     if (isFirst) {
-      return `
-        <div class="relative bg-gradient-to-b from-[#1a1400] to-surface-container-low rounded-xl p-8 border border-[#ffd70025] shadow-[0_0_40px_rgba(255,215,0,0.06)] overflow-hidden">
-          <div class="absolute top-3 right-4 opacity-10 font-black text-7xl italic leading-none text-[#ffd700]">01</div>
-          <div class="relative z-10 flex flex-col items-center text-center">
-            <span class="material-symbols-outlined text-[#ffd700] text-4xl mb-3" style="font-variation-settings:'FILL' 1;">workspace_premium</span>
-            <h4 class="font-headline font-black text-xl uppercase tracking-tight text-on-surface leading-tight">${entry.user_name}</h4>
-            <p class="text-secondary text-xs font-bold uppercase tracking-widest mt-1 mb-4">${team}</p>
-            <div class="mb-4">${tierBadge(tier)}</div>
-            <div class="grid grid-cols-2 gap-3 w-full">
-              <div class="bg-surface-container-highest rounded-lg p-3">
-                <div class="font-headline font-black text-xl text-tertiary italic">${km}</div>
-                <div class="text-[9px] text-on-surface-variant font-bold uppercase tracking-widest">KM</div>
-              </div>
-              <div class="bg-surface-container-highest rounded-lg p-3">
-                <div class="font-headline font-black text-xl text-primary italic">${pts}</div>
-                <div class="text-[9px] text-on-surface-variant font-bold uppercase tracking-widest">PTS</div>
-              </div>
-            </div>
-          </div>
-        </div>`;
+      return '<div class="relative bg-gradient-to-b from-[#1a1400] to-surface-container-low rounded-xl p-8 border border-[#ffd70025] shadow-[0_0_40px_rgba(255,215,0,0.06)] overflow-hidden">' +
+        '<div class="absolute top-3 right-4 opacity-10 font-black text-7xl italic leading-none text-[#ffd700]">01</div>' +
+        '<div class="relative z-10 flex flex-col items-center text-center">' +
+          '<span class="material-symbols-outlined text-[#ffd700] text-4xl mb-3" style="font-variation-settings:\'FILL\' 1;">workspace_premium</span>' +
+          '<h4 class="font-headline font-black text-xl uppercase tracking-tight text-on-surface leading-tight">' + entry.user_name + '</h4>' +
+          '<p class="text-secondary text-xs font-bold uppercase tracking-widest mt-1 mb-4">' + team + '</p>' +
+          '<div class="mb-4">' + tierBadge(tier) + '</div>' +
+          '<div class="grid grid-cols-2 gap-3 w-full">' +
+            '<div class="bg-surface-container-highest rounded-lg p-3"><div class="font-headline font-black text-xl text-tertiary italic">' + km + '</div><div class="text-[9px] text-on-surface-variant font-bold uppercase tracking-widest">KM</div></div>' +
+            '<div class="bg-surface-container-highest rounded-lg p-3"><div class="font-headline font-black text-xl text-primary italic">' + pts + '</div><div class="text-[9px] text-on-surface-variant font-bold uppercase tracking-widest">PTS</div></div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
     }
 
-    return `
-      <div class="relative bg-surface-container-low rounded-xl p-6 border ${borders[index]} overflow-hidden">
-        <div class="absolute top-3 right-4 opacity-8 font-black text-6xl italic leading-none ${colors[index]}">0${index+1}</div>
-        <div class="relative z-10 flex flex-col items-center text-center">
-          <span class="material-symbols-outlined ${colors[index]} text-2xl mb-2" style="font-variation-settings:'FILL' 1;">${medals[index]}</span>
-          <h4 class="font-headline font-black text-base uppercase tracking-tight text-on-surface leading-tight">${entry.user_name}</h4>
-          <p class="text-on-surface-variant text-[10px] font-bold uppercase tracking-widest mt-1 mb-3">${team}</p>
-          <div class="mb-3">${tierBadge(tier)}</div>
-          <div class="flex gap-4 text-center">
-            <div>
-              <div class="font-headline font-black text-lg text-tertiary italic">${km} <span class="text-xs font-bold">KM</span></div>
-            </div>
-            <div class="w-px bg-surface-container-highest"></div>
-            <div>
-              <div class="font-headline font-black text-lg text-primary italic">${pts} <span class="text-xs font-bold">PTS</span></div>
-            </div>
-          </div>
-        </div>
-      </div>`;
+    return '<div class="relative bg-surface-container-low rounded-xl p-6 border ' + borders[index] + ' overflow-hidden">' +
+      '<div class="absolute top-3 right-4 opacity-8 font-black text-6xl italic leading-none ' + colors[index] + '">0' + (index+1) + '</div>' +
+      '<div class="relative z-10 flex flex-col items-center text-center">' +
+        '<span class="material-symbols-outlined ' + colors[index] + ' text-2xl mb-2" style="font-variation-settings:\'FILL\' 1;">' + medals[index] + '</span>' +
+        '<h4 class="font-headline font-black text-base uppercase tracking-tight text-on-surface leading-tight">' + entry.user_name + '</h4>' +
+        '<p class="text-on-surface-variant text-[10px] font-bold uppercase tracking-widest mt-1 mb-3">' + team + '</p>' +
+        '<div class="mb-3">' + tierBadge(tier) + '</div>' +
+        '<div class="flex gap-4 text-center">' +
+          '<div><div class="font-headline font-black text-lg text-tertiary italic">' + km + ' <span class="text-xs font-bold">KM</span></div></div>' +
+          '<div class="w-px bg-surface-container-highest"></div>' +
+          '<div><div class="font-headline font-black text-lg text-primary italic">' + pts + ' <span class="text-xs font-bold">PTS</span></div></div>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
   }
 
-  // ─── ⑤ Tier distribution builder ────────────────────────────────────────
+  // ─── Strava team leaderboard ────────────────────────────────────────────────
+  var _stravaData = null;
+  var _stravaMode = 'all';
+  var _stravaWeek = null;
 
+  function buildStravaRow(team, index) {
+    var color   = RANK_C[index]  || 'text-on-surface-variant';
+    var bg      = RANK_BG[index] || 'bg-transparent';
+    var medal   = MEDALS[index]  || '';
+    var medalHtml = medal
+      ? '<span class="material-symbols-outlined text-xs ' + color + '" style="font-variation-settings:\'FILL\' 1;">' + medal + '</span>'
+      : '';
+    return '<div class="flex items-center gap-4 px-6 py-4 ' + bg + ' hover:bg-surface-container-high transition-colors border-b border-surface-container-highest last:border-0">' +
+      '<div class="w-8 shrink-0 flex flex-col items-center gap-0.5">' +
+        '<span class="font-headline font-black text-lg italic leading-none ' + color + '">' + String(index+1).padStart(2,'0') + '</span>' +
+        medalHtml +
+      '</div>' +
+      '<div class="flex-1 min-w-0">' +
+        '<p class="font-headline font-black text-sm uppercase tracking-tight text-on-surface truncate">' + team.team_name + '</p>' +
+        '<p class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest mt-0.5">' +
+          (team.active_member_count || 0) + '/' + (team.total_member_count || 0) + ' active' +
+        '</p>' +
+      '</div>' +
+      '<div class="w-24 text-right hidden sm:block">' +
+        '<div class="font-headline text-sm font-black text-tertiary italic">' + fmt(team.display_distance) + '<span class="text-[9px] font-bold text-on-surface-variant ml-0.5">km</span></div>' +
+      '</div>' +
+      '<div class="w-16 text-right hidden sm:block">' +
+        '<div class="font-headline text-sm font-black text-secondary italic">+' + fmt(team.display_bonus, 0) + '</div>' +
+      '</div>' +
+      '<div class="w-px h-8 bg-surface-container-highest hidden sm:block"></div>' +
+      '<div class="w-20 text-right">' +
+        '<div class="font-headline text-2xl font-black italic tracking-tighter ' + color + '">' + fmt(team.display_pts) + '</div>' +
+        '<div class="text-[9px] text-on-surface-variant font-bold uppercase tracking-widest">pts</div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function renderStravaLeaderboard() {
+    var container = document.getElementById('strava-rows');
+    if (!_stravaData || !container) return;
+    var displayEntries;
+    if (_stravaMode === 'all') {
+      displayEntries = _stravaData.entries.map(function(t) {
+        return { team_name: t.team_name, active_member_count: t.active_member_count,
+                 total_member_count: t.total_member_count, display_distance: t.total_distance,
+                 display_bonus: t.total_bonus, display_pts: t.total_pts };
+      });
+      displayEntries.sort(function(a, b) { return b.display_pts - a.display_pts; });
+    } else {
+      var weekKey = _stravaWeek;
+      if (!weekKey && _stravaData.weeks.length > 0) {
+        weekKey = _stravaData.weeks[_stravaData.weeks.length - 1].key;
+        _stravaWeek = weekKey;
+      }
+      displayEntries = _stravaData.entries.map(function(t) {
+        var wd = (t.weeks && t.weeks[weekKey]) || { avg_distance: 0, avg_bonus: 0, avg_score: 0, active_member_count: 0 };
+        return { team_name: t.team_name, active_member_count: wd.active_member_count || 0,
+                 total_member_count: t.total_member_count, display_distance: wd.avg_distance,
+                 display_bonus: wd.avg_bonus, display_pts: wd.avg_score };
+      });
+      displayEntries.sort(function(a, b) { return b.display_pts - a.display_pts; });
+    }
+    container.innerHTML = displayEntries.length > 0
+      ? displayEntries.map(buildStravaRow).join('')
+      : '<div class="flex items-center justify-center py-12 text-on-surface-variant text-xs font-bold uppercase tracking-widest gap-2"><span class="material-symbols-outlined text-sm">info</span> No data for selected period.</div>';
+  }
+
+  window.switchStravaMode = function(mode) {
+    _stravaMode = mode;
+    var activeC  = 'px-3 py-1.5 rounded-md text-[10px] font-black uppercase tracking-widest transition-all duration-200 bg-primary text-on-primary';
+    var inactC   = 'px-3 py-1.5 rounded-md text-[10px] font-black uppercase tracking-widest transition-all duration-200 text-on-surface-variant hover:text-on-surface';
+    var btnAll   = document.getElementById('strava-btn-all');
+    var btnWeek  = document.getElementById('strava-btn-week');
+    var pickerEl = document.getElementById('week-picker');
+    if (btnAll)   btnAll.className  = mode === 'all'  ? activeC : inactC;
+    if (btnWeek)  btnWeek.className = mode === 'week' ? activeC : inactC;
+    if (pickerEl) pickerEl.classList.toggle('hidden', mode !== 'week');
+    renderStravaLeaderboard();
+  };
+
+  window.switchStravaWeek = function(weekKey) {
+    _stravaWeek = weekKey;
+    if (_stravaData) {
+      _stravaData.weeks.forEach(function(w) {
+        var btn = document.getElementById('wk-btn-' + w.key);
+        if (!btn) return;
+        btn.className = w.key === weekKey
+          ? 'px-3 py-1 rounded-md text-[10px] font-black uppercase tracking-widest transition-all duration-200 bg-secondary text-on-secondary'
+          : 'px-3 py-1 rounded-md text-[10px] font-black uppercase tracking-widest transition-all duration-200 bg-surface-container-highest text-on-surface-variant hover:text-on-surface';
+      });
+    }
+    renderStravaLeaderboard();
+  };
+
+  // ─── Tier distribution ────────────────────────────────────────────────────
   function renderTierDistribution(entries, totalMembers) {
-    const counts = {};
-    TIERS.forEach(t => counts[t.name] = 0);
-    entries.forEach(e => {
-      const t = e.tier_name ?? 'INACTIVE';
+    var counts = {};
+    TIERS.forEach(function(t) { counts[t.name] = 0; });
+    entries.forEach(function(e) {
+      var t = e.tier_name || 'INACTIVE';
       if (counts[t] !== undefined) counts[t]++;
       else counts['INACTIVE']++;
     });
-    // INACTIVE = roster not in leaderboard
-    const inLeaderboard = entries.length;
+    var inLeaderboard = entries.length;
     counts['INACTIVE'] = Math.max(0, totalMembers - inLeaderboard);
+    var total = totalMembers || inLeaderboard;
+    document.getElementById('tier-total-label').textContent = total + ' registered athletes';
 
-    const total = totalMembers || inLeaderboard;
-    document.getElementById('tier-total-label').textContent = `${total} registered athletes`;
-
-    const bar = document.getElementById('tier-bar');
-    const legend = document.getElementById('tier-legend');
+    var bar    = document.getElementById('tier-bar');
+    var legend = document.getElementById('tier-legend');
     bar.innerHTML = '';
     legend.innerHTML = '';
 
-    TIERS.forEach(tier => {
-      const n = counts[tier.name] ?? 0;
+    TIERS.forEach(function(tier) {
+      var n = counts[tier.name] || 0;
       if (n === 0) return;
-      const pct = ((n / total) * 100).toFixed(1);
-
-      // bar segment
-      const seg = document.createElement('div');
-      seg.style.cssText = `width:${pct}%;background:${tier.color};`;
-      seg.title = `${tier.name}: ${n}`;
+      var pct = ((n / total) * 100).toFixed(1);
+      var seg = document.createElement('div');
+      seg.style.cssText = 'width:' + pct + '%;background:' + tier.color + ';';
+      seg.title = tier.name + ': ' + n;
       bar.appendChild(seg);
-
-      // legend item
-      const item = document.createElement('div');
+      var item = document.createElement('div');
       item.className = 'flex items-center gap-2';
-      item.innerHTML = `
-        <span class="w-3 h-3 rounded-sm shrink-0" style="background:${tier.color};"></span>
-        <span class="text-[10px] font-bold uppercase tracking-widest" style="color:${tier.color};">${tier.name}</span>
-        <span class="text-[10px] text-on-surface-variant font-bold">${n} <span class="opacity-60">(${pct}%)</span></span>`;
+      item.innerHTML =
+        '<span class="w-3 h-3 rounded-sm shrink-0" style="background:' + tier.color + ';"></span>' +
+        '<span class="text-[10px] font-bold uppercase tracking-widest" style="color:' + tier.color + ';">' + tier.name + '</span>' +
+        '<span class="text-[10px] text-on-surface-variant font-bold">' + n + ' <span class="opacity-60">(' + pct + '%)</span></span>';
       legend.appendChild(item);
     });
   }
 
-  // ─── ⑥ Last week's champions builder ─────────────────────────────────────
-
+  // ─── Last week's champions ─────────────────────────────────────────────────
   function renderLastWeek(teamData, indivData, prevWeek) {
-    const container = document.getElementById('last-week-cards');
-
-    const teamEntries  = teamData?.entries  ?? [];
-    const indivEntries = indivData?.entries ?? [];
-    const weekNum = prevWeek.week;
+    var container     = document.getElementById('last-week-cards');
+    var teamEntries   = (teamData && teamData.entries)  || [];
+    var indivEntries  = (indivData && indivData.entries) || [];
+    var weekNum       = prevWeek.week;
 
     if (teamEntries.length === 0 && indivEntries.length === 0) {
-      container.innerHTML = `<div class="md:col-span-2 text-center py-8 text-on-surface-variant text-xs font-bold uppercase tracking-widest">
-        No data for week ${weekNum} — season may have just started.</div>`;
+      container.innerHTML = '<div class="md:col-span-2 text-center py-8 text-on-surface-variant text-xs font-bold uppercase tracking-widest">No data for week ' + weekNum + ' — season may have just started.</div>';
       return;
     }
 
-    let html = '';
-
-    // Team champion
+    var html = '';
     if (teamEntries.length > 0) {
-      const t = teamEntries[0];
-      html += `
-        <div class="bg-surface-container-low rounded-xl p-6 border border-secondary/20 relative overflow-hidden">
-          <div class="absolute -right-6 -bottom-6 opacity-5">
-            <span class="material-symbols-outlined text-[100px]" style="font-variation-settings:'FILL' 1;">groups</span>
-          </div>
-          <div class="relative z-10">
-            <p class="text-[10px] text-secondary font-black uppercase tracking-[0.2em] mb-3 flex items-center gap-1">
-              <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1;">emoji_events</span>
-              Week ${weekNum} Team Champion
-            </p>
-            <h4 class="font-headline font-black text-2xl uppercase tracking-tight text-on-surface mb-1">${t.team_name}</h4>
-            <p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-4">
-              ${t.active_member_count ?? '—'} / ${t.total_member_count ?? '—'} active members
-            </p>
-            <div class="flex items-baseline gap-2">
-              <span class="font-headline font-black text-4xl italic text-secondary">${fmt(t.avg_score)}</span>
-              <span class="text-on-surface-variant text-xs font-bold uppercase">avg pts</span>
-            </div>
-          </div>
-        </div>`;
+      var t = teamEntries[0];
+      html += '<div class="bg-surface-container-low rounded-xl p-6 border border-secondary/20 relative overflow-hidden">' +
+        '<div class="absolute -right-6 -bottom-6 opacity-5"><span class="material-symbols-outlined text-[100px]" style="font-variation-settings:\'FILL\' 1;">groups</span></div>' +
+        '<div class="relative z-10">' +
+          '<p class="text-[10px] text-secondary font-black uppercase tracking-[0.2em] mb-3 flex items-center gap-1">' +
+            '<span class="material-symbols-outlined text-sm" style="font-variation-settings:\'FILL\' 1;">emoji_events</span> Week ' + weekNum + ' Team Champion</p>' +
+          '<h4 class="font-headline font-black text-2xl uppercase tracking-tight text-on-surface mb-1">' + t.team_name + '</h4>' +
+          '<p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-4">' + (t.active_member_count || '—') + ' / ' + (t.total_member_count || '—') + ' active members</p>' +
+          '<div class="flex items-baseline gap-2">' +
+            '<span class="font-headline font-black text-4xl italic text-secondary">' + fmt(t.avg_score) + '</span>' +
+            '<span class="text-on-surface-variant text-xs font-bold uppercase">avg pts · strava</span>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
     }
-
-    // Individual champion
     if (indivEntries.length > 0) {
-      const p = indivEntries[0];
-      html += `
-        <div class="bg-surface-container-low rounded-xl p-6 border border-primary/20 relative overflow-hidden">
-          <div class="absolute -right-6 -bottom-6 opacity-5">
-            <span class="material-symbols-outlined text-[100px]" style="font-variation-settings:'FILL' 1;">person</span>
-          </div>
-          <div class="relative z-10">
-            <p class="text-[10px] text-primary font-black uppercase tracking-[0.2em] mb-3 flex items-center gap-1">
-              <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1;">workspace_premium</span>
-              Week ${weekNum} Individual Champion
-            </p>
-            <h4 class="font-headline font-black text-2xl uppercase tracking-tight text-on-surface mb-1">${p.user_name}</h4>
-            <p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-4">${p.team_name ?? '—'}</p>
-            <div class="flex items-center gap-4">
-              <div>
-                <div class="font-headline font-black text-4xl italic text-tertiary">${fmt(p.raw_value)}<span class="text-base ml-1 text-on-surface-variant">km</span></div>
-              </div>
-              <div class="w-px h-10 bg-surface-container-highest"></div>
-              <div>
-                <div class="font-headline font-black text-4xl italic text-primary">${fmt(p.total_points)}<span class="text-base ml-1 text-on-surface-variant">pts</span></div>
-              </div>
-              <div class="ml-auto">${tierBadge(p.tier_name)}</div>
-            </div>
-          </div>
-        </div>`;
+      var p = indivEntries[0];
+      html += '<div class="bg-surface-container-low rounded-xl p-6 border border-primary/20 relative overflow-hidden">' +
+        '<div class="absolute -right-6 -bottom-6 opacity-5"><span class="material-symbols-outlined text-[100px]" style="font-variation-settings:\'FILL\' 1;">person</span></div>' +
+        '<div class="relative z-10">' +
+          '<p class="text-[10px] text-primary font-black uppercase tracking-[0.2em] mb-3 flex items-center gap-1">' +
+            '<span class="material-symbols-outlined text-sm" style="font-variation-settings:\'FILL\' 1;">workspace_premium</span> Week ' + weekNum + ' Individual Champion</p>' +
+          '<h4 class="font-headline font-black text-2xl uppercase tracking-tight text-on-surface mb-1">' + p.user_name + '</h4>' +
+          '<p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-4">' + (p.team_name || '—') + '</p>' +
+          '<div class="flex items-center gap-4">' +
+            '<div><div class="font-headline font-black text-4xl italic text-tertiary">' + fmt(p.raw_value) + '<span class="text-base ml-1 text-on-surface-variant">km</span></div></div>' +
+            '<div class="w-px h-10 bg-surface-container-highest"></div>' +
+            '<div><div class="font-headline font-black text-4xl italic text-primary">' + fmt(p.total_points) + '<span class="text-base ml-1 text-on-surface-variant">pts</span></div></div>' +
+            '<div class="ml-auto">' + tierBadge(p.tier_name) + '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
     }
-
-    container.innerHTML = html || `<div class="md:col-span-2 text-center py-8 text-on-surface-variant text-xs font-bold uppercase tracking-widest">No champion data for week ${weekNum}.</div>`;
+    container.innerHTML = html || '<div class="md:col-span-2 text-center py-8 text-on-surface-variant text-xs font-bold uppercase tracking-widest">No champion data for week ' + weekNum + '.</div>';
   }
 
-  // ─── Main data loader ─────────────────────────────────────────────────────
-
+  // ─── Main loader ──────────────────────────────────────────────────────────
   async function loadDashboard() {
-    const cur  = bangkokIsoWeek(0);
-    const prev = bangkokIsoWeek(1);
+    var cur  = bangkokIsoWeek(0);
+    var prev = bangkokIsoWeek(1);
 
-    const [teamsRes, indivRes, lastTeamRes, lastIndivRes] = await Promise.allSettled([
-      fetch(`/api/scoreboard/teams?year=${cur.year}&week=${cur.week}`),
-      fetch(`/api/scoreboard/individuals?year=${cur.year}&week=${cur.week}&per_page=100`),
-      fetch(`/api/scoreboard/teams?year=${prev.year}&week=${prev.week}`),
-      fetch(`/api/scoreboard/individuals?year=${prev.year}&week=${prev.week}&per_page=1`),
+    var [seasonRes, stravaSeasonRes, teamsRes, indivRes, lastTeamRes, lastIndivRes] = await Promise.allSettled([
+      CubeData.getSeasonTeams(),
+      CubeData.getStravaTeamsSeason(),
+      CubeData.getTeams(cur.year, cur.week),
+      CubeData.getIndividuals(cur.year, cur.week, { per_page: 100 }),
+      CubeData.getTeams(prev.year, prev.week),
+      CubeData.getIndividuals(prev.year, prev.week, { per_page: 1 }),
     ]);
 
-    async function safeJson(settled) {
-      if (settled.status !== 'fulfilled') return null;
-      const r = settled.value;
-      if (!r.ok) return null;
-      return r.json().catch(() => null);
+    function safeVal(settled) {
+      return settled.status === 'fulfilled' ? settled.value : null;
     }
 
-    const [teamData, indivData, lastTeamData, lastIndivData] = await Promise.all([
-      safeJson(teamsRes), safeJson(indivRes), safeJson(lastTeamRes), safeJson(lastIndivRes),
-    ]);
+    var seasonData       = safeVal(seasonRes);
+    var stravaSeasonData = safeVal(stravaSeasonRes);
+    var teamData         = safeVal(teamsRes);
+    var indivData        = safeVal(indivRes);
+    var lastTeamData     = safeVal(lastTeamRes);
+    var lastIndivData    = safeVal(lastIndivRes);
 
-    // ── Teams ───────────────────────────────────────────────────────────────
-    const teamContainer = document.getElementById('team-rows');
-    document.getElementById('teams-loading')?.remove();
+    // ── Season Standings ────────────────────────────────────────────────
+    var seasonRows = document.getElementById('season-rows');
+    var seasonEntries = (seasonData && seasonData.entries) || [];
+    if (seasonEntries.length > 0) {
+      seasonRows.innerHTML = seasonEntries.map(buildSeasonRow).join('');
 
-    const teams = teamData?.entries ?? [];
-    if (teams.length > 0) {
-      teamContainer.innerHTML = teams.slice(0, 5).map(buildTeamRow).join('');
-
-      const leader = teams[0];
-      document.getElementById('top-team-score').textContent = fmt(leader.avg_score);
+      var leader = seasonEntries[0];
+      document.getElementById('top-team-score').textContent = fmt(leader.total_pts);
       document.getElementById('top-team-name').textContent  = leader.team_name;
     } else {
-      teamContainer.innerHTML = `<div class="flex items-center justify-center py-12 text-on-surface-variant text-xs font-bold uppercase tracking-widest gap-2">
-        <span class="material-symbols-outlined text-sm">info</span> No team data yet this week.</div>`;
+      seasonRows.innerHTML = '<div class="flex items-center justify-center py-12 text-on-surface-variant text-xs font-bold uppercase tracking-widest gap-2"><span class="material-symbols-outlined text-sm">info</span> No season data yet.</div>';
       document.getElementById('top-team-name').textContent = 'No data yet';
     }
 
-    if (teamData?.week) {
-      document.getElementById('week-label').textContent = `Week ${teamData.week}`;
+    // ── Strava team leaderboard ──────────────────────────────────────────
+    _stravaData = stravaSeasonData;
+    if (stravaSeasonData && stravaSeasonData.weeks.length > 0) {
+      var pickerEl = document.getElementById('week-picker');
+      _stravaWeek  = stravaSeasonData.weeks[stravaSeasonData.weeks.length - 1].key;
+      pickerEl.innerHTML = stravaSeasonData.weeks.map(function(w) {
+        var isActive = w.key === _stravaWeek;
+        return '<button id="wk-btn-' + w.key + '" onclick="window.switchStravaWeek(\'' + w.key + '\')" class="' +
+          (isActive
+            ? 'px-3 py-1 rounded-md text-[10px] font-black uppercase tracking-widest transition-all duration-200 bg-secondary text-on-secondary'
+            : 'px-3 py-1 rounded-md text-[10px] font-black uppercase tracking-widest transition-all duration-200 bg-surface-container-highest text-on-surface-variant hover:text-on-surface') +
+          '">Wk ' + w.week + '</button>';
+      }).join('');
     }
+    renderStravaLeaderboard();
 
-    // ── Participation rate (from teams) ─────────────────────────────────────
+    // ── Weekly Strava leader ──────────────────────────────────────────────
+    var teams = (teamData && teamData.entries) || [];
     if (teams.length > 0) {
-      const totalMembers  = teams.reduce((s, t) => s + (t.total_member_count  ?? 0), 0);
-      const activeMembers = teams.reduce((s, t) => s + (t.active_member_count ?? 0), 0);
-      const pct = totalMembers > 0 ? Math.round((activeMembers / totalMembers) * 100) : 0;
-
-      document.getElementById('active-count').textContent = activeMembers;
-      document.getElementById('total-count').textContent  = `/ ${totalMembers}`;
-      document.getElementById('participation-bar').style.width = `${pct}%`;
-      document.getElementById('participation-pct').innerHTML =
-        `<span style="color:#929bfa;">${pct}%</span> <span class="text-on-surface-variant">ACTIVE THIS WEEK</span>`;
+      var weeklyLeader = teams[0];
+      document.getElementById('weekly-leader-score').textContent = fmt(weeklyLeader.avg_score);
+      document.getElementById('weekly-leader-name').textContent  = weeklyLeader.team_name;
+      document.getElementById('weekly-leader-dist').textContent  =
+        fmt(weeklyLeader.avg_distance) + ' KM AVG · STRAVA CHALLENGE';
+    } else {
+      document.getElementById('weekly-leader-name').textContent = 'No data yet';
+      document.getElementById('weekly-leader-score').textContent = '—';
     }
 
-    // ── Individuals ─────────────────────────────────────────────────────────
-    const indivEntries = indivData?.entries ?? [];
-
-    // Company total KM
-    const totalKm = indivEntries.reduce((s, e) => s + (e.raw_value ?? 0), 0);
+    // ── Individual / KM / Podium ─────────────────────────────────────────
+    var indivEntries = (indivData && indivData.entries) || [];
+    var totalKm = indivEntries.reduce(function(s, e) { return s + (e.raw_value || 0); }, 0);
     document.getElementById('company-km').textContent = fmt(totalKm);
 
-    // Top-3 podium
-    const top3 = indivEntries.slice(0, 3);
-    const top3Container = document.getElementById('top3-container');
+    var top3 = indivEntries.slice(0, 3);
+    var top3Container = document.getElementById('top3-container');
     if (top3.length > 0) {
       top3Container.innerHTML = top3.map(buildPodiumCard).join('');
     } else {
-      top3Container.innerHTML = `<div class="lg:col-span-3 text-center py-10 text-on-surface-variant text-xs font-bold uppercase tracking-widest">No individual scores yet this week.</div>`;
+      top3Container.innerHTML = '<div class="lg:col-span-3 text-center py-10 text-on-surface-variant text-xs font-bold uppercase tracking-widest">No individual scores yet this week.</div>';
     }
-    if (indivData?.week) {
-      document.getElementById('top3-week-label').textContent = `Week ${indivData.week}`;
+    if (indivData && indivData.week) {
+      document.getElementById('top3-week-label').textContent = 'Week ' + indivData.week;
     }
 
-    // Tier distribution
-    const totalMembers = teams.reduce((s, t) => s + (t.total_member_count ?? 0), 0);
-    renderTierDistribution(indivEntries, totalMembers || indivEntries.length);
+    // ── Tier distribution ────────────────────────────────────────────────
+    var totalRoster = teams.reduce(function(s, t) { return s + (t.total_member_count || 0); }, 0);
+    renderTierDistribution(indivEntries, totalRoster || indivEntries.length);
 
-    // ── Last week's champions ───────────────────────────────────────────────
+    // ── Last week's champions ────────────────────────────────────────────
     renderLastWeek(lastTeamData, lastIndivData, prev);
   }
 
-  loadDashboard().catch(err => console.error('Dashboard load failed:', err));
+  loadDashboard().catch(function(err) { console.error('Dashboard load failed:', err); });
 })();
 </script>
 </body>

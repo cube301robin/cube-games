@@ -67,6 +67,7 @@
       <a class="text-[#929bfa] hover:bg-[#262626] transition-colors duration-300 px-4 py-2 rounded-lg font-['Space_Grotesk'] tracking-tighter uppercase font-bold" href="index.html">Dashboard</a>
       <a class="text-[#929bfa] hover:bg-[#262626] transition-colors duration-300 px-4 py-2 rounded-lg font-['Space_Grotesk'] tracking-tighter uppercase font-bold" href="individuals.html">Individuals</a>
       <a class="text-[#ff8f6f] font-bold hover:bg-[#262626] transition-colors duration-300 px-4 py-2 rounded-lg font-['Space_Grotesk'] tracking-tighter uppercase" href="teams.html">Teams</a>
+      <a class="text-[#929bfa] hover:bg-[#262626] transition-colors duration-300 px-4 py-2 rounded-lg font-['Space_Grotesk'] tracking-tighter uppercase font-bold" href="activities.html">Activities</a>
       <a class="text-[#929bfa] hover:bg-[#262626] transition-colors duration-300 px-4 py-2 rounded-lg font-['Space_Grotesk'] tracking-tighter uppercase font-bold" href="rules.html">Rules</a>
     </nav>
     <div class="flex items-center gap-3">
@@ -97,6 +98,9 @@
     </a>
     <a class="flex items-center gap-4 px-4 py-3 text-[#ff8f6f] border-l-4 border-[#ff8f6f] bg-gradient-to-r from-[#ff8f6f15] to-transparent font-['Space_Grotesk'] text-sm font-bold tracking-tight" href="teams.html">
       <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">group</span> Teams
+    </a>
+    <a class="flex items-center gap-4 px-4 py-3 text-gray-500 hover:text-[#929bfa] hover:translate-x-1 transition-all duration-300 font-['Space_Grotesk'] text-sm font-bold tracking-tight" href="activities.html">
+      <span class="material-symbols-outlined">flag</span> Activities
     </a>
     <a class="flex items-center gap-4 px-4 py-3 text-gray-500 hover:text-[#929bfa] hover:translate-x-1 transition-all duration-300 font-['Space_Grotesk'] text-sm font-bold tracking-tight" href="rules.html">
       <span class="material-symbols-outlined">info</span> Rules
@@ -275,13 +279,17 @@
     <span class="material-symbols-outlined">dashboard</span>
     <span class="text-[10px] font-bold uppercase">Home</span>
   </a>
+  <a class="flex flex-col items-center gap-1 text-on-surface-variant" href="individuals.html">
+    <span class="material-symbols-outlined">leaderboard</span>
+    <span class="text-[10px] font-bold uppercase">Indiv</span>
+  </a>
   <a class="flex flex-col items-center gap-1 text-primary" href="teams.html">
     <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">group</span>
     <span class="text-[10px] font-bold uppercase">Teams</span>
   </a>
-  <a class="flex flex-col items-center gap-1 text-on-surface-variant" href="individuals.html">
-    <span class="material-symbols-outlined">leaderboard</span>
-    <span class="text-[10px] font-bold uppercase">Ranks</span>
+  <a class="flex flex-col items-center gap-1 text-on-surface-variant" href="activities.html">
+    <span class="material-symbols-outlined">flag</span>
+    <span class="text-[10px] font-bold uppercase">Events</span>
   </a>
   <a class="flex flex-col items-center gap-1 text-on-surface-variant" href="rules.html">
     <span class="material-symbols-outlined">info</span>
@@ -289,6 +297,7 @@
   </a>
 </nav>
 
+<script src="data.js"></script>
 <script>
 // ============================================================
 // CONSTANTS
@@ -316,7 +325,7 @@ function bangkokIsoWeek(weekOffset) {
   if (weekOffset === undefined) weekOffset = 0;
   var bkk = new Date(Date.now() + 7 * 3600 * 1000);
   var shifted = new Date(Date.UTC(
-    bkk.getUTCFullYear(), bkk.getUTCMonth(), bkk.getUTCDate() - weekOffset * 7
+    bkk.getUTCFullYear(), bkk.getUTCMonth(), bkk.getUTCDate() + weekOffset * 7
   ));
   var day = shifted.getUTCDay() || 7;
   shifted.setUTCDate(shifted.getUTCDate() + 4 - day);
@@ -339,25 +348,13 @@ var indivCache = {};
 // ============================================================
 function fetchTeams(year, week) {
   var key = year + '_' + week;
-  if (!teamsCache[key]) {
-    teamsCache[key] = fetch('/api/scoreboard/teams?game=' + GAME + '&year=' + year + '&week=' + week)
-      .then(function(r) {
-        if (!r.ok) throw new Error('HTTP ' + r.status);
-        return r.json();
-      });
-  }
+  if (!teamsCache[key]) teamsCache[key] = CubeData.getTeams(year, week);
   return teamsCache[key];
 }
 
 function fetchIndivs(year, week) {
   var key = year + '_' + week;
-  if (!indivCache[key]) {
-    indivCache[key] = fetch('/api/scoreboard/individuals?game=' + GAME + '&year=' + year + '&week=' + week + '&per_page=100')
-      .then(function(r) {
-        if (!r.ok) throw new Error('HTTP ' + r.status);
-        return r.json();
-      });
-  }
+  if (!indivCache[key]) indivCache[key] = CubeData.getIndividuals(year, week, { per_page: 100 });
   return indivCache[key];
 }
 
@@ -548,10 +545,25 @@ function teamCardHTML(team, members, isExpanded, inactiveCount, weekNum) {
         '</div>' +
       '</div>' +
 
-      // Avg score
-      '<div style="text-align:right;flex-shrink:0;">' +
-        '<div style="font-size:10px;color:#adaaaa;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:2px;">Avg Score</div>' +
-        '<div style="font-size:28px;font-weight:900;font-family:\'Space Grotesk\',sans-serif;font-style:italic;letter-spacing:-0.03em;color:' + avgColor + ';">' + fmtPts(team.avg_score) + '</div>' +
+      // Score breakdown: avg dist | bonus | total
+      '<div style="display:flex;align-items:center;gap:0;flex-shrink:0;border:1px solid rgba(72,72,71,0.25);border-radius:10px;overflow:hidden;">' +
+        '<div style="padding:8px 12px;text-align:center;">' +
+          '<div style="font-size:9px;color:#adaaaa;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:3px;white-space:nowrap;">Avg Dist</div>' +
+          '<div style="font-size:16px;font-weight:900;font-family:\'Space Grotesk\',sans-serif;font-style:italic;color:#81ecff;white-space:nowrap;">' + (+team.avg_distance).toFixed(1) + '</div>' +
+          '<div style="font-size:8px;color:#4b5563;font-weight:700;margin-top:1px;">km</div>' +
+        '</div>' +
+        '<div style="width:1px;background:rgba(72,72,71,0.25);align-self:stretch;"></div>' +
+        '<div style="padding:8px 12px;text-align:center;">' +
+          '<div style="font-size:9px;color:#adaaaa;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:3px;white-space:nowrap;">Bonus</div>' +
+          '<div style="font-size:16px;font-weight:900;font-family:\'Space Grotesk\',sans-serif;font-style:italic;color:#929bfa;white-space:nowrap;">+' + team.avg_bonus + '</div>' +
+          '<div style="font-size:8px;color:#4b5563;font-weight:700;margin-top:1px;">pts</div>' +
+        '</div>' +
+        '<div style="width:1px;background:rgba(72,72,71,0.25);align-self:stretch;"></div>' +
+        '<div style="padding:8px 14px;text-align:center;">' +
+          '<div style="font-size:9px;color:#adaaaa;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:3px;">Total</div>' +
+          '<div style="font-size:22px;font-weight:900;font-family:\'Space Grotesk\',sans-serif;font-style:italic;letter-spacing:-0.02em;color:' + avgColor + ';white-space:nowrap;">' + fmtPts(team.avg_score) + '</div>' +
+          '<div style="font-size:8px;color:#4b5563;font-weight:700;margin-top:1px;">pts</div>' +
+        '</div>' +
       '</div>' +
 
       // Chevron
